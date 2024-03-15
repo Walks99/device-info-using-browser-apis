@@ -60,17 +60,21 @@ export default function Home() {
           { name: "2/1", value: 2 },
         ];
 
-        // Calculate actual screen ratio in CSS pixels and find the closest common ratio
-        const actualRatioInCssPixels = widthInCSSPixels / heightInCSSPixels;
-        const closestRatioInCssPixels = commonRatios.reduce((prev, curr) => {
-          // Calculate the absolute difference between the actual ratio and the current ratio
-          const diff = Math.abs(curr.value - actualRatioInCssPixels);
-          const threshold = 0.0001;
-          // If the current ratio is a single number, compare it directly to the actual ratio
-          // Otherwise, compare the ratios as fractions
-          return diff < Math.abs(prev.value - actualRatioInCssPixels) - threshold || (diff <= threshold && curr.value === actualRatioInCssPixels) ? curr : prev;
-        });
-        setAspectRatioInCSSPixels(closestRatioInCssPixels.name);
+        let aspectRatio : number;
+
+        if (window.screen.orientation.type === "landscape-primary") {
+          aspectRatio = widthInCSSPixels / heightInCSSPixels;
+        } else {
+          aspectRatio = heightInCSSPixels / widthInCSSPixels;
+        }
+
+        const closestRatio = commonRatios.reduce((prev, curr) =>
+          Math.abs(curr.value - aspectRatio) <
+          Math.abs(prev.value - aspectRatio)
+            ? curr
+            : prev
+        );
+        setAspectRatioInCSSPixels(closestRatio.name);
 
         // Navigator Information
         setBrowserLanguage(navigator.language);
