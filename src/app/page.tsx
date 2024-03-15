@@ -31,12 +31,9 @@ export default function Home() {
       console.log("Fetching device info...");
       try {
         // Screen Details
-        // const widthInCSSPixels = window.screen.width;
-        const widthInCSSPixels = window.screen.width * window.devicePixelRatio;
+        const widthInCSSPixels = window.screen.width;
         console.log("widthInCSSPixels", widthInCSSPixels);
-        // const heightInCSSPixels = window.screen.height;
-        const heightInCSSPixels = window.screen.height * window.devicePixelRatio;
-
+        const heightInCSSPixels = window.screen.height;
         console.log("heightInCSSPixels", heightInCSSPixels);
         const devicePixelRatio = window.devicePixelRatio;
         setScreenWidthInCSSPixels(widthInCSSPixels);
