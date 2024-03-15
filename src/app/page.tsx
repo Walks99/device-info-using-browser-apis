@@ -53,8 +53,8 @@ export default function Home() {
       console.log("Fetching device info...");
       try {
         // Screen Details
-        const widthInCSSPixels = window.screen.width;
-        const heightInCSSPixels = window.screen.height;
+        const widthInCSSPixels = window.innerWidth;
+        const heightInCSSPixels = window.innerHeight;
         setScreenWidthInCSSPixels(widthInCSSPixels);
         setScreenHeightInCSSPixels(heightInCSSPixels);
         setScreenResolutionInCSSPixels(
