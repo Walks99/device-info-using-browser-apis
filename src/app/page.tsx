@@ -176,12 +176,11 @@ export default function Home() {
           console.log("Geolocation is not supported by your browser");
         }
 
-                // Hide the iframe after 3 seconds
-                const timer = setTimeout(() => {
-                  setShowIframe(false);
-                }, 2500); // 3000 milliseconds = 3 seconds
-        
-                return () => clearTimeout(timer); // Cleanup on component unmount
+        const timer = setTimeout(() => {
+          setShowIframe(false);
+        }, 2200);
+
+        return () => clearTimeout(timer);
       } catch (error) {
         console.error("Error fetching device info:", error);
       } /* finally {
@@ -230,7 +229,7 @@ export default function Home() {
             <p>{screenHeightInPhysicalPixels}</p>
           </div> */}
           <div className={styles.childContainer}>
-            <p>Screen Resolution in Physical Pixels</p>
+            <p>Screen Resolution in Physical Pixels:</p>
             <p>{screenResolutionInPhysicalPixels}</p>
           </div>
           <div className={styles.childContainer}>
