@@ -1,5 +1,16 @@
 "use client";
 
+// At the top of your page.tsx file
+declare module "react" {
+  interface Navigator {
+    userAgentData?: {
+      brands: { brand: string; version: string }[];
+      mobile: boolean;
+      platform: string;
+    };
+  }
+}
+
 import styles from "./page.module.scss";
 import React, { useEffect, useState } from "react";
 
@@ -50,8 +61,12 @@ export default function Home() {
         // Navigator Information
         setBrowserLanguage(navigator.language);
         setBrowserOnlineStatus(navigator.onLine);
-        setOperatingSystem(window.navigator.userAgentData.platform);
-        setBrowser(window.navigator.userAgentData.brands[2].brand);
+        if ((navigator as any).userAgentData) {
+          setOperatingSystem((navigator as any).userAgentData.platform);
+          setBrowser((navigator as any).userAgentData.brands[2].brand);
+        } else {
+          console.log("userAgentData is not supported");
+        }
 
         // User Agent Information
         setUserAgent(navigator.userAgent);
