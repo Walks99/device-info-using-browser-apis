@@ -39,9 +39,9 @@ export default function Home() {
     screenResolutionInPhysicalPixels,
     setScreenResolutionInPhysicalPixels,
   ] = useState<string | null>(null);
-  // const [aspectRatioInCSSPixels, setAspectRatioInCSSPixels] = useState<string | null>(null);
-  const [aspectRatioInPhysicalPixels, setAspectRatioInPhysicalPixels] =
-    useState<string | null>(null);
+  const [aspectRatioInCSSPixels, setAspectRatioInCSSPixels] = useState<string | null>(null);
+  // const [aspectRatioInPhysicalPixels, setAspectRatioInPhysicalPixels] =
+  //   useState<string | null>(null);
   const [operatingSystem, setOperatingSystem] = useState<string | null>(null);
   const [browser, setBrowser] = useState<string | null>(null);
   const [latitude, setLatitude] = useState<number | null>(null);
@@ -87,25 +87,25 @@ export default function Home() {
           { name: "2/1", value: 2 },
         ];
 
-        // // Calculate actual screen ratio in CSS pixels and find the closest common ratio
-        // const actualRatioInCssPixels = widthInCSSPixels / heightInCSSPixels;
-        // const closestRatioInCssPixels = commonRatios.reduce((prev, curr) =>
-        //   Math.abs(curr.value - actualRatioInCssPixels) <
-        //   Math.abs(prev.value - actualRatioInCssPixels)
-        //     ? curr
-        //     : prev
-        // );
-        // setAspectRatioInCSSPixels(closestRatioInCssPixels.name);
-        // Calculate actual screen ratio in Physical pixels and find the closest common ratio
-        const actualRatioInPhysicalPixels =
-          widthInPhysicalPixels / heightInPhysicalPixels;
-        const closestRatioPhysicalPixels = commonRatios.reduce((prev, curr) =>
-          Math.abs(curr.value - actualRatioInPhysicalPixels) <
-          Math.abs(prev.value - actualRatioInPhysicalPixels)
+        // Calculate actual screen ratio in CSS pixels and find the closest common ratio
+        const actualRatioInCssPixels = widthInCSSPixels / heightInCSSPixels;
+        const closestRatioInCssPixels = commonRatios.reduce((prev, curr) =>
+          Math.abs(curr.value - actualRatioInCssPixels) <
+          Math.abs(prev.value - actualRatioInCssPixels)
             ? curr
             : prev
         );
-        setAspectRatioInPhysicalPixels(closestRatioPhysicalPixels.name);
+        setAspectRatioInCSSPixels(closestRatioInCssPixels.name);
+        // Calculate actual screen ratio in Physical pixels and find the closest common ratio
+        // const actualRatioInPhysicalPixels =
+        //   widthInPhysicalPixels / heightInPhysicalPixels;
+        // const closestRatioPhysicalPixels = commonRatios.reduce((prev, curr) =>
+        //   Math.abs(curr.value - actualRatioInPhysicalPixels) <
+        //   Math.abs(prev.value - actualRatioInPhysicalPixels)
+        //     ? curr
+        //     : prev
+        // );
+        // setAspectRatioInPhysicalPixels(closestRatioPhysicalPixels.name);
 
         // Navigator Information
         setBrowserLanguage(navigator.language);
@@ -215,10 +215,10 @@ export default function Home() {
             <p>Screen Resolution in CSS Pixels:</p>
             <p>{screenResolutionInCSSPixels}</p>
           </div>
-          {/* <div className={styles.childContainer}>
+          <div className={styles.childContainer}>
             <p>Aspect Ratio In CSS pixels:</p>
             <p>{aspectRatioInCSSPixels}</p>
-          </div> */}
+          </div>
           {/* <div className={styles.childContainer}>
             <p>Screen Width in Physical pixels:</p>
             <p>{screenWidthInPhysicalPixels}</p>
@@ -235,10 +235,10 @@ export default function Home() {
             <p>Device Pixel Ratio:</p>
             <p>{devicePixelRatio}</p>
           </div>
-          <div className={styles.childContainer}>
+          {/* <div className={styles.childContainer}>
             <p>Aspect Ratio:</p>
             <p>{aspectRatioInPhysicalPixels}</p>
-          </div>
+          </div> */}
           <div className={styles.childContainer}>
             <p>Screen Orientation:</p>
             <p>{screenOrientation}</p>
