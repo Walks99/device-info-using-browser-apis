@@ -5,9 +5,20 @@ import React, { useEffect, useState } from "react";
 
 export default function Home() {
   // State variables for device information
+  const [showIframe, setShowIframe] = useState<boolean>(true);
   const [isLoading, setIsLoading] = useState(true);
-  const [screenWidth, setScreenWidth] = useState<number | null>(null);
-  const [screenHeight, setScreenHeight] = useState<number | null>(null);
+  const [screenWidthInCSSPixels, setScreenWidthInCSSPixels] = useState<
+    number | null
+  >(null);
+  const [screenHeightInCSSPixels, setScreenHeightInCSSPixels] = useState<
+    number | null
+  >(null);
+
+  const [screenWidthInPhysicalPixels, setScreenWidthInPhysicalPixels] =
+    useState<number | null>(null);
+  const [screenHeightInPhysicalPixels, setScreenHeightInPhysicalPixels] =
+    useState<number | null>(null);
+
   const [screenOrientation, setScreenOrientation] = useState<string | null>(
     null
   );
@@ -22,8 +33,15 @@ export default function Home() {
   const [vibrationSupported, setVibrationSupported] = useState<boolean | null>(
     null
   );
-  const [screenResolution, setScreenResolution] = useState<string | null>(null);
-  const [aspectRatio, setAspectRatio] = useState<string | null>(null);
+  const [screenResolutionInCSSPixels, setScreenResolutionInCSSPixels] =
+    useState<string | null>(null);
+  const [
+    screenResolutionInPhysicalPixels,
+    setScreenResolutionInPhysicalPixels,
+  ] = useState<string | null>(null);
+  // const [aspectRatioInCSSPixels, setAspectRatioInCSSPixels] = useState<string | null>(null);
+  const [aspectRatioInPhysicalPixels, setAspectRatioInPhysicalPixels] =
+    useState<string | null>(null);
   const [operatingSystem, setOperatingSystem] = useState<string | null>(null);
   const [browser, setBrowser] = useState<string | null>(null);
   const [latitude, setLatitude] = useState<number | null>(null);
@@ -32,20 +50,62 @@ export default function Home() {
 
   useEffect(() => {
     const fetchDeviceInfo = async () => {
+      console.log("Fetching device info...");
       try {
         // Screen Details
-        const width = window.screen.width;
-        const height = window.screen.height;
-        setScreenWidth(width);
-        setScreenHeight(height);
-
+        const widthInCSSPixels = window.screen.width;
+        const heightInCSSPixels = window.screen.height;
+        setScreenWidthInCSSPixels(widthInCSSPixels);
+        setScreenHeightInCSSPixels(heightInCSSPixels);
+        setScreenResolutionInCSSPixels(
+          `${widthInCSSPixels} x ${heightInCSSPixels}`
+        );
+        const widthInPhysicalPixels = Math.round(
+          window.screen.width * window.devicePixelRatio
+        );
+        const heightInPhysicalPixels = Math.round(
+          window.screen.height * window.devicePixelRatio
+        );
+        setScreenWidthInPhysicalPixels(widthInPhysicalPixels);
+        setScreenHeightInPhysicalPixels(heightInPhysicalPixels);
+        setScreenResolutionInPhysicalPixels(
+          `${widthInPhysicalPixels} x ${heightInPhysicalPixels}`
+        );
         setScreenOrientation(window.screen.orientation.type);
+        setDevicePixelRatio(Number(window.devicePixelRatio.toFixed(2)));
 
-        // Device Pixel Ratio
-        setDevicePixelRatio(window.devicePixelRatio);
-        const physicalWidth = window.screen.width * window.devicePixelRatio;
-        const physicalHeight = window.screen.height * window.devicePixelRatio;
-        console.log(`screen resolution: ${physicalWidth}x${physicalHeight}`);
+        // Aspect Ratio
+        const commonRatios = [
+          { name: "4/3", value: 4 / 3 },
+          { name: "16/9", value: 16 / 9 },
+          { name: "16/10", value: 16 / 10 },
+          { name: "1/1", value: 1 },
+          { name: "21/9", value: 21 / 9 },
+          { name: "32/9", value: 32 / 9 },
+          { name: "5/4", value: 5 / 4 },
+          { name: "3/2", value: 3 / 2 },
+          { name: "2/1", value: 2 },
+        ];
+
+        // // Calculate actual screen ratio in CSS pixels and find the closest common ratio
+        // const actualRatioInCssPixels = widthInCSSPixels / heightInCSSPixels;
+        // const closestRatioInCssPixels = commonRatios.reduce((prev, curr) =>
+        //   Math.abs(curr.value - actualRatioInCssPixels) <
+        //   Math.abs(prev.value - actualRatioInCssPixels)
+        //     ? curr
+        //     : prev
+        // );
+        // setAspectRatioInCSSPixels(closestRatioInCssPixels.name);
+        // Calculate actual screen ratio in Physical pixels and find the closest common ratio
+        const actualRatioInPhysicalPixels =
+          widthInPhysicalPixels / heightInPhysicalPixels;
+        const closestRatioPhysicalPixels = commonRatios.reduce((prev, curr) =>
+          Math.abs(curr.value - actualRatioInPhysicalPixels) <
+          Math.abs(prev.value - actualRatioInPhysicalPixels)
+            ? curr
+            : prev
+        );
+        setAspectRatioInPhysicalPixels(closestRatioPhysicalPixels.name);
 
         // Navigator Information
         setBrowserLanguage(navigator.language);
@@ -73,34 +133,10 @@ export default function Home() {
         // Vibration API
         setVibrationSupported("vibrate" in navigator);
 
-        // Calculate actual screen ratio and find the closest common ratio
-        const actualRatio = width / height;
-        const commonRatios = [
-          { name: "4/3", value: 4 / 3 },
-          { name: "16/9", value: 16 / 9 },
-          { name: "16/10", value: 16 / 10 },
-          { name: "1/1", value: 1 },
-          { name: "21/9", value: 21 / 9 },
-          { name: "32/9", value: 32 / 9 },
-          { name: "5/4", value: 5 / 4 },
-          { name: "3/2", value: 3 / 2 },
-          { name: "2/1", value: 2 },
-        ];
-        const closestRatio = commonRatios.reduce((prev, curr) =>
-          Math.abs(curr.value - actualRatio) <
-          Math.abs(prev.value - actualRatio)
-            ? curr
-            : prev
-        );
-        setScreenResolution(`${width}x${height}`);
-        setAspectRatio(closestRatio.name);
-
         // Geolocation
         if (navigator.geolocation) {
-          console.log("Geolocation is supported by your browser");
-
           // Request permission to access the user's location
-          await navigator.geolocation.getCurrentPosition(
+          navigator.geolocation.getCurrentPosition(
             async function (position) {
               setLatitude(position.coords.latitude);
               setLongitude(position.coords.longitude);
@@ -139,11 +175,18 @@ export default function Home() {
         } else {
           console.log("Geolocation is not supported by your browser");
         }
+
+                // Hide the iframe after 3 seconds
+                const timer = setTimeout(() => {
+                  setShowIframe(false);
+                }, 2000); // 3000 milliseconds = 3 seconds
+        
+                return () => clearTimeout(timer); // Cleanup on component unmount
       } catch (error) {
         console.error("Error fetching device info:", error);
-      } finally {
+      } /* finally {
         setIsLoading(false);
-      }
+      } */
     };
 
     fetchDeviceInfo();
@@ -151,45 +194,76 @@ export default function Home() {
 
   return (
     <main className={styles.main}>
-      {isLoading ? (
-        <p className={styles.isLoading}>Loading...</p>
+      {showIframe ? (
+        // <p className={styles.isLoading}>Loading...</p>
+        <iframe
+          src="https://giphy.com/embed/3ohc0Rnm6JE0cg0RvG"
+          width="480"
+          height="480"
+          className="giphy-embed"
+          allowFullScreen
+        ></iframe>
       ) : (
         <div className={styles.deviceInfoContainer}>
-          <div className={styles.childContainer}>
-            <p>Screen Width:</p>
-            <p>{screenWidth}</p>
+          {/* <div className={styles.childContainer}>
+            <p>Screen Width in CSS pixels:</p>
+            <p>{screenWidthInCSSPixels}</p>
           </div>
           <div className={styles.childContainer}>
-            <p>Screen Height:</p>
-            <p>{screenHeight}</p>
+            <p>Screen Height in CSS pixels:</p>
+            <p>{screenHeightInCSSPixels}</p>
+          </div> */}
+          <div className={styles.childContainer}>
+            <p>Screen Resolution in CSS pixels:</p>
+            <p>{screenResolutionInCSSPixels}</p>
+          </div>
+          {/* <div className={styles.childContainer}>
+            <p>Aspect Ratio In CSS pixels:</p>
+            <p>{aspectRatioInCSSPixels}</p>
+          </div> */}
+          {/* <div className={styles.childContainer}>
+            <p>Screen Width in Physical pixels:</p>
+            <p>{screenWidthInPhysicalPixels}</p>
           </div>
           <div className={styles.childContainer}>
-            <p>Screen Orientation:</p>
-            <p>{screenOrientation}</p>
-          </div>
+            <p>Screen Height in Physical pixels:</p>
+            <p>{screenHeightInPhysicalPixels}</p>
+          </div> */}
           <div className={styles.childContainer}>
-            <p>Screen Resolution:</p>
-            <p>{screenResolution}</p>
-          </div>
-          <div className={styles.childContainer}>
-            <p>Aspect Ratio:</p>
-            <p>{aspectRatio}</p>
+            <p>Screen Resolution in physical pixels</p>
+            <p>{screenResolutionInPhysicalPixels}</p>
           </div>
           <div className={styles.childContainer}>
             <p>Device Pixel Ratio:</p>
             <p>{devicePixelRatio}</p>
           </div>
           <div className={styles.childContainer}>
+            <p>Aspect Ratio:</p>
+            <p>{aspectRatioInPhysicalPixels}</p>
+          </div>
+          <div className={styles.childContainer}>
+            <p>Screen Orientation:</p>
+            <p>{screenOrientation}</p>
+          </div>
+          <div className={styles.childContainer}>
             <p>Browser Language:</p>
             <p>{browserLanguage}</p>
+          </div>
+          <div className={styles.childContainer}>
+            <p>Browser:</p>
+            <p>{browser}</p>
           </div>
           <div className={styles.childContainer}>
             <p>Browser Online Status:</p>
             <p>{browserOnlineStatus ? "Online" : "Offline"}</p>
           </div>
-          <div className={styles.childContainer}>
+          <div className={`${styles.childContainer} ${styles.secondClass}`}>
             <p>User Agent:</p>
             <p>{userAgent}</p>
+          </div>
+          <div className={styles.childContainer}>
+            <p>Operating System:</p>
+            <p>{operatingSystem}</p>
           </div>
           <div className={styles.childContainer}>
             <p>Battery Level:</p>
@@ -204,24 +278,16 @@ export default function Home() {
             <p>{vibrationSupported ? "Yes" : "No"}</p>
           </div>
           <div className={styles.childContainer}>
-            <p>Operating System:</p>
-            <p>{operatingSystem}</p>
-          </div>
-          <div className={styles.childContainer}>
-            <p>Browser:</p>
-            <p>{browser}</p>
-          </div>
-          <div className={styles.childContainer}>
             <p>Latitude:</p>
-            <p>{latitude}</p>
+            <p>{latitude ? latitude : "Loading..."}</p>
           </div>
           <div className={styles.childContainer}>
             <p>Longitude:</p>
-            <p>{longitude}</p>
+            <p>{longitude ? longitude : "Loading..."}</p>
           </div>
           <div className={styles.childContainer}>
             <p>Location:</p>
-            <p>{location}</p>
+            <p>{location ? location : "Loading..."}</p>
           </div>
         </div>
       )}
