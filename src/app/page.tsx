@@ -4,44 +4,22 @@ import styles from "./page.module.scss";
 import React, { useEffect, useState } from "react";
 
 export default function Home() {
-  // State variables for device information
   const [showIframe, setShowIframe] = useState<boolean>(true);
-  // const [isLoading, setIsLoading] = useState(true);
-  const [screenWidthInCSSPixels, setScreenWidthInCSSPixels] = useState<
-    number | null
-  >(null);
-  const [screenHeightInCSSPixels, setScreenHeightInCSSPixels] = useState<
-    number | null
-  >(null);
-
-  const [screenWidthInPhysicalPixels, setScreenWidthInPhysicalPixels] =
-    useState<number | null>(null);
-  const [screenHeightInPhysicalPixels, setScreenHeightInPhysicalPixels] =
-    useState<number | null>(null);
-
-  const [screenOrientation, setScreenOrientation] = useState<string | null>(
-    null
-  );
+  const [screenWidthInCSSPixels, setScreenWidthInCSSPixels] = useState<number | null>(null);
+  const [screenHeightInCSSPixels, setScreenHeightInCSSPixels] = useState<number | null>(null);
+  const [screenWidthInPhysicalPixels, setScreenWidthInPhysicalPixels] = useState<number | null>(null);
+  const [screenHeightInPhysicalPixels, setScreenHeightInPhysicalPixels] =useState<number | null>(null);
+  const [screenOrientation, setScreenOrientation] = useState<string | null>(null);
   const [devicePixelRatio, setDevicePixelRatio] = useState<number | null>(null);
   const [browserLanguage, setBrowserLanguage] = useState<string | null>(null);
-  const [browserOnlineStatus, setBrowserOnlineStatus] = useState<
-    boolean | null
-  >(null);
+  const [browserOnlineStatus, setBrowserOnlineStatus] = useState<boolean | null>(null);
   const [userAgent, setUserAgent] = useState<string | null>(null);
   const [batteryLevel, setBatteryLevel] = useState<number | null>(null);
   const [batteryCharging, setBatteryCharging] = useState<boolean | null>(null);
-  const [vibrationSupported, setVibrationSupported] = useState<boolean | null>(
-    null
-  );
-  const [screenResolutionInCSSPixels, setScreenResolutionInCSSPixels] =
-    useState<string | null>(null);
-  const [
-    screenResolutionInPhysicalPixels,
-    setScreenResolutionInPhysicalPixels,
-  ] = useState<string | null>(null);
+  const [vibrationSupported, setVibrationSupported] = useState<boolean | null>(null);
+  const [screenResolutionInCSSPixels, setScreenResolutionInCSSPixels] = useState<string | null>(null);
+  const [screenResolutionInPhysicalPixels, setScreenResolutionInPhysicalPixels] = useState<string | null>(null);
   const [aspectRatioInCSSPixels, setAspectRatioInCSSPixels] = useState<string | null>(null);
-  // const [aspectRatioInPhysicalPixels, setAspectRatioInPhysicalPixels] =
-  //   useState<string | null>(null);
   const [operatingSystem, setOperatingSystem] = useState<string | null>(null);
   const [browser, setBrowser] = useState<string | null>(null);
   const [latitude, setLatitude] = useState<number | null>(null);
@@ -53,26 +31,24 @@ export default function Home() {
       console.log("Fetching device info...");
       try {
         // Screen Details
-        const widthInCSSPixels = window.innerWidth;
-        const heightInCSSPixels = window.innerHeight;
+        // const widthInCSSPixels = window.screen.width;
+        const widthInCSSPixels = window.screen.width * window.devicePixelRatio;
+        console.log("widthInCSSPixels", widthInCSSPixels);
+        // const heightInCSSPixels = window.screen.height;
+        const heightInCSSPixels = window.screen.height * window.devicePixelRatio;
+
+        console.log("heightInCSSPixels", heightInCSSPixels);
+        const devicePixelRatio = window.devicePixelRatio;
         setScreenWidthInCSSPixels(widthInCSSPixels);
         setScreenHeightInCSSPixels(heightInCSSPixels);
-        setScreenResolutionInCSSPixels(
-          `${widthInCSSPixels} x ${heightInCSSPixels}`
-        );
-        const widthInPhysicalPixels = Math.round(
-          window.screen.width * window.devicePixelRatio
-        );
-        const heightInPhysicalPixels = Math.round(
-          window.screen.height * window.devicePixelRatio
-        );
+        setScreenResolutionInCSSPixels(`${widthInCSSPixels} x ${heightInCSSPixels}`);
+        const widthInPhysicalPixels = Math.round(widthInCSSPixels * devicePixelRatio);
+        const heightInPhysicalPixels = Math.round(heightInCSSPixels * devicePixelRatio);
         setScreenWidthInPhysicalPixels(widthInPhysicalPixels);
         setScreenHeightInPhysicalPixels(heightInPhysicalPixels);
-        setScreenResolutionInPhysicalPixels(
-          `${widthInPhysicalPixels} x ${heightInPhysicalPixels}`
-        );
+        setScreenResolutionInPhysicalPixels(`${widthInPhysicalPixels} x ${heightInPhysicalPixels}`);
         setScreenOrientation(window.screen.orientation.type);
-        setDevicePixelRatio(Number(window.devicePixelRatio.toFixed(2)));
+        setDevicePixelRatio(Number(devicePixelRatio.toFixed(2)));
 
         // Aspect Ratio
         const commonRatios = [
@@ -90,11 +66,7 @@ export default function Home() {
         // Calculate actual screen ratio in CSS pixels and find the closest common ratio
         const actualRatioInCssPixels = widthInCSSPixels / heightInCSSPixels;
         const closestRatioInCssPixels = commonRatios.reduce((prev, curr) =>
-          Math.abs(curr.value - actualRatioInCssPixels) <
-          Math.abs(prev.value - actualRatioInCssPixels)
-            ? curr
-            : prev
-        );
+          Math.abs(curr.value - actualRatioInCssPixels) <Math.abs(prev.value - actualRatioInCssPixels) ? curr : prev);
         setAspectRatioInCSSPixels(closestRatioInCssPixels.name);
         // Calculate actual screen ratio in Physical pixels and find the closest common ratio
         // const actualRatioInPhysicalPixels =
@@ -139,13 +111,10 @@ export default function Home() {
             async function (position) {
               setLatitude(position.coords.latitude);
               setLongitude(position.coords.longitude);
-
-              // Use the latitude and longitude to get the user's location
               const locationUrl = `https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${position.coords.latitude}&lon=${position.coords.longitude}&zoom=18&addressdetails=1`;
               const response = await fetch(locationUrl);
               const data = await response.json();
               if (data && data.address) {
-                // Construct a more detailed address string
                 let detailedAddress = "";
                 if (data.address.house_number) {
                   detailedAddress += data.address.house_number + " ";
@@ -182,9 +151,7 @@ export default function Home() {
         return () => clearTimeout(timer);
       } catch (error) {
         console.error("Error fetching device info:", error);
-      } /* finally {
-        setIsLoading(false);
-      } */
+      } 
     };
 
     fetchDeviceInfo();
@@ -193,7 +160,6 @@ export default function Home() {
   return (
     <main className={styles.main}>
       {showIframe ? (
-        // <p className={styles.isLoading}>Loading...</p>
         <iframe
           src="https://giphy.com/embed/3ohc0Rnm6JE0cg0RvG"
           width="480"
