@@ -141,7 +141,7 @@ export default function Home() {
 
         const timer = setTimeout(() => {
           setShowIframe(false);
-        }, 2200);
+        }, 3000);
 
         return () => clearTimeout(timer);
       } catch (error) {
