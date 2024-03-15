@@ -62,19 +62,14 @@ export default function Home() {
 
         // Calculate actual screen ratio in CSS pixels and find the closest common ratio
         const actualRatioInCssPixels = widthInCSSPixels / heightInCSSPixels;
-        const closestRatioInCssPixels = commonRatios.reduce((prev, curr) =>
-          Math.abs(curr.value - actualRatioInCssPixels) <Math.abs(prev.value - actualRatioInCssPixels) ? curr : prev);
+        const closestRatioInCssPixels = commonRatios.reduce((prev, curr) => {
+          // Calculate the absolute difference between the actual ratio and the current ratio
+          const diff = Math.abs(curr.value - actualRatioInCssPixels);
+          // If the current ratio is a single number, compare it directly to the actual ratio
+          // Otherwise, compare the ratios as fractions
+          return diff < Math.abs(prev.value - actualRatioInCssPixels) || (diff === 0 && curr.value === actualRatioInCssPixels) ? curr : prev;
+        });
         setAspectRatioInCSSPixels(closestRatioInCssPixels.name);
-        // Calculate actual screen ratio in Physical pixels and find the closest common ratio
-        // const actualRatioInPhysicalPixels =
-        //   widthInPhysicalPixels / heightInPhysicalPixels;
-        // const closestRatioPhysicalPixels = commonRatios.reduce((prev, curr) =>
-        //   Math.abs(curr.value - actualRatioInPhysicalPixels) <
-        //   Math.abs(prev.value - actualRatioInPhysicalPixels)
-        //     ? curr
-        //     : prev
-        // );
-        // setAspectRatioInPhysicalPixels(closestRatioPhysicalPixels.name);
 
         // Navigator Information
         setBrowserLanguage(navigator.language);
