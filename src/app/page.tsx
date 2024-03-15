@@ -5,10 +5,10 @@ import React, { useEffect, useState } from "react";
 
 export default function Home() {
   const [showIframe, setShowIframe] = useState<boolean>(true);
-  const [screenWidthInCSSPixels, setScreenWidthInCSSPixels] = useState<number | null>(null);
-  const [screenHeightInCSSPixels, setScreenHeightInCSSPixels] = useState<number | null>(null);
-  const [screenWidthInPhysicalPixels, setScreenWidthInPhysicalPixels] = useState<number | null>(null);
-  const [screenHeightInPhysicalPixels, setScreenHeightInPhysicalPixels] =useState<number | null>(null);
+  // const [screenWidthInCSSPixels, setScreenWidthInCSSPixels] = useState<number | null>(null);
+  // const [screenHeightInCSSPixels, setScreenHeightInCSSPixels] = useState<number | null>(null);
+  // const [screenWidthInPhysicalPixels, setScreenWidthInPhysicalPixels] = useState<number | null>(null);
+  // const [screenHeightInPhysicalPixels, setScreenHeightInPhysicalPixels] =useState<number | null>(null);
   const [screenOrientation, setScreenOrientation] = useState<string | null>(null);
   const [devicePixelRatio, setDevicePixelRatio] = useState<number | null>(null);
   const [browserLanguage, setBrowserLanguage] = useState<string | null>(null);
@@ -32,17 +32,15 @@ export default function Home() {
       try {
         // Screen Details
         const widthInCSSPixels = window.screen.width;
-        console.log("widthInCSSPixels", widthInCSSPixels);
         const heightInCSSPixels = window.screen.height;
-        console.log("heightInCSSPixels", heightInCSSPixels);
         const devicePixelRatio = window.devicePixelRatio;
-        setScreenWidthInCSSPixels(widthInCSSPixels);
-        setScreenHeightInCSSPixels(heightInCSSPixels);
+        // setScreenWidthInCSSPixels(widthInCSSPixels);
+        // setScreenHeightInCSSPixels(heightInCSSPixels);
         setScreenResolutionInCSSPixels(`${widthInCSSPixels} x ${heightInCSSPixels}`);
         const widthInPhysicalPixels = Math.round(widthInCSSPixels * devicePixelRatio);
         const heightInPhysicalPixels = Math.round(heightInCSSPixels * devicePixelRatio);
-        setScreenWidthInPhysicalPixels(widthInPhysicalPixels);
-        setScreenHeightInPhysicalPixels(heightInPhysicalPixels);
+        // setScreenWidthInPhysicalPixels(widthInPhysicalPixels);
+        // setScreenHeightInPhysicalPixels(heightInPhysicalPixels);
         setScreenResolutionInPhysicalPixels(`${widthInPhysicalPixels} x ${heightInPhysicalPixels}`);
         setScreenOrientation(window.screen.orientation.type);
         setDevicePixelRatio(Number(devicePixelRatio.toFixed(2)));
@@ -178,10 +176,6 @@ export default function Home() {
             <p>Screen Resolution in CSS Pixels:</p>
             <p>{screenResolutionInCSSPixels}</p>
           </div>
-          <div className={styles.childContainer}>
-            <p>Aspect Ratio In CSS pixels:</p>
-            <p>{aspectRatioInCSSPixels}</p>
-          </div>
           {/* <div className={styles.childContainer}>
             <p>Screen Width in Physical pixels:</p>
             <p>{screenWidthInPhysicalPixels}</p>
@@ -193,6 +187,10 @@ export default function Home() {
           <div className={styles.childContainer}>
             <p>Screen Resolution in Physical Pixels:</p>
             <p>{screenResolutionInPhysicalPixels}</p>
+          </div>
+          <div className={styles.childContainer}>
+            <p>Aspect Ratio:</p>
+            <p>{aspectRatioInCSSPixels}</p>
           </div>
           <div className={styles.childContainer}>
             <p>Device Pixel Ratio:</p>
