@@ -1,16 +1,5 @@
 "use client";
 
-// At the top of your page.tsx file
-declare module "react" {
-  interface Navigator {
-    userAgentData?: {
-      brands: { brand: string; version: string }[];
-      mobile: boolean;
-      platform: string;
-    };
-  }
-}
-
 import styles from "./page.module.scss";
 import React, { useEffect, useState } from "react";
 
