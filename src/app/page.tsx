@@ -65,9 +65,10 @@ export default function Home() {
         const closestRatioInCssPixels = commonRatios.reduce((prev, curr) => {
           // Calculate the absolute difference between the actual ratio and the current ratio
           const diff = Math.abs(curr.value - actualRatioInCssPixels);
+          const threshold = 0.0001;
           // If the current ratio is a single number, compare it directly to the actual ratio
           // Otherwise, compare the ratios as fractions
-          return diff < Math.abs(prev.value - actualRatioInCssPixels) || (diff === 0 && curr.value === actualRatioInCssPixels) ? curr : prev;
+          return diff < Math.abs(prev.value - actualRatioInCssPixels) - threshold || (diff <= threshold && curr.value === actualRatioInCssPixels) ? curr : prev;
         });
         setAspectRatioInCSSPixels(closestRatioInCssPixels.name);
 
