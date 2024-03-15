@@ -6,7 +6,7 @@ import React, { useEffect, useState } from "react";
 export default function Home() {
   // State variables for device information
   const [showIframe, setShowIframe] = useState<boolean>(true);
-  const [isLoading, setIsLoading] = useState(true);
+  // const [isLoading, setIsLoading] = useState(true);
   const [screenWidthInCSSPixels, setScreenWidthInCSSPixels] = useState<
     number | null
   >(null);
@@ -122,10 +122,9 @@ export default function Home() {
 
         // Battery Status
         if ("getBattery" in navigator) {
-          await (navigator.getBattery as any)().then(function (battery: any) {
-            setBatteryLevel(battery.level);
-            setBatteryCharging(battery.charging);
-          });
+          const battery = await (navigator.getBattery as any)();
+          setBatteryLevel(battery.level * 100);
+          setBatteryCharging(battery.charging);
         } else {
           console.log("Battery API is not supported");
         }
@@ -248,10 +247,16 @@ export default function Home() {
             <p>Browser Language:</p>
             <p>{browserLanguage}</p>
           </div>
-          <div className={styles.childContainer}>
+          {/* <div className={styles.childContainer}>
             <p>Browser:</p>
             <p>{browser}</p>
-          </div>
+          </div> */}
+          {browser ? (
+            <div className={styles.childContainer}>
+              <p>Browser:</p>
+              <p>{browser}</p>
+            </div>
+          ) : null}
           <div className={styles.childContainer}>
             <p>Browser Online Status:</p>
             <p>{browserOnlineStatus ? "Online" : "Offline"}</p>
@@ -260,18 +265,24 @@ export default function Home() {
             <p>User Agent:</p>
             <p>{userAgent}</p>
           </div>
-          <div className={styles.childContainer}>
-            <p>Operating System:</p>
-            <p>{operatingSystem}</p>
-          </div>
-          <div className={styles.childContainer}>
-            <p>Battery Level:</p>
-            <p>{batteryLevel ? `${batteryLevel * 100}%` : "Unknown"}</p>
-          </div>
-          <div className={styles.childContainer}>
-            <p>Battery Charging:</p>
-            <p>{batteryCharging ? "Yes" : "No"}</p>
-          </div>
+          {operatingSystem ? (
+            <div className={styles.childContainer}>
+              <p>Operating System:</p>
+              <p>{operatingSystem}</p>
+            </div>
+          ) : null}
+          {batteryLevel ? (
+            <div className={styles.childContainer}>
+              <p>Battery Level:</p>
+              <p>{`${batteryLevel}%`}</p>
+            </div>
+          ) : null}
+          {batteryCharging ? (
+            <div className={styles.childContainer}>
+              <p>Battery Charging:</p>
+              <p>{batteryCharging ? "Yes" : "No"}</p>
+            </div>
+          ) : null}
           <div className={styles.childContainer}>
             <p>Vibration Supported:</p>
             <p>{vibrationSupported ? "Yes" : "No"}</p>
