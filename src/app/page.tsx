@@ -179,7 +179,7 @@ export default function Home() {
                 // Hide the iframe after 3 seconds
                 const timer = setTimeout(() => {
                   setShowIframe(false);
-                }, 2000); // 3000 milliseconds = 3 seconds
+                }, 2500); // 3000 milliseconds = 3 seconds
         
                 return () => clearTimeout(timer); // Cleanup on component unmount
       } catch (error) {
@@ -214,7 +214,7 @@ export default function Home() {
             <p>{screenHeightInCSSPixels}</p>
           </div> */}
           <div className={styles.childContainer}>
-            <p>Screen Resolution in CSS pixels:</p>
+            <p>Screen Resolution in CSS Pixels:</p>
             <p>{screenResolutionInCSSPixels}</p>
           </div>
           {/* <div className={styles.childContainer}>
@@ -230,7 +230,7 @@ export default function Home() {
             <p>{screenHeightInPhysicalPixels}</p>
           </div> */}
           <div className={styles.childContainer}>
-            <p>Screen Resolution in physical pixels</p>
+            <p>Screen Resolution in Physical Pixels</p>
             <p>{screenResolutionInPhysicalPixels}</p>
           </div>
           <div className={styles.childContainer}>
