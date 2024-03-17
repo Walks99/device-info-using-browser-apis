@@ -5,26 +5,35 @@ import React, { useEffect, useState } from "react";
 
 export default function Home() {
   const [showIframe, setShowIframe] = useState<boolean>(true);
-  // const [screenWidthInCSSPixels, setScreenWidthInCSSPixels] = useState<number | null>(null);
-  // const [screenHeightInCSSPixels, setScreenHeightInCSSPixels] = useState<number | null>(null);
-  // const [screenWidthInPhysicalPixels, setScreenWidthInPhysicalPixels] = useState<number | null>(null);
-  // const [screenHeightInPhysicalPixels, setScreenHeightInPhysicalPixels] =useState<number | null>(null);
-  const [screenOrientation, setScreenOrientation] = useState<string | null>(null);
+  const [screenOrientation, setScreenOrientation] = useState<string | null>(
+    null
+  );
   const [devicePixelRatio, setDevicePixelRatio] = useState<number | null>(null);
   const [browserLanguage, setBrowserLanguage] = useState<string | null>(null);
-  const [browserOnlineStatus, setBrowserOnlineStatus] = useState<boolean | null>(null);
+  const [browserOnlineStatus, setBrowserOnlineStatus] = useState<
+    boolean | null
+  >(null);
   const [userAgent, setUserAgent] = useState<string | null>(null);
   const [batteryLevel, setBatteryLevel] = useState<number | null>(null);
   const [batteryCharging, setBatteryCharging] = useState<boolean | null>(null);
-  const [vibrationSupported, setVibrationSupported] = useState<boolean | null>(null);
-  const [screenResolutionInCSSPixels, setScreenResolutionInCSSPixels] = useState<string | null>(null);
-  const [screenResolutionInPhysicalPixels, setScreenResolutionInPhysicalPixels] = useState<string | null>(null);
-  const [aspectRatioInCSSPixels, setAspectRatioInCSSPixels] = useState<string | null>(null);
+  const [vibrationSupported, setVibrationSupported] = useState<boolean | null>(
+    null
+  );
+  const [screenResolutionInCSSPixels, setScreenResolutionInCSSPixels] =
+    useState<string | null>(null);
+  const [
+    screenResolutionInPhysicalPixels,
+    setScreenResolutionInPhysicalPixels,
+  ] = useState<string | null>(null);
+  const [aspectRatioInCSSPixels, setAspectRatioInCSSPixels] = useState<
+    string | null
+  >(null);
   const [operatingSystem, setOperatingSystem] = useState<string | null>(null);
   const [browser, setBrowser] = useState<string | null>(null);
   const [latitude, setLatitude] = useState<number | null>(null);
   const [longitude, setLongitude] = useState<number | null>(null);
   const [location, setLocation] = useState<string | null>(null);
+  const [permissionInteracted, setPermissionInteracted] = useState(false); // NEW NEW NEW NEW NEW NEW NEW NEW NEW NEW
 
   useEffect(() => {
     const fetchDeviceInfo = async () => {
@@ -34,14 +43,18 @@ export default function Home() {
         const widthInCSSPixels = window.screen.width;
         const heightInCSSPixels = window.screen.height;
         const devicePixelRatio = window.devicePixelRatio;
-        // setScreenWidthInCSSPixels(widthInCSSPixels);
-        // setScreenHeightInCSSPixels(heightInCSSPixels);
-        setScreenResolutionInCSSPixels(`${widthInCSSPixels} x ${heightInCSSPixels}`);
-        const widthInPhysicalPixels = Math.round(widthInCSSPixels * devicePixelRatio);
-        const heightInPhysicalPixels = Math.round(heightInCSSPixels * devicePixelRatio);
-        // setScreenWidthInPhysicalPixels(widthInPhysicalPixels);
-        // setScreenHeightInPhysicalPixels(heightInPhysicalPixels);
-        setScreenResolutionInPhysicalPixels(`${widthInPhysicalPixels} x ${heightInPhysicalPixels}`);
+        setScreenResolutionInCSSPixels(
+          `${widthInCSSPixels} x ${heightInCSSPixels}`
+        );
+        const widthInPhysicalPixels = Math.round(
+          widthInCSSPixels * devicePixelRatio
+        );
+        const heightInPhysicalPixels = Math.round(
+          heightInCSSPixels * devicePixelRatio
+        );
+        setScreenResolutionInPhysicalPixels(
+          `${widthInPhysicalPixels} x ${heightInPhysicalPixels}`
+        );
         setScreenOrientation(window.screen.orientation.type);
         setDevicePixelRatio(Number(devicePixelRatio.toFixed(2)));
 
@@ -58,7 +71,7 @@ export default function Home() {
           { name: "2/1", value: 2 },
         ];
 
-        let aspectRatio : number;
+        let aspectRatio: number;
 
         if (window.screen.orientation.type === "landscape-primary") {
           aspectRatio = widthInCSSPixels / heightInCSSPixels;
@@ -90,7 +103,7 @@ export default function Home() {
         // Battery Status
         if ("getBattery" in navigator) {
           const battery = await (navigator.getBattery as any)();
-          setBatteryLevel(battery.level * 100);
+          setBatteryLevel(Math.round(battery.level * 100));
           setBatteryCharging(battery.charging);
         } else {
           console.log("Battery API is not supported");
@@ -98,58 +111,62 @@ export default function Home() {
 
         // Vibration API
         setVibrationSupported("vibrate" in navigator);
-
-        // Geolocation
-        if (navigator.geolocation) {
-          // Request permission to access the user's location
-          navigator.geolocation.getCurrentPosition(
-            async function (position) {
-              setLatitude(position.coords.latitude);
-              setLongitude(position.coords.longitude);
-              const locationUrl = `https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${position.coords.latitude}&lon=${position.coords.longitude}&zoom=18&addressdetails=1`;
-              const response = await fetch(locationUrl);
-              const data = await response.json();
-              if (data && data.address) {
-                let detailedAddress = "";
-                if (data.address.house_number) {
-                  detailedAddress += data.address.house_number + " ";
-                }
-                if (data.address.road) {
-                  detailedAddress += data.address.road + ", ";
-                }
-                if (data.address.suburb) {
-                  detailedAddress += data.address.suburb + ", ";
-                }
-                if (data.address.city) {
-                  detailedAddress += data.address.city + ", ";
-                }
-                if (data.address.country) {
-                  detailedAddress += data.address.country;
-                }
-                setLocation(detailedAddress.trim());
-              } else {
-                console.log("Unable to determine location");
-              }
-            },
-            function (error) {
-              console.error("Error occurred: " + error.message);
-            }
-          );
-        } else {
-          console.log("Geolocation is not supported by your browser");
-        }
-
-        const timer = setTimeout(() => {
-          setShowIframe(false);
-        }, 3000);
-
-        return () => clearTimeout(timer);
       } catch (error) {
         console.error("Error fetching device info:", error);
-      } 
+      }
     };
 
     fetchDeviceInfo();
+  }, [permissionInteracted]);
+
+  useEffect(() => {
+    const fetchLocation = async () => {
+      // Geolocation
+      if (navigator.geolocation) {
+        // Request permission to access the user's location
+        navigator.geolocation.getCurrentPosition(
+          async function (position) {
+            setPermissionInteracted(true);
+            setShowIframe(false);
+            setLatitude(position.coords.latitude);
+            setLongitude(position.coords.longitude);
+            const locationUrl = `https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${position.coords.latitude}&lon=${position.coords.longitude}&zoom=18&addressdetails=1`;
+            const response = await fetch(locationUrl);
+            const data = await response.json();
+            if (data && data.address) {
+              let detailedAddress = "";
+              if (data.address.house_number) {
+                detailedAddress += data.address.house_number + " ";
+              }
+              if (data.address.road) {
+                detailedAddress += data.address.road + ", ";
+              }
+              if (data.address.suburb) {
+                detailedAddress += data.address.suburb + ", ";
+              }
+              if (data.address.city) {
+                detailedAddress += data.address.city + ", ";
+              }
+              if (data.address.country) {
+                detailedAddress += data.address.country;
+              }
+              setLocation(detailedAddress.trim());
+            } else {
+              console.log("Unable to determine location");
+            }
+          },
+          function (error) {
+            setPermissionInteracted(true);
+            console.error("Error occurred: " + error.message);
+            setShowIframe(false);
+          }
+        );
+      } else {
+        console.log("Geolocation is not supported by your browser");
+      }
+    };
+
+    fetchLocation();
   }, []);
 
   return (
@@ -164,26 +181,10 @@ export default function Home() {
         ></iframe>
       ) : (
         <div className={styles.deviceInfoContainer}>
-          {/* <div className={styles.childContainer}>
-            <p>Screen Width in CSS pixels:</p>
-            <p>{screenWidthInCSSPixels}</p>
-          </div>
-          <div className={styles.childContainer}>
-            <p>Screen Height in CSS pixels:</p>
-            <p>{screenHeightInCSSPixels}</p>
-          </div> */}
           <div className={styles.childContainer}>
             <p>Screen Resolution in CSS Pixels:</p>
             <p>{screenResolutionInCSSPixels}</p>
           </div>
-          {/* <div className={styles.childContainer}>
-            <p>Screen Width in Physical pixels:</p>
-            <p>{screenWidthInPhysicalPixels}</p>
-          </div>
-          <div className={styles.childContainer}>
-            <p>Screen Height in Physical pixels:</p>
-            <p>{screenHeightInPhysicalPixels}</p>
-          </div> */}
           <div className={styles.childContainer}>
             <p>Screen Resolution in Physical Pixels:</p>
             <p>{screenResolutionInPhysicalPixels}</p>
@@ -196,10 +197,6 @@ export default function Home() {
             <p>Device Pixel Ratio:</p>
             <p>{devicePixelRatio}</p>
           </div>
-          {/* <div className={styles.childContainer}>
-            <p>Aspect Ratio:</p>
-            <p>{aspectRatioInPhysicalPixels}</p>
-          </div> */}
           <div className={styles.childContainer}>
             <p>Screen Orientation:</p>
             <p>{screenOrientation}</p>
@@ -208,10 +205,6 @@ export default function Home() {
             <p>Browser Language:</p>
             <p>{browserLanguage}</p>
           </div>
-          {/* <div className={styles.childContainer}>
-            <p>Browser:</p>
-            <p>{browser}</p>
-          </div> */}
           {browser ? (
             <div className={styles.childContainer}>
               <p>Browser:</p>
