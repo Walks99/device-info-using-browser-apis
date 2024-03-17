@@ -29,6 +29,10 @@ export default function Home() {
     string | null
   >(null);
   const [operatingSystem, setOperatingSystem] = useState<string | null>(null);
+  const [numberOfLogicalProcessors, setNumberOfLogicalProcessors] = useState<
+    number | null
+  >(null);
+  const [estimatedRAM, setEstimatedRAM] = useState<number | null>(null);
   const [browser, setBrowser] = useState<string | null>(null);
   const [latitude, setLatitude] = useState<number | null>(null);
   const [longitude, setLongitude] = useState<number | null>(null);
@@ -38,6 +42,12 @@ export default function Home() {
 
   useEffect(() => {
     const fetchDeviceInfo = async () => {
+      /*let performanceEntries = performance.getEntriesByType("navigation");
+      if (performanceEntries.length) {
+        let navigationEntry = performanceEntries[0];
+        console.log(navigationEntry);
+      } */
+      console.log(window.History.length);
       console.log("Fetching device info...");
       try {
         // Screen Details
@@ -112,6 +122,8 @@ export default function Home() {
         setBrowserOnlineStatus(navigator.onLine);
         if ((navigator as any).userAgentData) {
           setOperatingSystem((navigator as any).userAgentData.platform);
+          setNumberOfLogicalProcessors((navigator as any).hardwareConcurrency);
+          setEstimatedRAM((navigator as any).deviceMemory);
           setBrowser((navigator as any).userAgentData.brands[2].brand);
         } else {
           console.log("userAgentData is not supported");
@@ -245,6 +257,18 @@ export default function Home() {
             <div className={styles.childContainer}>
               <p>Operating System:</p>
               <p>{operatingSystem}</p>
+            </div>
+          ) : null}
+          {numberOfLogicalProcessors ? (
+            <div className={styles.childContainer}>
+              <p>Number of Logical Processors:</p>
+              <p>{numberOfLogicalProcessors}</p>
+            </div>
+          ) : null}
+          {estimatedRAM ? (
+            <div className={styles.childContainer}>
+              <p>Estimated RAM:</p>
+              <p>{`${estimatedRAM} GB`}</p>
             </div>
           ) : null}
           {batteryLevel ? (
