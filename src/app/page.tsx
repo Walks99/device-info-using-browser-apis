@@ -1,7 +1,5 @@
 "use client";
 
-// import Head from 'next/head';
-
 import styles from "./page.module.scss";
 import React, { useEffect, useState } from "react";
 
@@ -35,7 +33,8 @@ export default function Home() {
   const [latitude, setLatitude] = useState<number | null>(null);
   const [longitude, setLongitude] = useState<number | null>(null);
   const [location, setLocation] = useState<string | null>(null);
-  const [permissionInteracted, setPermissionInteracted] = useState(false); // NEW NEW NEW NEW NEW NEW NEW NEW NEW NEW
+  const [permissionInteracted, setPermissionInteracted] = useState(false);
+  const [locationsDisabled, setLocationsDisabled] = useState(false);
 
   useEffect(() => {
     const fetchDeviceInfo = async () => {
@@ -180,10 +179,12 @@ export default function Home() {
             setPermissionInteracted(true);
             console.error("Error occurred: " + error.message);
             setShowIframe(false);
+            setLocationsDisabled(true);
           }
         );
       } else {
         console.log("Geolocation is not supported by your browser");
+        setLocationsDisabled(true);
       }
     };
 
@@ -192,9 +193,6 @@ export default function Home() {
 
   return (
     <main className={styles.main}>
-            {/* <Head>
-        <link rel="icon" href="/favicon.ico" />
-      </Head> */}
       {showIframe ? (
         <iframe
           src="https://giphy.com/embed/3ohc0Rnm6JE0cg0RvG"
@@ -265,18 +263,27 @@ export default function Home() {
             <p>Vibration Supported:</p>
             <p>{vibrationSupported ? "Yes" : "No"}</p>
           </div>
-          <div className={styles.childContainer}>
-            <p>Latitude:</p>
-            <p>{latitude ? latitude : "Loading..."}</p>
-          </div>
-          <div className={styles.childContainer}>
-            <p>Longitude:</p>
-            <p>{longitude ? longitude : "Loading..."}</p>
-          </div>
-          <div className={styles.childContainer}>
-            <p>Location:</p>
-            <p>{location ? location : "Loading..."}</p>
-          </div>
+          {locationsDisabled ? (
+            <div className={styles.childContainer}>
+              <p>Location:</p>
+              <p>Disabled - Update browser permissions in device settings</p>
+            </div>
+          ) : (
+            <>
+              <div className={styles.childContainer}>
+                <p>Latitude:</p>
+                <p>{latitude ? latitude : "Loading..."}</p>
+              </div>
+              <div className={styles.childContainer}>
+                <p>Longitude:</p>
+                <p>{longitude ? longitude : "Loading..."}</p>
+              </div>
+              <div className={styles.childContainer}>
+                <p>Location:</p>
+                <p>{location ? location : "Loading..."}</p>
+              </div>
+            </>
+          )}
         </div>
       )}
     </main>
