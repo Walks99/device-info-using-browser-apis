@@ -59,7 +59,7 @@ export default function Home() {
         setDevicePixelRatio(Number(devicePixelRatio.toFixed(2)));
 
         // Aspect Ratio
-        const commonRatios = [
+        const commonLandscapeRatios = [
           { name: "4/3", value: 4 / 3 },
           { name: "16/9", value: 16 / 9 },
           { name: "16/10", value: 16 / 10 },
@@ -70,22 +70,41 @@ export default function Home() {
           { name: "3/2", value: 3 / 2 },
           { name: "2/1", value: 2 },
         ];
+        const commonPortraitRatios = [
+          { name: "3/4", value: 4 / 3 },
+          { name: "9/16", value: 16 / 9 },
+          { name: "10/16", value: 16 / 10 },
+          { name: "1/1", value: 1 },
+          { name: "9/21", value: 21 / 9 },
+          { name: "9/32", value: 32 / 9 },
+          { name: "4/5", value: 5 / 4 },
+          { name: "2/3", value: 3 / 2 },
+          { name: "1/2", value: 2 },
+        ];
 
         let aspectRatio: number;
 
         if (window.screen.orientation.type === "landscape-primary") {
           aspectRatio = widthInCSSPixels / heightInCSSPixels;
+          const closestLandscapeRatio = commonLandscapeRatios.reduce(
+            (prev, curr) =>
+              Math.abs(curr.value - aspectRatio) <
+              Math.abs(prev.value - aspectRatio)
+                ? curr
+                : prev
+          );
+          setAspectRatioInCSSPixels(closestLandscapeRatio.name);
         } else {
           aspectRatio = heightInCSSPixels / widthInCSSPixels;
+          const closestPortraitRatio = commonPortraitRatios.reduce(
+            (prev, curr) =>
+              Math.abs(curr.value - aspectRatio) <
+              Math.abs(prev.value - aspectRatio)
+                ? curr
+                : prev
+          );
+          setAspectRatioInCSSPixels(closestPortraitRatio.name);
         }
-
-        const closestRatio = commonRatios.reduce((prev, curr) =>
-          Math.abs(curr.value - aspectRatio) <
-          Math.abs(prev.value - aspectRatio)
-            ? curr
-            : prev
-        );
-        setAspectRatioInCSSPixels(closestRatio.name);
 
         // Navigator Information
         setBrowserLanguage(navigator.language);
