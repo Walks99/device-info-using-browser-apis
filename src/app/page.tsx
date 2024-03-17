@@ -1,5 +1,7 @@
 "use client";
 
+// import Head from 'next/head';
+
 import styles from "./page.module.scss";
 import React, { useEffect, useState } from "react";
 
@@ -190,6 +192,9 @@ export default function Home() {
 
   return (
     <main className={styles.main}>
+            {/* <Head>
+        <link rel="icon" href="/favicon.ico" />
+      </Head> */}
       {showIframe ? (
         <iframe
           src="https://giphy.com/embed/3ohc0Rnm6JE0cg0RvG"
