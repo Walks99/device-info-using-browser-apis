@@ -211,24 +211,22 @@ export default function Home() {
     const switchGif = () => {
       setCurrentGif((prevGif) => (prevGif < 5 ? prevGif + 1 : 1));
     };
-  
+
     switchGif();
     const intervalId = setInterval(() => {
       switchGif();
     }, 2500); // Start with the first GIF after 1 second
-  
+
     // Cleanup function
     return () => {
       clearInterval(intervalId);
     };
   }, []);
-   
- 
 
   const handleClick = async () => {
     const fingerprint = await getFingerprint();
     setFingerprint(fingerprint);
- };
+  };
 
   return (
     <main className={styles.main}>
@@ -241,63 +239,63 @@ export default function Home() {
         //   className="giphy-embed"
         //   allowFullScreen
         // ></iframe>
-        <div>
-        {currentGif === 1 && (
-          <iframe
-            src="https://giphy.com/embed/3ohc0Rnm6JE0cg0RvG"
-            width="480"
-            height="480"
-            className="giphy-embed"
-            allowFullScreen
-            sandbox="allow-scripts allow-same-origin"
-            style={{ pointerEvents: "none", border: "none" }}
-          ></iframe>
-        )}
-        {currentGif === 2 && (
-          <iframe
-            src="https://giphy.com/embed/zQc8STzaOlJ3q" // Replace with the second GIF's URL
-            width="480"
-            height="480"
-            className="giphy-embed"
-            allowFullScreen
-            sandbox="allow-scripts allow-same-origin"
-            style={{ pointerEvents: "none", border: "none" }}
-          ></iframe>
-        )}
-        {currentGif === 3 && (
-          <iframe
-            src="https://giphy.com/embed/3ubqmFn2F7ytq" // Replace with the second GIF's URL
-            width="480"
-            height="480"
-            className="giphy-embed"
-            allowFullScreen
-            sandbox="allow-scripts allow-same-origin"
-            style={{ pointerEvents: "none", border: "none" }}
-          ></iframe>
-        )}
-        {currentGif === 4 && (
-          <iframe
-            src="https://giphy.com/embed/l378b59fSuMV12tzO" // Replace with the second GIF's URL
-            width="480"
-            height="480"
-            className="giphy-embed"
-            allowFullScreen
-            sandbox="allow-scripts allow-same-origin"
-            style={{ pointerEvents: "none", border: "none" }}
-          ></iframe>
-        )}
-        {currentGif === 5 && (
-          <iframe
-            src="https://giphy.com/embed/l3diU8csLCa1UcBc4" // Replace with the second GIF's URL
-            width="480"
-            height="480"
-            className="giphy-embed"
-            allowFullScreen
-            sandbox="allow-scripts allow-same-origin"
-            style={{ pointerEvents: "none", border: "none" }}
-          ></iframe>
-        )}
-     </div>
+        <div className={styles.gifsContainer}>
+          {currentGif === 1 && (
+            <iframe
+              src="https://giphy.com/embed/3ohc0Rnm6JE0cg0RvG"
+              width="880"
+              height="880"
+              className="giphy-embed"
+              allowFullScreen
+              sandbox="allow-scripts allow-same-origin"
+              style={{ pointerEvents: "none", border: "none" }}
+            ></iframe>
+          )}
+          {currentGif === 2 && (
+            <iframe
+              src="https://giphy.com/embed/zQc8STzaOlJ3q" // Replace with the second GIF's URL
+              width="880"
+              height="880"
+              className="giphy-embed"
+              allowFullScreen
+              sandbox="allow-scripts allow-same-origin"
+              style={{ pointerEvents: "none", border: "none" }}
+            ></iframe>
+          )}
+          {currentGif === 3 && (
+            <iframe
+              src="https://giphy.com/embed/3ubqmFn2F7ytq" // Replace with the second GIF's URL
+              width="880"
+              height="880"
+              className="giphy-embed"
+              allowFullScreen
+              sandbox="allow-scripts allow-same-origin"
+              style={{ pointerEvents: "none", border: "none" }}
+            ></iframe>
+          )}
+          {currentGif === 4 && (
+            <iframe
+              src="https://giphy.com/embed/l378b59fSuMV12tzO" // Replace with the second GIF's URL
+              width="880"
+              height="880"
+              className="giphy-embed"
+              allowFullScreen
+              sandbox="allow-scripts allow-same-origin"
+              style={{ pointerEvents: "none", border: "none" }}
+            ></iframe>
+          )}
+          {currentGif === 5 && (
+            <iframe
+              src="https://giphy.com/embed/l3diU8csLCa1UcBc4" // Replace with the second GIF's URL
+              width="880"
+              height="880"
+              className="giphy-embed"
+              allowFullScreen
+              sandbox="allow-scripts allow-same-origin"
+              style={{ pointerEvents: "none", border: "none" }}
+            ></iframe>
+          )}
+        </div>
       ) : (
         <div className={styles.deviceInfoContainer}>
           <div className={styles.childContainer}>
@@ -398,7 +396,8 @@ export default function Home() {
             {fingerprint ? (
               <div>
                 <p>{fingerprint}</p>
-              </div> ) : null}
+              </div>
+            ) : null}
           </div>
         </div>
       )}
