@@ -215,7 +215,7 @@ export default function Home() {
     switchGif();
     const intervalId = setInterval(() => {
       switchGif();
-    }, 2500); // Start with the first GIF after 1 second
+    }, 3000);
 
     // Cleanup function
     return () => {
@@ -231,14 +231,6 @@ export default function Home() {
   return (
     <main className={styles.main}>
       {showIframe ? (
-        // <iframe
-        // key={Date.now()}
-        //   src={`https://giphy.com/embed/3ohc0Rnm6JE0cg0RvG?`}
-        //   width="480"
-        //   height="480"
-        //   className="giphy-embed"
-        //   allowFullScreen
-        // ></iframe>
         <div className={styles.gifsContainer}>
           {currentGif === 1 && (
             <iframe
@@ -253,7 +245,7 @@ export default function Home() {
           )}
           {currentGif === 2 && (
             <iframe
-              src="https://giphy.com/embed/zQc8STzaOlJ3q" // Replace with the second GIF's URL
+              src="https://giphy.com/embed/zQc8STzaOlJ3q" 
               width="880"
               height="880"
               className="giphy-embed"
@@ -264,7 +256,7 @@ export default function Home() {
           )}
           {currentGif === 3 && (
             <iframe
-              src="https://giphy.com/embed/3ubqmFn2F7ytq" // Replace with the second GIF's URL
+              src="https://giphy.com/embed/3ubqmFn2F7ytq" 
               width="880"
               height="880"
               className="giphy-embed"
@@ -275,7 +267,7 @@ export default function Home() {
           )}
           {currentGif === 4 && (
             <iframe
-              src="https://giphy.com/embed/l378b59fSuMV12tzO" // Replace with the second GIF's URL
+              src="https://giphy.com/embed/l378b59fSuMV12tzO" 
               width="880"
               height="880"
               className="giphy-embed"
@@ -286,7 +278,7 @@ export default function Home() {
           )}
           {currentGif === 5 && (
             <iframe
-              src="https://giphy.com/embed/l3diU8csLCa1UcBc4" // Replace with the second GIF's URL
+              src="https://giphy.com/embed/l3diU8csLCa1UcBc4" 
               width="880"
               height="880"
               className="giphy-embed"
