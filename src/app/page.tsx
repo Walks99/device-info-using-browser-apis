@@ -2,9 +2,11 @@
 
 import styles from "./page.module.scss";
 import React, { useEffect, useState } from "react";
+import { getFingerprint } from "@thumbmarkjs/thumbmarkjs";
 
 export default function Home() {
   const [showIframe, setShowIframe] = useState<boolean>(true);
+  const [currentGif, setCurrentGif] = useState(0); // Start with the first GIF
   const [screenOrientation, setScreenOrientation] = useState<string | null>(
     null
   );
@@ -39,6 +41,7 @@ export default function Home() {
   const [location, setLocation] = useState<string | null>(null);
   const [permissionInteracted, setPermissionInteracted] = useState(false);
   const [locationsDisabled, setLocationsDisabled] = useState(false);
+  const [fingerprint, setFingerprint] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchDeviceInfo = async () => {
@@ -158,8 +161,8 @@ export default function Home() {
         // Request permission to access the user's location
         navigator.geolocation.getCurrentPosition(
           async function (position) {
-            setPermissionInteracted(true);
             setShowIframe(false);
+            setPermissionInteracted(true);
             setLatitude(position.coords.latitude);
             setLongitude(position.coords.longitude);
             const locationUrl = `https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${position.coords.latitude}&lon=${position.coords.longitude}&zoom=18&addressdetails=1`;
@@ -186,8 +189,10 @@ export default function Home() {
             } else {
               console.log("Unable to determine location");
             }
+            setShowIframe(false);
           },
           function (error) {
+            setCurrentGif(2);
             setPermissionInteracted(true);
             console.error("Error occurred: " + error.message);
             setShowIframe(false);
@@ -199,20 +204,100 @@ export default function Home() {
         setLocationsDisabled(true);
       }
     };
-
     fetchLocation();
   }, []);
+
+  useEffect(() => {
+    const switchGif = () => {
+      setCurrentGif((prevGif) => (prevGif < 5 ? prevGif + 1 : 1));
+    };
+  
+    switchGif();
+    const intervalId = setInterval(() => {
+      switchGif();
+    }, 2500); // Start with the first GIF after 1 second
+  
+    // Cleanup function
+    return () => {
+      clearInterval(intervalId);
+    };
+  }, []);
+   
+ 
+
+  const handleClick = async () => {
+    const fingerprint = await getFingerprint();
+    setFingerprint(fingerprint);
+ };
 
   return (
     <main className={styles.main}>
       {showIframe ? (
-        <iframe
-          src="https://giphy.com/embed/3ohc0Rnm6JE0cg0RvG"
-          width="480"
-          height="480"
-          className="giphy-embed"
-          allowFullScreen
-        ></iframe>
+        // <iframe
+        // key={Date.now()}
+        //   src={`https://giphy.com/embed/3ohc0Rnm6JE0cg0RvG?`}
+        //   width="480"
+        //   height="480"
+        //   className="giphy-embed"
+        //   allowFullScreen
+        // ></iframe>
+        <div>
+        {currentGif === 1 && (
+          <iframe
+            src="https://giphy.com/embed/3ohc0Rnm6JE0cg0RvG"
+            width="480"
+            height="480"
+            className="giphy-embed"
+            allowFullScreen
+            sandbox="allow-scripts allow-same-origin"
+            style={{ pointerEvents: "none", border: "none" }}
+          ></iframe>
+        )}
+        {currentGif === 2 && (
+          <iframe
+            src="https://giphy.com/embed/zQc8STzaOlJ3q" // Replace with the second GIF's URL
+            width="480"
+            height="480"
+            className="giphy-embed"
+            allowFullScreen
+            sandbox="allow-scripts allow-same-origin"
+            style={{ pointerEvents: "none", border: "none" }}
+          ></iframe>
+        )}
+        {currentGif === 3 && (
+          <iframe
+            src="https://giphy.com/embed/3ubqmFn2F7ytq" // Replace with the second GIF's URL
+            width="480"
+            height="480"
+            className="giphy-embed"
+            allowFullScreen
+            sandbox="allow-scripts allow-same-origin"
+            style={{ pointerEvents: "none", border: "none" }}
+          ></iframe>
+        )}
+        {currentGif === 4 && (
+          <iframe
+            src="https://giphy.com/embed/l378b59fSuMV12tzO" // Replace with the second GIF's URL
+            width="480"
+            height="480"
+            className="giphy-embed"
+            allowFullScreen
+            sandbox="allow-scripts allow-same-origin"
+            style={{ pointerEvents: "none", border: "none" }}
+          ></iframe>
+        )}
+        {currentGif === 5 && (
+          <iframe
+            src="https://giphy.com/embed/l3diU8csLCa1UcBc4" // Replace with the second GIF's URL
+            width="480"
+            height="480"
+            className="giphy-embed"
+            allowFullScreen
+            sandbox="allow-scripts allow-same-origin"
+            style={{ pointerEvents: "none", border: "none" }}
+          ></iframe>
+        )}
+     </div>
       ) : (
         <div className={styles.deviceInfoContainer}>
           <div className={styles.childContainer}>
@@ -308,6 +393,13 @@ export default function Home() {
               </div>
             </>
           )}
+          <div className={styles.childContainer}>
+            <button onClick={handleClick}>Generate Fingerprint</button>
+            {fingerprint ? (
+              <div>
+                <p>{fingerprint}</p>
+              </div> ) : null}
+          </div>
         </div>
       )}
     </main>
