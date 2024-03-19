@@ -1,0 +1,21 @@
+.main {
+    width: 45%;
+    height: 80%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    .title {
+        p {
+            font-weight: bold;
+            font-size: 1.4rem;
+        }
+    }
+    .introductionBody {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        height: 100%;
+        justify-content: center;
+    }
+}

@@ -1,0 +1,40 @@
+// .main {
+//   width: 100%;
+//   height: 100vh;
+//   display: flex;
+//   justify-content: space-around;
+//   align-items: center;
+//   .fingerprintInfoContainer {
+//     width: 45%;
+//     height: 80%;
+//     display: flex;
+//     flex-direction: column;
+//     align-items: flex-start;
+//     justify-content: flex-start;
+//   }
+// }
+
+// @media (max-width: 500px) {
+//   .main {
+//     .deviceInfoContainer {
+//       width: 92%;
+//       height: 96vh;
+//       justify-content: space-around;
+//       align-items: flex-start;
+//       .childContainer {
+//         align-items: flex-start;
+//       }
+//       .secondClass {
+//         p {
+//           &:first-child {
+//             width: 28%;
+//             margin: 0;
+//           }
+//           &:last-child {
+//             width: 72%;
+//           }
+//         }
+//       }
+//     }
+//   }
+// }

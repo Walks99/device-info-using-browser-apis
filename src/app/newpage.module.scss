@@ -1,0 +1,62 @@
+.main {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    .deviceInfoContainer {
+        display: flex;
+        width: 45%;
+        height: 80%;
+        flex-direction: column;
+        justify-content: space-around;
+        .childContainer {
+            display: flex;
+            .data {
+                color: red;
+                margin: 0 0 0 10px;
+            }
+        }
+        .buttonContainer {
+            display: flex;
+            align-items: center;
+            button {
+                width: 200px;
+                height: 50px;
+                font-size: 1.2rem;
+            }
+            .data {
+                color: red;
+                margin: 0 0 0 10px;
+                font-size: 1.4rem;
+                font-weight: bold;
+            }
+        }
+    }
+  }
+  
+  @media (max-width: 500px) {
+    .main {
+      .deviceInfoContainer {
+        width: 92%;
+        height: 96vh;
+        justify-content: space-around;
+        align-items: flex-start;
+        .childContainer {
+          align-items: flex-start;
+        }
+        .secondClass {
+          p {
+            &:first-child {
+              width: 28%;
+              margin: 0;
+            }
+            &:last-child {
+              width: 72%;
+            }
+          }
+        }
+      }
+    }
+  }
+  
