@@ -681,7 +681,10 @@ export default function Home() {
               </div>
             </>
           )}
-          <div className={styles.buttonContainer}>
+          {isLoading ? (
+            null
+          ) : (
+            <div className={styles.buttonContainer}>
             <button onClick={handleClick}>Generate Fingerprint</button>
             {fingerprint ? (
               <div>
@@ -689,6 +692,7 @@ export default function Home() {
               </div>
             ) : null}
           </div>
+          )}
         </div>
     </main>
   );
