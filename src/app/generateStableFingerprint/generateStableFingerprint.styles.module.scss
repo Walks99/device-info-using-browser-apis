@@ -2,7 +2,7 @@
 
 .main {
   width: 100%;
-  height: 90vh;
+  height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
@@ -29,7 +29,7 @@
   }
   .deviceInfoContainer {
     width: 50%;
-    height: 50%;
+    height: 30%;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
@@ -45,10 +45,44 @@
       }
     }
   }
-  button {
+
+  .buttonsContainer {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+
+    button {
     width: 250px;
     height: 50px;
     font-size: 1.2rem;
+    margin: 0 0 20px 0;
+    }
+    .generateCookieButtonContainer {
+      display: flex;
+      align-items: center;
+      p {
+        font-size: 1.2rem;
+        margin: 0 0 0 10px;
+        &:last-child {
+          color: red;
+        }
+      }
+    }
+  }
+  .cookieInformationContainer {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    h3 {
+      font-size: 1rem;
+      margin: 0 0 10px 0;
+    }
+    p {
+      font-size: 1rem;
+      margin: 0 0 10px 0;
+    }
   }
 }
 

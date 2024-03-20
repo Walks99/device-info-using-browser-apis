@@ -21,6 +21,8 @@ export default function GenerateStableFingerprint() {
   const [aspectRatio, setAspectRatio] = useState<string | null>(null);
   const [colourDepth, setColourDepth] = useState<number | null>(null);
   const [fingerprint, setFingerprint] = useState<string | null>(null);
+  const [timerActive, setTimerActive] = useState<boolean>(false);
+  const [remainingTime, setRemainingTime] = useState<number>(120); // 2 minutes in seconds
   // ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
   // --------------------------------------------------------------------------------
   useEffect(() => {
@@ -120,20 +122,39 @@ export default function GenerateStableFingerprint() {
   };
   // ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
   // -------------------------------------------------------------------------------- // NEWNEWNEWNEWNEWNEWNEWNEWNEWNEWNEWNEWNEWNEWNEW
-  useEffect(() => {
-    const setAndGetFingerprintFromCookie = async () => {
-      try {
-        if (fingerprint) {
-          await setFingerprintCookie(fingerprint);
-          const fingerprintFromCookie = await getFingerprintCookie();
-          console.log("Fingerprint from cookie: ", fingerprintFromCookie);
-        }
-      } catch (error) {
-        
+  const setAndGetFingerprintFromCookie = async () => {
+    try {
+      if (fingerprint !== null) {
+        await setFingerprintCookie(fingerprint);
+        setTimerActive(true);
+        const fingerprintFromCookie = await getFingerprintCookie();
+        console.log("Fingerprint from cookie: ", fingerprintFromCookie);
+      } else {
+        console.error("Fingerprint is null");
       }
-    };
-    setAndGetFingerprintFromCookie(); 
-  }, [fingerprint]);
+    } catch (error) {
+      console.error("Error setting and getting fingerprint from cookie: ", error);
+    }
+  };
+  // ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ // NEWNEWNEWNEWNEWNEWNEWNEWNEWNEWNEWNEWNEWNEWNEW
+  // -------------------------------------------------------------------------------- // NEWNEWNEWNEWNEWNEWNEWNEWNEWNEWNEWNEWNEWNEWNEW
+  useEffect(() => {
+    let timerId: NodeJS.Timeout | undefined;
+    if (timerActive) {
+       timerId = setInterval(() => {
+         setRemainingTime((prevTime) => {
+           if (prevTime <= 1) {
+             clearInterval(timerId as NodeJS.Timeout);
+             setTimerActive(false);
+             return 0;
+           }
+           return prevTime - 1;
+         });
+       }, 1000);
+    }
+    return () => clearInterval(timerId as NodeJS.Timeout);
+   }, [timerActive]);   
+   
   // ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ // NEWNEWNEWNEWNEWNEWNEWNEWNEWNEWNEWNEWNEWNEWNEW
   return (
     <div className={styles.main}>
@@ -175,7 +196,30 @@ export default function GenerateStableFingerprint() {
           </div>
         </div>
       )}
-      <button onClick={generateFingerprint}>Generate fingerprint</button>
+      <div className={styles.buttonsContainer}>
+        <button onClick={generateFingerprint}>Generate fingerprint</button>
+        <div className={styles.generateCookieButtonContainer}>
+          <button onClick={setAndGetFingerprintFromCookie}>Generate cookie</button>
+          {timerActive ? (
+            <>
+            <p>Expires in:</p>
+            <p className={styles.remainingTime}>{remainingTime} seconds</p>
+            </>
+          ) : (
+            null
+          )}
+        </div>
+      </div>
+      <div className={styles.cookieInformationContainer}>
+        <h3>To see your cookie, follow the intrustions below:</h3>
+        <p><strong>1.</strong> Open Chrome dev tools: Right click, select &apos;inspect&apos;</p>
+        <p><strong>2.</strong> Select &apos;Application&apos; in the task bar</p>
+        <p><strong>3.</strong> From the left navigation bar, select &apos;Cookies&apos;</p>
+        <p><strong>4.</strong> Under &apos;Cookies&apos;, select the URL listed</p>
+        <p><strong>5.</strong> If your cookie is not listed, click the circular arrow to refresh the table</p>
+        <p><strong>NOTE:</strong> Your cookie will expire in two minutes</p>
+      </div>
+
     </div>
   );
 }
