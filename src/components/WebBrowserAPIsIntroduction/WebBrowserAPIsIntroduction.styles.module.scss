@@ -23,6 +23,21 @@
     }
 }
 
+@media (max-width: 2600px) {
+    .main {
+        height: 60%;
+    }
+}
+@media (max-width: 2400px) {
+    .main {
+        height: 70%;
+    }
+}
+@media (max-width: 2200px) {
+    .main {
+        height: 75%;
+    }
+}
 @media (max-width: 1580px) {
     .main {
         height: 90%;
