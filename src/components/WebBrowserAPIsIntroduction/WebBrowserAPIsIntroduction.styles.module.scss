@@ -17,5 +17,43 @@
         width: 100%;
         height: 100%;
         justify-content: center;
+        p {
+            font-size: 1rem; // Default font size
+        }
+    }
+}
+
+@media (max-width: 1580px) {
+    .main {
+        height: 90%;
+        .title {
+            p {
+                font-size: 1.2rem;
+            }
+        }
+        .introductionBody {
+            p {
+                font-size: 0.96rem; /* Adjust as needed */
+            }
+        }
+    }
+}
+@media (max-width: 500px) {
+    .main {
+        width: 94%;
+        height: 1100px;
+        justify-content: space-around;
+        .title {
+            margin: 20px 0 0 0;
+            p {
+                font-size: 1.6rem;
+            }
+        }
+        .introductionBody {
+            height: auto;
+            p {
+                font-size: 0.96rem; /* Adjust as needed */
+            }
+        }
     }
 }

@@ -37,6 +37,8 @@
   
   @media (max-width: 500px) {
     .main {
+      height: auto;
+      flex-direction: column;
       .deviceInfoContainer {
         width: 92%;
         height: 96vh;
