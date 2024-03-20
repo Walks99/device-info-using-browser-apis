@@ -1,7 +1,9 @@
+// src/generatedStableFingerprint/page.tsx
 "use client";
 
 import React, { useState, useEffect } from "react";
 import styles from "./generateStableFingerprint.styles.module.scss";
+import { setFingerprintCookie, getFingerprintCookie } from '../../utils/cookies'; // NEWNEWNEWNEWNEWNEWNEWNEWNEWNEWNEWNEWNEWNEWNEWNEWNEWNEWNEWNEWNEW
 
 export default function GenerateStableFingerprint() {
   // --------------------------------------------------------------------------------
@@ -117,6 +119,22 @@ export default function GenerateStableFingerprint() {
     setFingerprint(hashHex);
   };
   // ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  // -------------------------------------------------------------------------------- // NEWNEWNEWNEWNEWNEWNEWNEWNEWNEWNEWNEWNEWNEWNEW
+  useEffect(() => {
+    const setAndGetFingerprintFromCookie = async () => {
+      try {
+        if (fingerprint) {
+          await setFingerprintCookie(fingerprint);
+          const fingerprintFromCookie = await getFingerprintCookie();
+          console.log("Fingerprint from cookie: ", fingerprintFromCookie);
+        }
+      } catch (error) {
+        
+      }
+    };
+    setAndGetFingerprintFromCookie(); 
+  }, [fingerprint]);
+  // ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ // NEWNEWNEWNEWNEWNEWNEWNEWNEWNEWNEWNEWNEWNEWNEW
   return (
     <div className={styles.main}>
       <div className={styles.titleContainer}>

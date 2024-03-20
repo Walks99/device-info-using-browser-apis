@@ -76,11 +76,11 @@
 
 // ##############################################################################################################
 
-      /*let performanceEntries = performance.getEntriesByType("navigation");
-      if (performanceEntries.length) {
-        let navigationEntry = performanceEntries[0];
-        console.log(navigationEntry);
-      } */
+      // let performanceEntries = performance.getEntriesByType("navigation");
+      // if (performanceEntries.length) {
+      //   let navigationEntry = performanceEntries[0];
+      //   console.log(navigationEntry);
+      // } 
 
 // ##############################################################################################################
 
