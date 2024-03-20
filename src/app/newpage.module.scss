@@ -35,6 +35,34 @@
     }
   }
   
+
+  @media (max-width: 1265px) {
+    .main {
+      height: auto;
+      flex-direction: column;
+      .deviceInfoContainer {
+        width: 80%;
+        height: 96vh;
+        justify-content: space-around;
+        align-items: flex-start;
+        .childContainer {
+          align-items: flex-start;
+        }
+        .secondClass {
+          p {
+            &:first-child {
+              width: 28%;
+              margin: 0;
+            }
+            &:last-child {
+              width: 72%;
+            }
+          }
+        }
+      }
+    }
+  }
+  
   @media (max-width: 500px) {
     .main {
       height: auto;
@@ -61,4 +89,3 @@
       }
     }
   }
-  
