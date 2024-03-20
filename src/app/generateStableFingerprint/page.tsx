@@ -124,7 +124,7 @@ export default function GenerateStableFingerprint() {
     <div className={styles.main}>
       <div className={styles.titleContainer}>
       <h1>Generate fingerprint from screen properties</h1>
-      <p>subtle crypto API</p>
+      <p>Subtle Crypto API</p>
       </div>
       {loading ? (
         <p>Loading...</p>
