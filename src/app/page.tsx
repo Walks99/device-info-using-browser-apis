@@ -685,7 +685,7 @@ export default function Home() {
             null
           ) : (
             <div className={styles.buttonContainer}>
-            <button onClick={handleClick}>Generate Fingerprint</button>
+            <button onClick={handleClick}>Generate fingerprint</button>
             {fingerprint ? (
               <div>
                 <p className={styles.data}>{fingerprint}</p>
