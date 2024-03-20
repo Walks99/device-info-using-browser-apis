@@ -16,9 +16,7 @@ export default function GenerateStableFingerprint() {
     screenResolutionInPhysicalPixels,
     setScreenResolutionInPhysicalPixels,
   ] = useState<string | null>(null);
-  const [aspectRatio, setAspectRatio] = useState<
-    string | null
-  >(null);
+  const [aspectRatio, setAspectRatio] = useState<string | null>(null);
   const [colourDepth, setColourDepth] = useState<number | null>(null);
   const [fingerprint, setFingerprint] = useState<string | null>(null);
   // ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -46,7 +44,6 @@ export default function GenerateStableFingerprint() {
         setScreenOrientation(window.screen.orientation.type);
         setDevicePixelRatio(Number(devicePixelRatio.toFixed(2)));
         setColourDepth(window.screen.colorDepth);
-           
 
         // Aspect Ratio
         const commonLandscapeRatios = [
@@ -123,8 +120,8 @@ export default function GenerateStableFingerprint() {
   return (
     <div className={styles.main}>
       <div className={styles.titleContainer}>
-      <h1>Generate fingerprint from screen properties</h1>
-      <p>Subtle Crypto API</p>
+        <h1>Generate fingerprint from screen properties</h1>
+        <p>Subtle Crypto API</p>
       </div>
       {loading ? (
         <p>Loading...</p>
@@ -164,4 +161,3 @@ export default function GenerateStableFingerprint() {
     </div>
   );
 }
-
