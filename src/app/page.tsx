@@ -1,7 +1,7 @@
 // src/app/page.tsx
 "use client";
 
-import styles from "./newpage.module.scss";
+import styles from "./page.module.scss";
 import React, { useEffect, useState } from "react";
 import { getFingerprint } from "@thumbmarkjs/thumbmarkjs";
 import WebBrowserAPIsIntroduction from "@/components/WebBrowserAPIsIntroduction/WebBrowserAPIsIntroduction";

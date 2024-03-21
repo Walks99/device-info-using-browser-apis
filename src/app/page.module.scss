@@ -1,49 +1,67 @@
 .main {
-    width: 100%;
-    height: 100vh;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  // border: 2px solid green;
+  .webIntroAndDeviceInfoContainer {
     display: flex;
     justify-content: space-around;
     align-items: center;
+    width: 100%;
+    height: 90%;
     .deviceInfoContainer {
+      display: flex;
+      width: 45%;
+      height: 90%;
+      flex-direction: column;
+      justify-content: space-around;
+      // border: 2px solid yellow;
+      .childContainer {
         display: flex;
-        width: 45%;
-        height: 80%;
-        flex-direction: column;
-        justify-content: space-around;
-        .childContainer {
-            display: flex;
-            p {
-                &:last-child {
-                  color: red;
-                  margin: 0 0 0 10px;
-                }
-            }
-        }
-    }
-  }
-  
-  @media (max-width: 500px) {
-    .main {
-      .deviceInfoContainer {
-        width: 92%;
-        height: 96vh;
-        justify-content: space-around;
-        align-items: flex-start;
-        .childContainer {
-          align-items: flex-start;
-        }
-        .secondClass {
-          p {
-            &:first-child {
-              width: 28%;
-              margin: 0;
-            }
-            &:last-child {
-              width: 72%;
-            }
-          }
+        .data {
+          color: red;
+          margin: 0 0 0 10px;
         }
       }
     }
   }
-  
+  .generateDataFingerprintCookieButtonContainer {
+    display: flex;
+    height: 10%;
+    width: 100%;
+    // border: 2px solid red;
+  }
+}
+
+@media (max-width: 500px) {
+  .main {
+    height: auto;
+    width: 100%;
+    .webIntroAndDeviceInfoContainer {
+      width: 94%;
+      height: auto;
+      margin: 20px 0 0 0;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      .deviceInfoContainer {
+        height:700px;
+        width: 100%;
+      }
+    }
+  }
+  .generateDataFingerprintCookieButtonContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: auto;
+    width: 100%;
+    // border: 2px solid red;
+    button {
+      margin-bottom: 20px;
+    }
+  }
+}

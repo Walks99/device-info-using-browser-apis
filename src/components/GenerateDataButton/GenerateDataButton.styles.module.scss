@@ -4,22 +4,4 @@
         height: 50px;
         font-size: 1.2rem;
     }
-    margin: 0 20px 0 60px;
 }
-
-  @media (max-width: 1265px) {
-    .GenerateDataButtonContainer {
-        button {
-            margin: 60px 0 60px 0;
-        }
-    }
-  }
-
-  @media (max-width: 500px) {
-    .GenerateDataButtonContainer {
-        button {
-            margin: 40px 0 20px 0;
-            width: 200px;
-        }
-    }
-  }

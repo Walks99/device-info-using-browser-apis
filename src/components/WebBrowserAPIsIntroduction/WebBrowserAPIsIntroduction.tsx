@@ -1,13 +1,25 @@
 // src/components/WebBrowserAPIsIntroduction.tsx
 "use client";
-import React from "react";
+import React, { useState, useEffect} from "react";
 import styles from "./WebBrowserAPIsIntroduction.styles.module.scss";
 
 export default function WebBrowserAPIsIntroduction() {
 
-  const currentPath = window.location.pathname;
-
-  const hideInstructions = currentPath === '/';
+  const [currentPath, setCurrentPath] = useState('');
+  const [hideInstructions, setHideInstructions] = useState(false);
+ 
+  useEffect(() => {
+    const runFunctions = async () => {
+      if (typeof window !== 'undefined') {
+        await setCurrentPath(window.location.pathname);
+          if (currentPath === '/') {
+            setHideInstructions(true);
+          }
+      }
+    }
+     runFunctions();
+  }, []);
+  
   return (
     <div className={styles.main}>
       <div className={styles.title}>
