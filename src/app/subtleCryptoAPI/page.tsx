@@ -3,6 +3,7 @@
 
 import styles from "./subtleCryptoAPI.styles.module.scss";
 import React, { useEffect, useState } from "react";
+import dynamic from "next/dynamic";
 // import { getFingerprint } from "@thumbmarkjs/thumbmarkjs";
 import WebBrowserAPIsIntroduction from "@/components/WebBrowserAPIsIntroduction/WebBrowserAPIsIntroduction";
 import GenerateDataButton from "@/components/GenerateDataButton/GenerateDataButton";
@@ -13,7 +14,7 @@ import {
   getFingerprintCookie,
 } from "../../utils/cookies"; // NEWNEWNEWNEWNEWNEWNEWNEWNEWNEWNEWNEWNEWNEWNEWNEWNEWNEWNEWNEWNEW
 
-export default function Home() {
+function HomePage() {
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [timerActive, setTimerActive] = useState<boolean>(false);
   const [remainingTime, setRemainingTime] = useState<number>(120); // 2 minutes in seconds
@@ -590,3 +591,18 @@ export default function Home() {
     </main>
   );
 }
+
+// ---------------------------------------------------------------------------------------
+// Dynamically import the HomeComponent with Server Side Rendering disabled
+const Home = dynamic(() => Promise.resolve(HomePage), {
+  ssr: false, // This ensures the component is only loaded on the client side
+});
+
+export default function Page() {
+  return (
+    <div>
+      <Home />
+    </div>
+  );
+}
+// ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^

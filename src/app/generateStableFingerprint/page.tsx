@@ -3,9 +3,10 @@
 
 import React, { useState, useEffect } from "react";
 import styles from "./generateStableFingerprint.styles.module.scss";
+import dynamic from "next/dynamic";
 import { setFingerprintCookie, getFingerprintCookie } from '../../utils/cookies'; // NEWNEWNEWNEWNEWNEWNEWNEWNEWNEWNEWNEWNEWNEWNEWNEWNEWNEWNEWNEWNEW
 
-export default function GenerateStableFingerprint() {
+function GenerateStableFingerprint() {
   // --------------------------------------------------------------------------------
   const [loading, setLoading] = useState(true);
   const [screenOrientation, setScreenOrientation] = useState<string | null>(
@@ -223,3 +224,18 @@ export default function GenerateStableFingerprint() {
     </div>
   );
 }
+
+// ---------------------------------------------------------------------------------------
+// Dynamically import the HomeComponent with Server Side Rendering disabled
+const Home = dynamic(() => Promise.resolve(GenerateStableFingerprint), {
+  ssr: false, // This ensures the component is only loaded on the client side
+});
+
+export default function Page() {
+  return (
+    <div>
+      <Home />
+    </div>
+  );
+}
+// ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^

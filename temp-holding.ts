@@ -85,3 +85,18 @@
 // ##############################################################################################################
 
 // const fingerprintData = `${screenOrientation}${devicePixelRatio}${browserOnlineStatus}${userAgent}${batteryLevel}${batteryCharging}${vibrationSupported}${screenResolutionInCSSPixels}${aspectRatio}${colourDepth}${operatingSystem}${numberOfLogicalProcessors}${estimatedRAM}${browser}${latitude}${longitude}${location}${permissionInteracted}${locationsDisabled}${downlink}${effectiveType}${rtt}${currentEntryId}${screenOrientation}${currentEntryKey}${timeOrigin}${connectStart}${decodedBodySize}${domContentLoadedEventStart}${domComplete}${domainLookupStart}${fetchStart}${requestStart}${responseStart}${responseEnd}${transferSize}`;
+
+
+// ##############################################################################################################
+
+// useEffect(() => {
+//   const runFunctions = async () => {
+//     if (typeof window !== 'undefined') {
+//       await setCurrentPath(window.location.pathname);
+//         if (currentPath === '/') {
+//           setHideInstructions(true);
+//         }
+//     }
+//   }
+//    runFunctions();
+// }, []);

@@ -6,11 +6,11 @@ import React, { useEffect, useState } from "react";
 import { getFingerprint } from "@thumbmarkjs/thumbmarkjs";
 import WebBrowserAPIsIntroduction from "@/components/WebBrowserAPIsIntroduction/WebBrowserAPIsIntroduction";
 // Button imports
-import GenerateCookieButton from "@/components/GenerateCookieButton/GenerateCookieButton";
 import GenerateDataButton from "@/components/GenerateDataButton/GenerateDataButton";
 import GenerateFingerprintButton from "@/components/GenerateFingerprintButton/GenerateFingerprintButton";
+import dynamic from "next/dynamic";
 
-export default function Home() {
+function HomePage() {
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [screenOrientation, setScreenOrientation] = useState<string | null>(
     null
@@ -402,3 +402,18 @@ export default function Home() {
     </main>
   );
 }
+
+// ---------------------------------------------------------------------------------------
+// Dynamically import the HomeComponent with Server Side Rendering disabled
+const Home = dynamic(() => Promise.resolve(HomePage), {
+  ssr: false, // This ensures the component is only loaded on the client side
+});
+
+export default function Page() {
+  return (
+    <div>
+      <Home />
+    </div>
+  );
+}
+// ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
