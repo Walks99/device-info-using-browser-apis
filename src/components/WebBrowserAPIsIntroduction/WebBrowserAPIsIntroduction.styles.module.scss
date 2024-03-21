@@ -1,24 +1,35 @@
 .main {
     width: 45%;
-    height: 80%;
+    height: 100%;
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
+    justify-content: space-around;
     align-items: center;
     .title {
         p {
             font-weight: bold;
             font-size: 2rem;
+            margin: 0 0 40px 0;
+            
         }
     }
     .introductionBody {
         display: flex;
         flex-direction: column;
         width: 100%;
-        height: 100%;
+        // height: 100%;
         justify-content: center;
         p {
             font-size: 1rem; // Default font size
+        }
+    }
+    .instructionsContainer {
+        margin: 20px 0 0 0;
+        h3 {
+            margin: 0 0 10px 0
+        }
+        p {
+            margin: 5px 0 0 0;
         }
     }
 }
