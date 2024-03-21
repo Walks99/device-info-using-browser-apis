@@ -4,6 +4,10 @@ import React from "react";
 import styles from "./WebBrowserAPIsIntroduction.styles.module.scss";
 
 export default function WebBrowserAPIsIntroduction() {
+
+  const currentPath = window.location.pathname;
+
+  const hideInstructions = currentPath === '/';
   return (
     <div className={styles.main}>
       <div className={styles.title}>
@@ -53,15 +57,17 @@ export default function WebBrowserAPIsIntroduction() {
           collected or stored; this is simply a demonstration of the
           capabilities and techniques involved.
         </p>
-        <div className={styles.instructionsContainer}>
-        <h3>To see the power of these API&apos;s in action, follow the instructions below:</h3>
-        <p><strong>1.</strong> Open Chrome dev tools: Right click, select &apos;inspect&apos;</p>
-        <p><strong>2.</strong> Select &apos;Application&apos; in the task bar</p>
-        <p><strong>3.</strong> From the left navigation bar, select &apos;Cookies&apos;</p>
-        <p><strong>4.</strong> Under &apos;Cookies&apos;, select the URL listed</p>
-        <p><strong>5.</strong> If your cookie is not listed, click the circular arrow to refresh the table</p>
-        <p><strong>NOTE:</strong> Your cookie will expire in two minutes</p>
-      </div>
+      {hideInstructions ? null : (
+                <div className={styles.instructionsContainer}>
+                <h3>To see the power of these API&apos;s in action, follow the instructions below:</h3>
+                <p><strong>1.</strong> Open Chrome dev tools: Right click, select &apos;inspect&apos;</p>
+                <p><strong>2.</strong> Select &apos;Application&apos; in the task bar</p>
+                <p><strong>3.</strong> From the left navigation bar, select &apos;Cookies&apos;</p>
+                <p><strong>4.</strong> Under &apos;Cookies&apos;, select the URL listed</p>
+                <p><strong>5.</strong> If your cookie is not listed, click the circular arrow to refresh the table</p>
+                <p><strong>NOTE:</strong> Your cookie will expire in two minutes</p>
+              </div>
+              )}
       </div>
 
     </div>

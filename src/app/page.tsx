@@ -5,6 +5,10 @@ import styles from "./newpage.module.scss";
 import React, { useEffect, useState } from "react";
 import { getFingerprint } from "@thumbmarkjs/thumbmarkjs";
 import WebBrowserAPIsIntroduction from "@/components/WebBrowserAPIsIntroduction/WebBrowserAPIsIntroduction";
+// Button imports
+import GenerateCookieButton from "@/components/GenerateCookieButton/GenerateCookieButton";
+import GenerateDataButton from "@/components/GenerateDataButton/GenerateDataButton";
+import GenerateFingerprintButton from "@/components/GenerateFingerprintButton/GenerateFingerprintButton";
 
 export default function Home() {
   const [isLoading, setIsLoading] = useState<boolean>(true);
@@ -235,159 +239,166 @@ export default function Home() {
 
   return (
     <main className={styles.main}>
-      <WebBrowserAPIsIntroduction
-      />
-      <div className={styles.deviceInfoContainer}>
-        <div className={styles.childContainer}>
-          <p>Screen Resolution in CSS Pixels:</p>
-          {generateDataButtonClicked ? (
-            <p className={styles.data}>{screenResolutionInCSSPixels}</p>
-          ) : null}
-        </div>
-        <div className={styles.childContainer}>
-          <p>Screen Resolution in Physical Pixels:</p>
-          {generateDataButtonClicked ? (
-            <p className={styles.data}>{screenResolutionInPhysicalPixels}</p>
-          ) : null}
-        </div>
-        <div className={styles.childContainer}>
-          <p>Aspect Ratio:</p>
-          {generateDataButtonClicked ? (
-            <p className={styles.data}>{aspectRatioInCSSPixels}</p>
-          ) : null}
-        </div>
-        <div className={styles.childContainer}>
-          <p>Device Pixel Ratio:</p>
-          {generateDataButtonClicked ? (
-            <p className={styles.data}>{devicePixelRatio}</p>
-          ) : null}
-        </div>
-        <div className={styles.childContainer}>
-          <p>Screen Orientation:</p>
-          {generateDataButtonClicked ? (
-            <p className={styles.data}>{screenOrientation}</p>
-          ) : null}
-        </div>
-        <div className={styles.childContainer}>
-          <p>Browser Language:</p>
-          {generateDataButtonClicked ? (
-            <p className={styles.data}>{browserLanguage}</p>
-          ) : null}
-        </div>
-        {browser ? (
+      {/* --------------------------------------- */}
+      <div className={styles.webIntroAndDeviceInfoContainer}>
+        <WebBrowserAPIsIntroduction />
+        <div className={styles.deviceInfoContainer}>
           <div className={styles.childContainer}>
-            <p>Browser:</p>
+            <p>Screen Resolution in CSS Pixels:</p>
             {generateDataButtonClicked ? (
-              <p className={styles.data}>{browser}</p>
+              <p className={styles.data}>{screenResolutionInCSSPixels}</p>
             ) : null}
           </div>
-        ) : null}
-        <div className={styles.childContainer}>
-          <p>Browser Online Status:</p>
-          {generateDataButtonClicked ? (
-            <p className={styles.data}>
-              {browserOnlineStatus ? "Online" : "Offline"}
-            </p>
-          ) : null}
-        </div>
-        <div className={`${styles.childContainer} ${styles.secondClass}`}>
-          <p>User Agent:</p>
-          {generateDataButtonClicked ? (
-            <p className={styles.data}>{userAgent}</p>
-          ) : null}
-        </div>
-        {operatingSystem ? (
           <div className={styles.childContainer}>
-            <p>Operating System:</p>
+            <p>Screen Resolution in Physical Pixels:</p>
             {generateDataButtonClicked ? (
-              <p className={styles.data}>{operatingSystem}</p>
+              <p className={styles.data}>{screenResolutionInPhysicalPixels}</p>
             ) : null}
           </div>
-        ) : null}
-        {numberOfLogicalProcessors ? (
           <div className={styles.childContainer}>
-            <p>Number of Logical Processors:</p>
+            <p>Aspect Ratio:</p>
             {generateDataButtonClicked ? (
-              <p className={styles.data}>{numberOfLogicalProcessors}</p>
+              <p className={styles.data}>{aspectRatioInCSSPixels}</p>
             ) : null}
           </div>
-        ) : null}
-        {estimatedRAM ? (
           <div className={styles.childContainer}>
-            <p>Estimated RAM:</p>
+            <p>Device Pixel Ratio:</p>
             {generateDataButtonClicked ? (
-              <p className={styles.data}>{`${estimatedRAM} GB`}</p>
+              <p className={styles.data}>{devicePixelRatio}</p>
             ) : null}
           </div>
-        ) : null}
-        {batteryLevel ? (
           <div className={styles.childContainer}>
-            <p>Battery Level:</p>
+            <p>Screen Orientation:</p>
             {generateDataButtonClicked ? (
-              <p className={styles.data}>{`${batteryLevel}%`}</p>
+              <p className={styles.data}>{screenOrientation}</p>
             ) : null}
           </div>
-        ) : null}
-        {batteryCharging ? (
           <div className={styles.childContainer}>
-            <p>Battery Charging:</p>
+            <p>Browser Language:</p>
             {generateDataButtonClicked ? (
-              <p className={styles.data}>{batteryCharging ? "Yes" : "No"}</p>
+              <p className={styles.data}>{browserLanguage}</p>
             ) : null}
           </div>
-        ) : null}
-        <div className={styles.childContainer}>
-          <p>Vibration Supported:</p>
-          {generateDataButtonClicked ? (
-            <p className={styles.data}>{vibrationSupported ? "Yes" : "No"}</p>
-          ) : null}
-        </div>
-        {locationsDisabled ? (
-          <div className={styles.childContainer}>
-            <p>Location:</p>
-            <p className={styles.data}>
-              Disabled - Update browser permissions in device settings
-            </p>
-          </div>
-        ) : (
-          <>
+          {browser ? (
             <div className={styles.childContainer}>
-              <p>Latitude:</p>
+              <p>Browser:</p>
               {generateDataButtonClicked ? (
-                <p className={styles.data}>
-                  {latitude ? latitude : "Loading..."}
-                </p>
+                <p className={styles.data}>{browser}</p>
               ) : null}
             </div>
+          ) : null}
+          <div className={styles.childContainer}>
+            <p>Browser Online Status:</p>
+            {generateDataButtonClicked ? (
+              <p className={styles.data}>
+                {browserOnlineStatus ? "Online" : "Offline"}
+              </p>
+            ) : null}
+          </div>
+          <div className={`${styles.childContainer} ${styles.secondClass}`}>
+            <p>User Agent:</p>
+            {generateDataButtonClicked ? (
+              <p className={styles.data}>{userAgent}</p>
+            ) : null}
+          </div>
+          {operatingSystem ? (
             <div className={styles.childContainer}>
-              <p>Longitude:</p>
+              <p>Operating System:</p>
               {generateDataButtonClicked ? (
-                <p className={styles.data}>
-                  {longitude ? longitude : "Loading..."}
-                </p>
+                <p className={styles.data}>{operatingSystem}</p>
               ) : null}
             </div>
+          ) : null}
+          {numberOfLogicalProcessors ? (
+            <div className={styles.childContainer}>
+              <p>Number of Logical Processors:</p>
+              {generateDataButtonClicked ? (
+                <p className={styles.data}>{numberOfLogicalProcessors}</p>
+              ) : null}
+            </div>
+          ) : null}
+          {estimatedRAM ? (
+            <div className={styles.childContainer}>
+              <p>Estimated RAM:</p>
+              {generateDataButtonClicked ? (
+                <p className={styles.data}>{`${estimatedRAM} GB`}</p>
+              ) : null}
+            </div>
+          ) : null}
+          {batteryLevel ? (
+            <div className={styles.childContainer}>
+              <p>Battery Level:</p>
+              {generateDataButtonClicked ? (
+                <p className={styles.data}>{`${batteryLevel}%`}</p>
+              ) : null}
+            </div>
+          ) : null}
+          {batteryCharging ? (
+            <div className={styles.childContainer}>
+              <p>Battery Charging:</p>
+              {generateDataButtonClicked ? (
+                <p className={styles.data}>{batteryCharging ? "Yes" : "No"}</p>
+              ) : null}
+            </div>
+          ) : null}
+          <div className={styles.childContainer}>
+            <p>Vibration Supported:</p>
+            {generateDataButtonClicked ? (
+              <p className={styles.data}>{vibrationSupported ? "Yes" : "No"}</p>
+            ) : null}
+          </div>
+          {locationsDisabled ? (
             <div className={styles.childContainer}>
               <p>Location:</p>
-              {generateDataButtonClicked ? (
-                <p className={styles.data}>
-                  {location ? location : "Loading..."}
-                </p>
-              ) : null}
+              <p className={styles.data}>
+                Disabled - Update browser permissions in device settings
+              </p>
             </div>
-          </>
-        )}
-        {isLoading ? null : (
-          <div className={styles.buttonContainer}>
-            <button onClick={handleClick}>Generate fingerprint</button>
-            {fingerprint ? (
-              <div>
-                <p className={styles.data}>{fingerprint}</p>
+          ) : (
+            <>
+              <div className={styles.childContainer}>
+                <p>Latitude:</p>
+                {generateDataButtonClicked ? (
+                  <p className={styles.data}>
+                    {latitude ? latitude : "Loading..."}
+                  </p>
+                ) : null}
               </div>
-            ) : null}
+              <div className={styles.childContainer}>
+                <p>Longitude:</p>
+                {generateDataButtonClicked ? (
+                  <p className={styles.data}>
+                    {longitude ? longitude : "Loading..."}
+                  </p>
+                ) : null}
+              </div>
+              <div className={styles.childContainer}>
+                <p>Location:</p>
+                {generateDataButtonClicked ? (
+                  <p className={styles.data}>
+                    {location ? location : "Loading..."}
+                  </p>
+                ) : null}
+              </div>
+            </>
+          )}
+          {fingerprint ? (
+            <div className={styles.childContainer}>
+            <p>Fingerprint:</p>
+            <p className={styles.data}>{fingerprint}</p>
           </div>
-        )}
+          ) : null}
+        </div>
       </div>
+      {/* ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ */}
+      {/* ------------------------------------------------ */}
+      <div className={styles.generateDataFingerprintCookieButtonContainer}>
+        <GenerateDataButton
+          setGenerateDataButtonClicked={setGenerateDataButtonClicked}
+        />
+        {isLoading ? null : <GenerateFingerprintButton onClick={handleClick} />}
+      </div>
+      {/* ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ */}
     </main>
   );
 }
