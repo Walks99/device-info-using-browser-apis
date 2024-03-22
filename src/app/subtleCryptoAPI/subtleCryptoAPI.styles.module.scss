@@ -1,121 +1,194 @@
 .main {
-    width: 100%;
-    height: 100vh;
+  // border: 2px solid blue;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  // flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  // align-items: flex-start;
+  .webIntroAndGenerateButtonsContainer {
+    width: 47%;
+    // border: 2px solid red;
+    // margin: 50px 0 0 0;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
-    align-items: flex-start;
-    .webIntroAndDeviceInfoContainer {
-      display: flex;
-      justify-content: space-around;
-      align-items: center;
-      height: 90%;
-      // margin: 50px 0 0 0;
-    }
+    align-items: center;
+    height: 100%;
+    // margin: 50px 0 0 0;
     .generateButtonsContainer {
-      width: 70%;
-      height: 10%;
+      // border: 2px solid yellow;
+      width: 100%;
+      height: 8%;
       display: flex;
       justify-content: flex-start;
-      align-items: center;
-      
+      align-items: flex-start;
+      button {
+        margin: 0 20px 0 0;
+      }
+
       .timerActiveContainer {
         display: flex;
-        align-items: center;
+        flex-direction: column;
+        align-items: flex-start;
         .remainingTime {
           font-size: 1.2rem;
           color: red;
-          margin: 0 0 0 10px;
+        }
+      }
+    }
+  }
+
+  .deviceInfoContainer {
+    // border: 2px solid purple;
+    display: flex;
+    width: 47%;
+    height: 96%;
+    flex-direction: column;
+    justify-content: space-between;
+    .childContainer {
+      display: flex;
+      p {
+        font-size: 0.9rem;
+      }
+      .data {
+        color: red;
+        margin: 0 0 0 10px;
+      }
+    }
+  }
+}
+
+@media (max-width: 1650px) {
+  .main {
+    .webIntroAndGenerateButtonsContainer {
+      .generateButtonsContainer {
+        button {
+          margin: 0 10px 0 0;
+          width: 150px;
+          font-size: 1rem;
+        }
+        .timerActiveContainer {
+          .remainingTime {
+            font-size: 1rem;
+            color: red;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 1265px) {
+  .main {
+    border: 2px solid blue;
+    height: auto;
+    flex-direction: column;
+    // align-items: center;
+    .webIntroAndGenerateButtonsContainer {
+      width: 80%;
+      border: 2px solid red;
+      height: 820px;
+      margin: 0 0 50px 0;
+      .generateButtonsContainer {
+        // border: 2px solid yellow;
+        width: 100%;
+        height: 8%;
+        display: flex;
+        justify-content: flex-start;
+        align-items: flex-start;
+        button {
+          margin: 0 10px 0 0;
+        }
+  
+        .timerActiveContainer {
+          display: flex;
+          flex-direction: column;
+          align-items: flex-start;
+          .remainingTime {
+            font-size: 1.2rem;
+            color: red;
+          }
         }
       }
     }
     .deviceInfoContainer {
-        display: flex;
-        width: 45%;
-        height: 95%;
-        flex-direction: column;
-        justify-content: space-between;
-        .childContainer {
-            display: flex;
-            .data {
-                color: red;
-                margin: 0 0 0 10px;
-            }
-        }
-        .buttonContainer {
-            display: flex;
-            align-items: center;
-            button {
-                width: 200px;
-                height: 50px;
-                font-size: 1.2rem;
-            }
-            .data {
-                color: red;
-                margin: 0 0 0 10px;
-                font-size: 1.4rem;
-                font-weight: bold;
-            }
-        }
+      border: 2px solid purple;
+      // display: flex;
+      width: 80%;
+      height: 900px;
     }
   }
+}
+@media (max-width: 1145px) {
+  .main {
+    .webIntroAndGenerateButtonsContainer {
+      width: 90%;
+      border: 2px solid red;
+    }
   
+    .deviceInfoContainer {
+      border: 2px solid purple;
+      // display: flex;
+      width: 90%;
+    }
+  }
+}
+@media (max-width: 1015px) {
+  .main {
+    .webIntroAndGenerateButtonsContainer {
+      height: 850px;
+    }
+  
+    .deviceInfoContainer {
+      height: 950px;
+    }
+  }
+}
+@media (max-width: 830px) {
+  .main {
+    .webIntroAndGenerateButtonsContainer {
+      height: 900px;
+    }
+  
+    .deviceInfoContainer {
+      height: 1000px;
+    }
+  }
+}
+@media (max-width: 730px) {
+  .main {
+    .webIntroAndGenerateButtonsContainer {
+      height: 1000px;
+    }
+  
+    .deviceInfoContainer {
+      height: 1050px;
+    }
+  }
+}
+@media (max-width: 650px) {
+  .main {
+    .webIntroAndGenerateButtonsContainer {
+      height: 1100px;
+    }
+  
+    .deviceInfoContainer {
+      height: 1100px;
+    }
+  }
+}
+@media (max-width: 550px) {
+  .main {
+    .webIntroAndGenerateButtonsContainer {
+      height: 1300px;
+    }
+  
+    .deviceInfoContainer {
+      height: 1100px;
+    }
+  }
+}
 
-  @media (max-width: 1265px) {
-    .main {
-      height: auto;
-      flex-direction: column;
-      .deviceInfoContainer {
-        width: 80%;
-        height: 96vh;
-        justify-content: space-around;
-        align-items: flex-start;
-        .childContainer {
-          align-items: flex-start;
-        }
-        .secondClass {
-          p {
-            &:first-child {
-              width: 28%;
-              margin: 0;
-            }
-            &:last-child {
-              width: 72%;
-            }
-          }
-        }
-      }
-    }
-  }
-  
-  @media (max-width: 500px) {
-    .main {
-      height: auto;
-      flex-direction: column;
-      .deviceInfoContainer {
-        width: 92%;
-        height: 800px;
-        justify-content: space-around;
-        align-items: flex-start;
-        .childContainer {
-          align-items: flex-start;
-        }
-        .secondClass {
-          p {
-            &:first-child {
-              width: 28%;
-              margin: 0;
-            }
-            &:last-child {
-              width: 72%;
-            }
-          }
-        }
-        .buttonContainer {
-          button {
-            width: 250px;
-          }
-        }
-      }
-    }
-  }
+

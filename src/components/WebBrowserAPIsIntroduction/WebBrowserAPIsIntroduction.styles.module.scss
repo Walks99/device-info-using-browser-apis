@@ -1,58 +1,119 @@
 .main {
-    width: 45%;
-    height: 100%;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+//   border: 2px solid orange;
+  .title {
+    width: 100%;
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
     align-items: center;
-    // border: 2px solid orange;
-    .title {
-        p {
-            font-weight: bold;
-            font-size: 2rem;
-            margin: 0 0 40px 0;
-            
+    margin: 20px 0 10px 0;
+    p {
+      &:first-child {
+        font-weight: bold;
+      font-size: 2rem;
+      margin: 0 0 5px 0;
+      }
+      &:last-child {
+        font-size: 0.9rem;
+        font-style: italic;
+        font-weight: normal;
+      }
+    }
+  }
+  .introductionBody {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    // height: 100%;
+    justify-content: center;
+    p {
+      font-size: 0.94rem; // Default font size
+    }
+  }
+  .instructionsContainer {
+    margin: 20px 0 0 0;
+    h3 {
+      margin: 0 0 10px 0;
+    }
+    p {
+      margin: 5px 0 0 0;
+    }
+    .instructionsNote {
+      width: 100%;
+      display: flex;
+      margin: 5px 0 0 0;
+      p {
+        &:first-child {
+          margin: 0 5px 0 0;
+        }
+        &:last-child {
+          margin: 0;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 1670px) {
+    .main {
+        .title {
+            p {
+                &:first-child {
+                    font-size: 1.6rem;
+                }
+                &:last-child {
+                    font-size: 0.8rem;
+                }
+            }
+        }
+        .introductionBody {
+            p {
+                font-size: 0.85rem;
+            }
         }
     }
-    .introductionBody {
-        display: flex;
-        flex-direction: column;
-        width: 100%;
-        // height: 100%;
-        justify-content: center;
-        p {
-            font-size: 1rem; // Default font size
+}
+@media (max-width: 1500px) {
+    .main {
+        .title {
+            p {
+                &:first-child {
+                    font-size: 1.6rem;
+                }
+                &:last-child {
+                    font-size: 0.8rem;
+                }
+            }
         }
-    }
-    .instructionsContainer {
-        margin: 20px 0 0 0;
-        h3 {
-            margin: 0 0 10px 0
-        }
-        p {
-            margin: 5px 0 0 0;
+        .introductionBody {
+            p {
+                font-size: 0.85rem;
+            }
         }
     }
 }
 
 @media (max-width: 500px) {
-    .main {
-        width: 100%;
-        height: 1000px;
-        justify-content: space-around;
-        .title {
-            margin: 0;
-            p {
-                margin: 0;
-            }
-        }
-        .introductionBody {
-            height: auto;
-            p {
-                font-size: 0.96rem; /* Adjust as needed */
-            }
-        }
+  .main {
+    width: 100%;
+    height: 1000px;
+    justify-content: space-around;
+    .title {
+      margin: 0;
+      p {
+        margin: 0;
+      }
     }
+    .introductionBody {
+      height: auto;
+      p {
+        font-size: 0.96rem; /* Adjust as needed */
+      }
+    }
+  }
 }
-
-

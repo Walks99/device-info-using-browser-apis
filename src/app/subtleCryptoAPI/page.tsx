@@ -17,7 +17,7 @@ import {
 function HomePage() {
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [timerActive, setTimerActive] = useState<boolean>(false);
-  const [remainingTime, setRemainingTime] = useState<number>(120); // 2 minutes in seconds
+  const [remainingTime, setRemainingTime] = useState<number>();
   const [screenOrientation, setScreenOrientation] = useState<string | null>(
     null
   );
@@ -61,7 +61,7 @@ function HomePage() {
   const [rtt, setRtt] = useState<number | null>(null);
   const [currentEntryId, setCurrentEntryId] = useState<string | null>(null);
   const [currentEntryKey, setCurrentEntryKey] = useState<string | null>(null);
-  const [timeOrigin, setTimeOrigin] = useState<number | null>(null);
+  const [timeOrigin, setTimeOrigin] = useState<string | null>(null);
   const [connectStart, setConnectStart] = useState<number | null>(null);
   const [decodedBodySize, setDecodedBodySize] = useState<number | null>(null);
   const [domContentLoadedEventStart, setDomContentLoadedEventStart] = useState<
@@ -180,8 +180,10 @@ function HomePage() {
         setCurrentEntryKey((window as any).navigation.currentEntry.key);
 
         // performace object
-        setTimeOrigin(performance.timeOrigin);
-
+        const timeOrigin = performance.timeOrigin;
+        const date = new Date(timeOrigin);
+        setTimeOrigin(date.toString());
+        
         // PerformanceNavigationTiming object
         let performanceEntries = performance.getEntriesByType("navigation");
         if (performanceEntries.length) {
@@ -283,6 +285,7 @@ function HomePage() {
       if (fingerprint !== null) {
         await setFingerprintCookie(fingerprint);
         setTimerActive(true);
+        setRemainingTime(120);
         const fingerprintFromCookie = await getFingerprintCookie();
         console.log("Fingerprint from cookie: ", fingerprintFromCookie);
       } else {
@@ -296,298 +299,309 @@ function HomePage() {
     }
   };
   // ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ // NEWNEWNEWNEWNEWNEWNEWNEWNEWNEWNEWNEWNEWNEWNEW
-   // -------------------------------------------------------------------------------- // NEWNEWNEWNEWNEWNEWNEWNEWNEWNEWNEWNEWNEWNEWNEW
-   useEffect(() => {
+  // -------------------------------------------------------------------------------- // NEWNEWNEWNEWNEWNEWNEWNEWNEWNEWNEWNEWNEWNEWNEW
+  useEffect(() => {
     let timerId: NodeJS.Timeout | undefined;
     if (timerActive) {
-       timerId = setInterval(() => {
-         setRemainingTime((prevTime) => {
-           if (prevTime <= 1) {
-             clearInterval(timerId as NodeJS.Timeout);
-             setTimerActive(false);
-             return 0;
-           }
-           return prevTime - 1;
-         });
-       }, 1000);
+      timerId = setInterval(() => {
+        setRemainingTime((prevTime = 0) => {
+          if (prevTime <= 1) {
+            clearInterval(timerId as NodeJS.Timeout);
+            setTimerActive(false);
+            return 0;
+          }
+          return prevTime - 1;
+        });
+      }, 1000);
     }
     return () => clearInterval(timerId as NodeJS.Timeout);
-   }, [timerActive]);   
-   
+  }, [timerActive]);
+
   // ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ // NEWNEWNEWNEWNEWNEWNEWNEWNEWNEWNEWNEWNEWNEWNEW
   return (
     <main className={styles.main}>
-      <div className={styles.webIntroAndDeviceInfoContainer}>
+      {/* ---------------------------------------------------------------------- */}
+      <div className={styles.webIntroAndGenerateButtonsContainer}>
         <WebBrowserAPIsIntroduction />
-        <div className={styles.deviceInfoContainer}>
-          <div className={styles.childContainer}>
-            <p>Screen Resolution in CSS Pixels:</p>
-            {generateDataButtonClicked ? (
-              <p className={styles.data}>{screenResolutionInCSSPixels}</p>
-            ) : null}
-          </div>
-          <div className={styles.childContainer}>
-            <p>Screen Resolution in Physical Pixels:</p>
-            {generateDataButtonClicked ? (
-              <p className={styles.data}>{screenResolutionInPhysicalPixels}</p>
-            ) : null}
-          </div>
-          <div className={styles.childContainer}>
-            <p>Aspect Ratio:</p>
-            {generateDataButtonClicked ? (
-              <p className={styles.data}>{aspectRatio}</p>
-            ) : null}
-          </div>
-          <div className={styles.childContainer}>
-            <p>Device Pixel Ratio:</p>
-            {generateDataButtonClicked ? (
-              <p className={styles.data}>{devicePixelRatio}</p>
-            ) : null}
-          </div>
-          <div className={styles.childContainer}>
-            <p>Colour depth:</p>
-            {generateDataButtonClicked ? (
-              <p className={styles.data}>{colourDepth}</p>
-            ) : null}
-          </div>
-          <div className={styles.childContainer}>
-            <p>Screen Orientation:</p>
-            {generateDataButtonClicked ? (
-              <p className={styles.data}>{screenOrientation}</p>
-            ) : null}
-          </div>
-          <div className={styles.childContainer}>
-            <p>Browser Language:</p>
-            {generateDataButtonClicked ? (
-              <p className={styles.data}>{browserLanguage}</p>
-            ) : null}
-          </div>
-          {browser ? (
-            <div className={styles.childContainer}>
-              <p>Browser:</p>
-              {generateDataButtonClicked ? (
-                <p className={styles.data}>{browser}</p>
-              ) : null}
-            </div>
+        <div className={styles.generateButtonsContainer}>
+          <GenerateDataButton
+            setGenerateDataButtonClicked={setGenerateDataButtonClicked}
+          />
+          {isLoading ? null : (
+            <GenerateFingerprintButton onClick={generateFingerprint} />
+          )}
+          {fingerprint ? (
+            <GenerateCookieButton onClick={setAndGetFingerprintFromCookie} />
           ) : null}
-          <div className={styles.childContainer}>
-            <p>Browser Online Status:</p>
-            {generateDataButtonClicked ? (
-              <p className={styles.data}>
-                {browserOnlineStatus ? "Online" : "Offline"}
-              </p>
-            ) : null}
-          </div>
-          <div className={`${styles.childContainer} ${styles.secondClass}`}>
-            <p>User Agent:</p>
-            {generateDataButtonClicked ? (
-              <p className={styles.data}>{userAgent}</p>
-            ) : null}
-          </div>
-          {operatingSystem ? (
-            <div className={styles.childContainer}>
-              <p>Operating System:</p>
-              {generateDataButtonClicked ? (
-                <p className={styles.data}>{operatingSystem}</p>
-              ) : null}
-            </div>
-          ) : null}
-          {numberOfLogicalProcessors ? (
-            <div className={styles.childContainer}>
-              <p>Number of Logical Processors:</p>
-              {generateDataButtonClicked ? (
-                <p className={styles.data}>{numberOfLogicalProcessors}</p>
-              ) : null}
-            </div>
-          ) : null}
-          {estimatedRAM ? (
-            <div className={styles.childContainer}>
-              <p>Estimated RAM:</p>
-              {generateDataButtonClicked ? (
-                <p className={styles.data}>{`${estimatedRAM} GB`}</p>
-              ) : null}
-            </div>
-          ) : null}
-          {batteryLevel ? (
-            <div className={styles.childContainer}>
-              <p>Battery Level:</p>
-              {generateDataButtonClicked ? (
-                <p className={styles.data}>{`${batteryLevel}%`}</p>
-              ) : null}
-            </div>
-          ) : null}
-          {batteryCharging ? (
-            <div className={styles.childContainer}>
-              <p>Battery Charging:</p>
-              {generateDataButtonClicked ? (
-                <p className={styles.data}>{batteryCharging ? "Yes" : "No"}</p>
-              ) : null}
-            </div>
-          ) : null}
-          <div className={styles.childContainer}>
-            <p>Vibration Supported:</p>
-            {generateDataButtonClicked ? (
-              <p className={styles.data}>{vibrationSupported ? "Yes" : "No"}</p>
-            ) : null}
-          </div>
-          {/* ---------- */}
-          <div className={styles.childContainer}>
-            <p>Connection downlink:</p>
-            {generateDataButtonClicked ? (
-              <p className={styles.data}>{downlink}</p>
-            ) : null}
-          </div>
-          <div className={styles.childContainer}>
-            <p>Connection effectiveType:</p>
-            {generateDataButtonClicked ? (
-              <p className={styles.data}>{effectiveType}</p>
-            ) : null}
-          </div>
-          <div className={styles.childContainer}>
-            <p>Connection rtt:</p>
-            {generateDataButtonClicked ? (
-              <p className={styles.data}>{rtt}</p>
-            ) : null}
-          </div>
-          <div className={styles.childContainer}>
-            <p>currentEntry id:</p>
-            {generateDataButtonClicked ? (
-              <p className={styles.data}>{currentEntryId}</p>
-            ) : null}
-          </div>
-          <div className={styles.childContainer}>
-            <p>currentEntry key</p>
-            {generateDataButtonClicked ? (
-              <p className={styles.data}>{currentEntryKey}</p>
-            ) : null}
-          </div>
-          <div className={styles.childContainer}>
-            <p>time origin:</p>
-            {generateDataButtonClicked ? (
-              <p className={styles.data}>{timeOrigin}</p>
-            ) : null}
-          </div>
-          <div className={styles.childContainer}>
-            <p>connectStart</p>
-            {generateDataButtonClicked ? (
-              <p className={styles.data}>{connectStart}</p>
-            ) : null}
-          </div>
-          <div className={styles.childContainer}>
-            <p>decodeBodySize:</p>
-            {generateDataButtonClicked ? (
-              <p className={styles.data}>{decodedBodySize}</p>
-            ) : null}
-          </div>
-          <div className={styles.childContainer}>
-            <p>domContentLoadedEventStart:</p>
-            {generateDataButtonClicked ? (
-              <p className={styles.data}>{domContentLoadedEventStart}</p>
-            ) : null}
-          </div>
-          <div className={styles.childContainer}>
-            <p>domComplete:</p>
-            {generateDataButtonClicked ? (
-              <p className={styles.data}>{domComplete}</p>
-            ) : null}
-          </div>
-          <div className={styles.childContainer}>
-            <p>domainLookupStart:</p>
-            {generateDataButtonClicked ? (
-              <p className={styles.data}>{domainLookupStart}</p>
-            ) : null}
-          </div>
-          <div className={styles.childContainer}>
-            <p>fetchStart:</p>
-            {generateDataButtonClicked ? (
-              <p className={styles.data}>{fetchStart}</p>
-            ) : null}
-          </div>
-          <div className={styles.childContainer}>
-            <p>requestStart:</p>
-            {generateDataButtonClicked ? (
-              <p className={styles.data}>{requestStart}</p>
-            ) : null}
-          </div>
-          <div className={styles.childContainer}>
-            <p>responseStart:</p>
-            {generateDataButtonClicked ? (
-              <p className={styles.data}>{responseStart}</p>
-            ) : null}
-          </div>
-          <div className={styles.childContainer}>
-            <p>responseEnd:</p>
-            {generateDataButtonClicked ? (
-              <p className={styles.data}>{responseEnd}</p>
-            ) : null}
-          </div>
-          <div className={styles.childContainer}>
-            <p>transferSize:</p>
-            {generateDataButtonClicked ? (
-              <p className={styles.data}>{transferSize}</p>
-            ) : null}
-          </div>
-          {/* --------------------- */}
-          {locationsDisabled ? (
-            <div className={styles.childContainer}>
-              <p>Location:</p>
-              <p className={styles.data}>
-                Disabled - Update browser permissions in device settings
-              </p>
+          {timerActive ? (
+            <div className={styles.timerActiveContainer}>
+              <p>Expires in:</p>
+              <p className={styles.remainingTime}>{remainingTime} seconds</p>
             </div>
           ) : (
-            <>
-              <div className={styles.childContainer}>
-                <p>Latitude:</p>
-                {generateDataButtonClicked ? (
-                  <p className={styles.data}>
-                    {latitude ? latitude : "Loading..."}
-                  </p>
-                ) : null}
-              </div>
-              <div className={styles.childContainer}>
-                <p>Longitude:</p>
-                {generateDataButtonClicked ? (
-                  <p className={styles.data}>
-                    {longitude ? longitude : "Loading..."}
-                  </p>
-                ) : null}
-              </div>
-              <div className={styles.childContainer}>
-                <p>Location:</p>
-                {generateDataButtonClicked ? (
-                  <p className={styles.data}>
-                    {location ? location : "Loading..."}
-                  </p>
-                ) : null}
-              </div>
-            </>
+            <div>
+              {remainingTime === 0 ? (
+                <div className={styles.timerActiveContainer}>
+                  <p className={styles.remainingTime}>Cookie expired</p>
+                </div>
+              ) : null}
+            </div>
           )}
+        </div>
+      </div>
+      <div className={styles.deviceInfoContainer}>
+        <div className={styles.childContainer}>
+          <p>Screen Resolution in CSS Pixels:</p>
+          {generateDataButtonClicked ? (
+            <p className={styles.data}>{screenResolutionInCSSPixels}</p>
+          ) : null}
+        </div>
+        <div className={styles.childContainer}>
+          <p>Screen Resolution in Physical Pixels:</p>
+          {generateDataButtonClicked ? (
+            <p className={styles.data}>{screenResolutionInPhysicalPixels}</p>
+          ) : null}
+        </div>
+        <div className={styles.childContainer}>
+          <p>Aspect Ratio:</p>
+          {generateDataButtonClicked ? (
+            <p className={styles.data}>{aspectRatio}</p>
+          ) : null}
+        </div>
+        <div className={styles.childContainer}>
+          <p>Device Pixel Ratio:</p>
+          {generateDataButtonClicked ? (
+            <p className={styles.data}>{devicePixelRatio}</p>
+          ) : null}
+        </div>
+        <div className={styles.childContainer}>
+          <p>Colour depth:</p>
+          {generateDataButtonClicked ? (
+            <p className={styles.data}>{colourDepth}</p>
+          ) : null}
+        </div>
+        <div className={styles.childContainer}>
+          <p>Screen Orientation:</p>
+          {generateDataButtonClicked ? (
+            <p className={styles.data}>{screenOrientation}</p>
+          ) : null}
+        </div>
+        <div className={styles.childContainer}>
+          <p>Browser Language:</p>
+          {generateDataButtonClicked ? (
+            <p className={styles.data}>{browserLanguage}</p>
+          ) : null}
+        </div>
+        {browser ? (
+          <div className={styles.childContainer}>
+            <p>Browser:</p>
+            {generateDataButtonClicked ? (
+              <p className={styles.data}>{browser}</p>
+            ) : null}
+          </div>
+        ) : null}
+        <div className={styles.childContainer}>
+          <p>Browser Online Status:</p>
+          {generateDataButtonClicked ? (
+            <p className={styles.data}>
+              {browserOnlineStatus ? "Online" : "Offline"}
+            </p>
+          ) : null}
+        </div>
+        <div className={`${styles.childContainer} ${styles.secondClass}`}>
+          <p>User Agent:</p>
+          {generateDataButtonClicked ? (
+            <p className={styles.data}>{userAgent}</p>
+          ) : null}
+        </div>
+        {operatingSystem ? (
+          <div className={styles.childContainer}>
+            <p>Operating System:</p>
+            {generateDataButtonClicked ? (
+              <p className={styles.data}>{operatingSystem}</p>
+            ) : null}
+          </div>
+        ) : null}
+        {numberOfLogicalProcessors ? (
+          <div className={styles.childContainer}>
+            <p>Number of Logical Processors:</p>
+            {generateDataButtonClicked ? (
+              <p className={styles.data}>{numberOfLogicalProcessors}</p>
+            ) : null}
+          </div>
+        ) : null}
+        {estimatedRAM ? (
+          <div className={styles.childContainer}>
+            <p>Estimated RAM:</p>
+            {generateDataButtonClicked ? (
+              <p className={styles.data}>{`${estimatedRAM} GB`}</p>
+            ) : null}
+          </div>
+        ) : null}
+        {batteryLevel ? (
+          <div className={styles.childContainer}>
+            <p>Battery Level:</p>
+            {generateDataButtonClicked ? (
+              <p className={styles.data}>{`${batteryLevel}%`}</p>
+            ) : null}
+          </div>
+        ) : null}
+        {batteryCharging ? (
+          <div className={styles.childContainer}>
+            <p>Battery Charging:</p>
+            {generateDataButtonClicked ? (
+              <p className={styles.data}>{batteryCharging ? "Yes" : "No"}</p>
+            ) : null}
+          </div>
+        ) : null}
+        <div className={styles.childContainer}>
+          <p>Vibration Supported:</p>
+          {generateDataButtonClicked ? (
+            <p className={styles.data}>{vibrationSupported ? "Yes" : "No"}</p>
+          ) : null}
+        </div>
+        {/* ---------- */}
+        <div className={styles.childContainer}>
+          <p>Connection downlink:</p>
+          {generateDataButtonClicked ? (
+            <p className={styles.data}>{downlink} milliseconds</p>
+          ) : null}
+        </div>
+        <div className={styles.childContainer}>
+          <p>Connection effectiveType:</p>
+          {generateDataButtonClicked ? (
+            <p className={styles.data}>{effectiveType}</p>
+          ) : null}
+        </div>
+        <div className={styles.childContainer}>
+          <p>Connection rtt:</p>
+          {generateDataButtonClicked ? (
+            <p className={styles.data}>{rtt} milliseconds</p>
+          ) : null}
+        </div>
+        <div className={styles.childContainer}>
+          <p>currentEntry id:</p>
+          {generateDataButtonClicked ? (
+            <p className={styles.data}>{currentEntryId}</p>
+          ) : null}
+        </div>
+        <div className={styles.childContainer}>
+          <p>currentEntry key</p>
+          {generateDataButtonClicked ? (
+            <p className={styles.data}>{currentEntryKey}</p>
+          ) : null}
+        </div>
+        <div className={styles.childContainer}>
+          <p>time origin:</p>
+          {generateDataButtonClicked ? (
+            <p className={styles.data}>{timeOrigin}</p>
+          ) : null}
+        </div>
+        <div className={styles.childContainer}>
+          <p>connectStart</p>
+          {generateDataButtonClicked ? (
+            <p className={styles.data}>{connectStart} milliseconds</p>
+          ) : null}
+        </div>
+        <div className={styles.childContainer}>
+          <p>decodeBodySize:</p>
+          {generateDataButtonClicked ? (
+            <p className={styles.data}>{decodedBodySize} bytes</p>
+          ) : null}
+        </div>
+        <div className={styles.childContainer}>
+          <p>domContentLoadedEventStart:</p>
+          {generateDataButtonClicked ? (
+            <p className={styles.data}>{domContentLoadedEventStart} milliseconds</p>
+          ) : null}
+        </div>
+        <div className={styles.childContainer}>
+          <p>domComplete:</p>
+          {generateDataButtonClicked ? (
+            <p className={styles.data}>{domComplete} milliseconds</p>
+          ) : null}
+        </div>
+        <div className={styles.childContainer}>
+          <p>domainLookupStart:</p>
+          {generateDataButtonClicked ? (
+            <p className={styles.data}>{domainLookupStart} milliseconds</p>
+          ) : null}
+        </div>
+        <div className={styles.childContainer}>
+          <p>fetchStart:</p>
+          {generateDataButtonClicked ? (
+            <p className={styles.data}>{fetchStart} milliseconds</p>
+          ) : null}
+        </div>
+        <div className={styles.childContainer}>
+          <p>requestStart:</p>
+          {generateDataButtonClicked ? (
+            <p className={styles.data}>{requestStart} milliseconds</p>
+          ) : null}
+        </div>
+        <div className={styles.childContainer}>
+          <p>responseStart:</p>
+          {generateDataButtonClicked ? (
+            <p className={styles.data}>{responseStart} milliseconds</p>
+          ) : null}
+        </div>
+        <div className={styles.childContainer}>
+          <p>responseEnd:</p>
+          {generateDataButtonClicked ? (
+            <p className={styles.data}>{responseEnd} milliseconds</p>
+          ) : null}
+        </div>
+        <div className={styles.childContainer}>
+          <p>transferSize:</p>
+          {generateDataButtonClicked ? (
+            <p className={styles.data}>{transferSize} bytes</p>
+          ) : null}
+        </div>
+        {/* --------------------- */}
+        {locationsDisabled ? (
+          <div className={styles.childContainer}>
+            <p>Location:</p>
+            <p className={styles.data}>
+              Disabled - Update browser permissions in device settings
+            </p>
+          </div>
+        ) : (
+          <>
+            <div className={styles.childContainer}>
+              <p>Latitude:</p>
+              {generateDataButtonClicked ? (
+                <p className={styles.data}>
+                  {latitude ? latitude : "Loading..."}
+                </p>
+              ) : null}
+            </div>
+            <div className={styles.childContainer}>
+              <p>Longitude:</p>
+              {generateDataButtonClicked ? (
+                <p className={styles.data}>
+                  {longitude ? longitude : "Loading..."}
+                </p>
+              ) : null}
+            </div>
+            <div className={styles.childContainer}>
+              <p>Location:</p>
+              {generateDataButtonClicked ? (
+                <p className={styles.data}>
+                  {location ? location : "Loading..."}
+                </p>
+              ) : null}
+            </div>
+          </>
+        )}
+        {isLoading ? null : (
           <div className={styles.childContainer}>
             <p>Fingerprint:</p>
             {fingerprint ? <p className={styles.data}>{fingerprint}</p> : null}
           </div>
-        </div>
-      </div>
-      <div className={styles.generateButtonsContainer}>
-        <GenerateDataButton
-          setGenerateDataButtonClicked={setGenerateDataButtonClicked}
-        />
-        {isLoading ? (
-          null
-        ) : <GenerateFingerprintButton onClick={generateFingerprint} />}
-        {fingerprint ? (
-          <GenerateCookieButton onClick={setAndGetFingerprintFromCookie} />
-        ) : null}
-        {timerActive ? (
-          <div className={styles.timerActiveContainer}>
-          <p>Expires in:</p>
-          <p className={styles.remainingTime}>{remainingTime} seconds</p>
-          </div>
-        ) : (
-          null
         )}
       </div>
+
+      {/* ---------------------------------------------------------------------- */}
     </main>
   );
 }
