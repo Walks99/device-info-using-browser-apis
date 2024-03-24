@@ -450,14 +450,17 @@ function HomePage() {
               ) : null}
             </div>
           ) : null}
-          {batteryLevel ? (
-            <div className={styles.childContainer}>
-              <p>Battery Level:</p>
-              {generateDataButtonClicked ? (
-                <p className={styles.data}>{`${batteryLevel}%`}</p>
-              ) : null}
-            </div>
-          ) : null}
+          {/* {batteryLevel ? ( */}
+          <div className={styles.childContainer}>
+            <p>Battery Level:</p>
+            {generateDataButtonClicked ? (
+              // <p className={styles.data}>{`${batteryLevel}%`}</p>
+              <p className={styles.data}>
+                {batteryLevel ? `${batteryLevel}%` : "N/A"}
+              </p>
+            ) : null}
+          </div>
+          {/* ) : null} */}
           {batteryCharging ? (
             <div className={styles.childContainer}>
               <p>Battery Charging:</p>
@@ -475,104 +478,135 @@ function HomePage() {
           <div className={styles.childContainer}>
             <p>Connection downlink:</p>
             {generateDataButtonClicked ? (
-              <p className={styles.data}>{downlink} milliseconds</p>
+              <p className={styles.data}>
+                {downlink ? `${downlink} milliseconds` : "N/A"}
+              </p>
             ) : null}
           </div>
           <div className={styles.childContainer}>
             <p>Connection effectiveType:</p>
             {generateDataButtonClicked ? (
-              <p className={styles.data}>{effectiveType}</p>
+              <p className={styles.data}>
+                {effectiveType ? effectiveType : "N/A"}
+              </p>
             ) : null}
           </div>
         </div>
         {/* ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ */}
         {/* -------------------------------------------------- */}
         <div className={styles.deviceInfoColumn}>
-
           <div className={styles.childContainer}>
             <p>Connection rtt:</p>
             {generateDataButtonClicked ? (
-              <p className={styles.data}>{rtt} milliseconds</p>
+              <p className={styles.data}>
+                {rtt ? `${rtt} milliseconds` : "N/A"}
+              </p>
             ) : null}
           </div>
           <div className={styles.childContainer}>
             <p>currentEntry id:</p>
             {generateDataButtonClicked ? (
-              <p className={styles.data}>{currentEntryId}</p>
+              <p className={styles.data}>
+                {currentEntryId ? currentEntryId : "N/A"}
+              </p>
             ) : null}
           </div>
           <div className={styles.childContainer}>
             <p>currentEntry key</p>
             {generateDataButtonClicked ? (
-              <p className={styles.data}>{currentEntryKey}</p>
+              <p className={styles.data}>
+                {currentEntryKey ? currentEntryKey : "N/A"}
+              </p>
             ) : null}
           </div>
           <div className={styles.childContainer}>
             <p>time origin:</p>
             {generateDataButtonClicked ? (
-              <p className={styles.data}>{timeOrigin}</p>
+              <p className={styles.data}>{timeOrigin ? timeOrigin : "N/A"}</p>
             ) : null}
           </div>
           <div className={styles.childContainer}>
             <p>connectStart</p>
             {generateDataButtonClicked ? (
-              <p className={styles.data}>{connectStart} milliseconds</p>
+              <p className={styles.data}>
+                {connectStart ? `${connectStart} milliseconds` : "N/A"}
+              </p>
             ) : null}
           </div>
           <div className={styles.childContainer}>
             <p>decodeBodySize:</p>
             {generateDataButtonClicked ? (
-              <p className={styles.data}>{decodedBodySize} bytes</p>
+              <p className={styles.data}>
+                {decodedBodySize ? `${decodedBodySize} bytes` : "N/A"}
+              </p>
             ) : null}
           </div>
           <div className={styles.childContainer}>
             <p>domContentLoadedEventStart:</p>
             {generateDataButtonClicked ? (
               <p className={styles.data}>
-                {domContentLoadedEventStart} milliseconds
+                {domContentLoadedEventStart
+                  ? `${domContentLoadedEventStart} milliseconds`
+                  : "N/A"}
               </p>
             ) : null}
           </div>
           <div className={styles.childContainer}>
             <p>domComplete:</p>
             {generateDataButtonClicked ? (
-              <p className={styles.data}>{domComplete} milliseconds</p>
+              <p className={styles.data}>
+                {domComplete ? `${domComplete} milliseconds` : "N/A"}
+              </p>
             ) : null}
           </div>
           <div className={styles.childContainer}>
             <p>domainLookupStart:</p>
             {generateDataButtonClicked ? (
-              <p className={styles.data}>{domainLookupStart} milliseconds</p>
+              <p className={styles.data}>
+                {domainLookupStart
+                  ? `${domainLookupStart} milliseconds`
+                  : "N/A"}
+              </p>
             ) : null}
           </div>
           <div className={styles.childContainer}>
             <p>fetchStart:</p>
             {generateDataButtonClicked ? (
-              <p className={styles.data}>{fetchStart} milliseconds</p>
+              <p className={styles.data}>
+                {fetchStart ? `${fetchStart} milliseconds` : "N/A"}
+              </p>
             ) : null}
           </div>
           <div className={styles.childContainer}>
             <p>requestStart:</p>
             {generateDataButtonClicked ? (
-              <p className={styles.data}>{requestStart} milliseconds</p>
+              <p className={styles.data}>
+                {requestStart ? `${requestStart} milliseconds` : "N/A"}
+              </p>
             ) : null}
           </div>
           <div className={styles.childContainer}>
             <p>responseStart:</p>
             {generateDataButtonClicked ? (
-              <p className={styles.data}>{responseStart} milliseconds</p>
+              <p className={styles.data}>
+                {responseStart ? `${responseStart} milliseconds` : "N/A"}
+              </p>
             ) : null}
           </div>
           <div className={styles.childContainer}>
             <p>responseEnd:</p>
             {generateDataButtonClicked ? (
-              <p className={styles.data}>{responseEnd} milliseconds</p>
+              <p className={styles.data}>
+                {responseEnd ? `${responseEnd} milliseconds` : "N/A"}
+              </p>
             ) : null}
           </div>
           <div className={styles.childContainer}>
             <p>transferSize:</p>
             {generateDataButtonClicked ? (
-              <p className={styles.data}>{transferSize} bytes</p>
+              <p className={styles.data}>
+                {transferSize ? `${transferSize} bytes` : "N/A"}
+              </p>
             ) : null}
           </div>
           {locationsDisabled ? (
