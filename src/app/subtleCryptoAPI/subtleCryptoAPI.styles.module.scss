@@ -33,7 +33,7 @@
 */
 // ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 // --------------------------------------------------------------------------------------------------------------
-@media (max-width: 1920px) and (max-height: 1080px) {
+@media (max-width: 1920px)  {
   .main {
     // border: 1px solid blue;
     width: 100%;
@@ -314,6 +314,55 @@
     .webIntroAndGenerateButtonsContainer {
       // border: 1px solid red;
       height: 1480px;
+    }
+  }
+}
+// ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+// --------------------------------------------------------------------------------------------------------------
+@media (max-width: 500px) {
+  .main {
+    // border: 1px solid blue;
+    .webIntroAndGenerateButtonsContainer {
+      // border: 1px solid red;
+      height: 1600px;
+      .generateButtonsContainer {
+        button {
+          width: 70px;
+          
+        }
+      }
+    }
+    .deviceInfoContainer {
+      // border: 1px solid purple;
+      .deviceInfoColumn {
+        // border: 1px solid yellow;
+        .childContainer {
+          p {
+            font-size: 0.8rem;
+          }
+        }
+      }
+    }
+  }
+}
+// ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+// --------------------------------------------------------------------------------------------------------------
+@media (max-width: 400px) {
+  .main {
+    // border: 1px solid blue;
+    .webIntroAndGenerateButtonsContainer {
+      // border: 1px solid red;
+      height: 1840px;
+      .generateButtonsContainer {
+        button {
+          margin: 0 8px 0 0;
+        }
+        .timerActiveContainer {
+          p {
+            font-size: 0.8rem;
+          }
+        }
+      }
     }
   }
 }
