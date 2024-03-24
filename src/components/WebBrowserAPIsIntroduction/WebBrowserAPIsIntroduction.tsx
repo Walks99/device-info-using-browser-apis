@@ -115,7 +115,7 @@ export default function WebBrowserAPIsIntroduction({ className }: WebBrowserAPIs
               to collecting and processing personal data. As users become more
               aware of these issues, the demand for privacy-enhancing
               technologies and practices will continue to grow, pushing the web
-              forward towards a more secure and user-centric future. way.
+              forward towards a more secure and user-centric future.
               <br />
               <br />
               This website demonstrates the use of the Subtle Crypto API to
@@ -152,7 +152,7 @@ export default function WebBrowserAPIsIntroduction({ className }: WebBrowserAPIs
                 bar
               </p>
               <p>
-                <strong>6.</strong> From the left navigation bar, select
+                <strong>6.</strong> From the left navigation menu, select
                 &apos;Cookies&apos;
               </p>
               <p>
