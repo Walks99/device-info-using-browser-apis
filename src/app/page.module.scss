@@ -2,69 +2,37 @@
   width: 100%;
   height: 100vh;
   display: flex;
-  flex-direction: column;
-  justify-content: space-around;
   align-items: center;
-  // border: 2px solid green;
-  .webIntroAndDeviceInfoContainer {
-    margin-top: 50px;
+  justify-content: center;
+  .contentsContainer {
+    width: 50%;
+    height: 20%;
     display: flex;
-    justify-content: space-around;
-    align-items: center;
-    width: 100%;
-    height: 90%;
-    .deviceInfoContainer {
-      display: flex;
-      width: 45%;
-      height: 90%;
-      flex-direction: column;
-      justify-content: space-around;
-      // border: 2px solid yellow;
-      .childContainer {
-        display: flex;
-        .data {
-          color: red;
-          margin: 0 0 0 10px;
-        }
-      }
-    }
-  }
-  .generateDataFingerprintCookieButtonContainer {
-    display: flex;
-    height: 10%;
-    width: 100%;
-    button {
-      margin: 0 0 0 50px;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-evenly;
+    a {
+      text-decoration: underline;
     }
   }
 }
-
-@media (max-width: 500px) {
+// ---------------------------------------------------------------------------------------------------------
+@media (max-width: 768px) {
   .main {
-    height: auto;
-    width: 100%;
-    .webIntroAndDeviceInfoContainer {
-      width: 94%;
-      height: auto;
-      margin: 20px 0 0 0;
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      .deviceInfoContainer {
-        height: 700px;
-        width: 100%;
-      }
+    .contentsContainer {
+      width: 80%;
     }
-    .generateDataFingerprintCookieButtonContainer {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      height: auto;
-      width: 100%;
-      // border: 2px solid red;
-      button {
-        margin: 0 0 20px 0;
+  }
+}
+// ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+// ---------------------------------------------------------------------------------------------------------
+@media (max-width: 400px) {
+  .main {
+    .contentsContainer {
+      a {
+        font-size: 0.9rem;
       }
     }
   }
 }
+// ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
