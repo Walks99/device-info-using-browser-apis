@@ -324,7 +324,7 @@
     // border: 1px solid blue;
     .webIntroAndGenerateButtonsContainer {
       // border: 1px solid red;
-      height: 1600px;
+      height: 1520px;
       .generateButtonsContainer {
         button {
           width: 70px;
@@ -347,12 +347,32 @@
 }
 // ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 // --------------------------------------------------------------------------------------------------------------
+@media (max-width: 450px) {
+  .main {
+    // border: 1px solid blue;
+    .webIntroAndGenerateButtonsContainer {
+      // border: 1px solid red;
+      height: 1560px;
+      .generateButtonsContainer {
+        button {
+          margin: 0 8px 0 0;
+        }
+        .timerActiveContainer {
+          p {
+            font-size: 0.8rem;
+          }
+        }
+      }
+    }
+  }
+}
+// ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+// --------------------------------------------------------------------------------------------------------------
 @media (max-width: 400px) {
   .main {
     // border: 1px solid blue;
     .webIntroAndGenerateButtonsContainer {
       // border: 1px solid red;
-      height: 1840px;
       .generateButtonsContainer {
         button {
           margin: 0 8px 0 0;
