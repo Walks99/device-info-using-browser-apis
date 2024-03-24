@@ -1,119 +1,193 @@
-.main {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-evenly;
-  align-items: center;
-//   border: 2px solid orange;
-  .title {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin: 20px 0 10px 0;
-    p {
-      &:first-child {
-        font-weight: bold;
-      font-size: 2rem;
-      margin: 0 0 5px 0;
-      }
-      &:last-child {
-        font-size: 0.9rem;
-        font-style: italic;
-        font-weight: normal;
-      }
-    }
-  }
-  .introductionBody {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    // height: 100%;
-    justify-content: center;
-    p {
-      font-size: 0.94rem; // Default font size
-    }
-  }
-  .instructionsContainer {
-    margin: 20px 0 0 0;
-    h3 {
-      margin: 0 0 10px 0;
-    }
-    p {
-      margin: 5px 0 0 0;
-    }
-    .instructionsNote {
-      width: 100%;
-      display: flex;
-      margin: 5px 0 0 0;
+// -------------------------------
+/*
+  .main {
+    border: 1px solid pink;
+    .title {
+      border: 1px solid red;
       p {
         &:first-child {
-          margin: 0 5px 0 0;
+          border: 1px solid green;
         }
         &:last-child {
-          margin: 0;
+          border: 1px solid blue;
         }
-      }
-    }
-  }
-}
-
-@media (max-width: 1670px) {
-    .main {
-        .title {
-            p {
-                &:first-child {
-                    font-size: 1.6rem;
-                }
-                &:last-child {
-                    font-size: 0.8rem;
-                }
-            }
-        }
-        .introductionBody {
-            p {
-                font-size: 0.85rem;
-            }
-        }
-    }
-}
-@media (max-width: 1500px) {
-    .main {
-        .title {
-            p {
-                &:first-child {
-                    font-size: 1.6rem;
-                }
-                &:last-child {
-                    font-size: 0.8rem;
-                }
-            }
-        }
-        .introductionBody {
-            p {
-                font-size: 0.85rem;
-            }
-        }
-    }
-}
-
-@media (max-width: 500px) {
-  .main {
-    width: 100%;
-    height: 1000px;
-    justify-content: space-around;
-    .title {
-      margin: 0;
-      p {
-        margin: 0;
       }
     }
     .introductionBody {
-      height: auto;
+      border: 1px solid yellow;
       p {
-        font-size: 0.96rem; /* Adjust as needed */
+      }
+    }
+    .instructionsContainer {
+      border: 1px solid orange;
+      h3 {
+        border: 1px solid purple;
+      }
+      p {
+        border: 1px solid brown;
+      }
+      .instructionsNote {
+        border: 1px solid white;
+        p {
+          &:first-child {
+          }
+          &:last-child {
+          }
+        }
+      }
+    }
+  }
+*/
+// ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+@media (max-width: 1920px) and (max-height: 1080px) {
+  .main {
+    border: 1px solid pink;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    .title {
+      border: 1px solid red;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin: 20px 0 0 0;
+      p {
+        &:first-child {
+          font-weight: bold;
+          font-size: 2rem;
+          margin: 10px 0 0 0;
+        }
+        &:last-child {
+          margin: 5px 0 0 0;
+          font-size: 0.9rem;
+          font-style: italic;
+          font-weight: normal;
+        }
+      }
+    }
+    .introductionBody {
+      margin: 16px 0 0 0;
+      border: 1px solid blueviolet;
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      justify-content: center;
+      p {
+        font-size: 0.94rem; // Default font size
+      }
+    }
+    .instructionsContainer {
+      border: 1px solid orange;
+      margin: 20px 0 0 0;
+      h3 {
+        margin: 0 0 10px 0;
+      }
+      p {
+        margin: 5px 0 0 0;
+      }
+      .instructionsNote {
+        border: 1px solid green;
+        width: 100%;
+        display: flex;
+        margin: 10px 0 0 0;
+        p {
+          &:first-child {
+            margin: 0 5px 0 0;
+          }
+          &:last-child {
+            margin: 0;
+          }
+        }
       }
     }
   }
 }
+
+
+// --------------------------------------------------------------------------------------------------------
+@media (max-width: 1440px) and (max-height: 900px) {
+  .main {
+    border: 1px solid pink;
+    .title {
+      border: 1px solid red;
+      p {
+        &:first-child {
+          border: 1px solid green;
+        }
+        &:last-child {
+          border: 1px solid blue;
+        }
+      }
+    }
+    .introductionBody {
+      border: 1px solid yellow;
+      p {
+      }
+    }
+    .instructionsContainer {
+      border: 1px solid orange;
+      h3 {
+        border: 1px solid purple;
+      }
+      p {
+        border: 1px solid brown;
+      }
+      .instructionsNote {
+        border: 1px solid white;
+        p {
+          &:first-child {
+          }
+          &:last-child {
+          }
+        }
+      }
+    }
+  }
+}
+// ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+// --------------------------------------------------------------------------------------------------------
+@media (max-width: 1366px) and (max-height: 768px) {
+  .main {
+    border: 1px solid pink;
+    .title {
+      border: 1px solid red;
+      p {
+        &:first-child {
+          border: 1px solid green;
+        }
+        &:last-child {
+          border: 1px solid blue;
+        }
+      }
+    }
+    .introductionBody {
+      border: 1px solid yellow;
+      p {
+        
+      }
+    }
+    .instructionsContainer {
+      border: 1px solid orange;
+      h3 {
+        border: 1px solid purple;
+      }
+      p {
+        border: 1px solid brown;
+      }
+      .instructionsNote {
+        border: 1px solid white;
+        p {
+          &:first-child {
+          }
+          &:last-child {
+          }
+        }
+      }
+    }
+  }
+}
+// ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^

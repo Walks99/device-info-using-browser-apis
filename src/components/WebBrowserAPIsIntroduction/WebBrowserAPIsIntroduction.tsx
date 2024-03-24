@@ -3,12 +3,16 @@
 import React from "react";
 import styles from "./WebBrowserAPIsIntroduction.styles.module.scss";
 
-export default function WebBrowserAPIsIntroduction() {
+interface WebBrowserAPIsIntroductionProps {
+  className?: string;
+ }
+
+export default function WebBrowserAPIsIntroduction({ className }: WebBrowserAPIsIntroductionProps) {
   const currentPath = window.location.pathname;
   const landingPage = currentPath === "/";
   const subtleCryptoAPIpage = currentPath === "/subtleCryptoAPI";
-  const hideInstructions = currentPath === "/";
-  const showSubtleCryptoTitle = currentPath === "/subtleCyptoAPI";
+  // const hideInstructions = currentPath === "/";
+  // const showSubtleCryptoTitle = currentPath === "/subtleCyptoAPI";
 
   return (
     <>

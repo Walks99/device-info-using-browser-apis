@@ -1,192 +1,251 @@
+// --------------------------------------------------------------------------------------------------------------
+/*
 .main {
-  // border: 2px solid blue;
-  width: 100%;
-  height: 100vh;
-  display: flex;
-  // flex-direction: column;
-  justify-content: space-around;
-  align-items: center;
-  // align-items: flex-start;
+  border: 1px solid blue;
   .webIntroAndGenerateButtonsContainer {
-    width: 47%;
-    // border: 2px solid red;
-    // margin: 50px 0 0 0;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    align-items: center;
-    height: 100%;
-    // margin: 50px 0 0 0;
+    border: 1px solid red;
     .generateButtonsContainer {
-      // border: 2px solid yellow;
-      width: 100%;
-      height: 8%;
-      display: flex;
-      justify-content: flex-start;
-      align-items: flex-start;
+      border: 2px solid yellow;
       button {
-        margin: 0 20px 0 0;
       }
-
       .timerActiveContainer {
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start;
+        border: 1px solid green;
         .remainingTime {
-          font-size: 1.2rem;
-          color: red;
+          border: 1px solid blue;
         }
       }
     }
   }
-
   .deviceInfoContainer {
-    // border: 2px solid purple;
-    display: flex;
-    width: 47%;
-    height: 96%;
-    flex-direction: column;
-    justify-content: space-between;
-    .childContainer {
-      display: flex;
-      p {
-        font-size: 0.9rem;
-      }
-      .data {
-        color: red;
-        margin: 0 0 0 10px;
-      }
-    }
-  }
-}
-
-@media (max-width: 1650px) {
-  .main {
-    .webIntroAndGenerateButtonsContainer {
-      .generateButtonsContainer {
-        button {
-          margin: 0 10px 0 0;
-          width: 150px;
-          font-size: 1rem;
+    border: 1px solid purple;
+    .deviceInfoColumn {
+      border: 1px solid red;
+      .childContainer {
+        border: 1px solid orange;
+        p {
         }
-        .timerActiveContainer {
-          .remainingTime {
-            font-size: 1rem;
-            color: red;
-          }
+        .data {
         }
       }
     }
   }
 }
-
-@media (max-width: 1265px) {
+*/
+// ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+// --------------------------------------------------------------------------------------------------------------
+@media (max-width: 1920px) and (max-height: 1080px) {
   .main {
-    border: 2px solid blue;
+    border: 1px solid blue;
+    width: 100%;
     height: auto;
+    display: flex;
     flex-direction: column;
-    // align-items: center;
+    justify-content: flex-start;
+    align-items: center;
     .webIntroAndGenerateButtonsContainer {
+      border: 1px solid red;
       width: 80%;
-      border: 2px solid red;
-      height: 820px;
-      margin: 0 0 50px 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+      align-items: center;
+      height: 800px;
       .generateButtonsContainer {
-        // border: 2px solid yellow;
+        border: 2px solid yellow;
         width: 100%;
-        height: 8%;
+        height: auto;
         display: flex;
         justify-content: flex-start;
-        align-items: flex-start;
+        align-items: flex-end;
         button {
-          margin: 0 10px 0 0;
+          margin: 0 20px 0 0;
         }
-  
         .timerActiveContainer {
+          border: 1px solid green;
           display: flex;
-          flex-direction: column;
-          align-items: flex-start;
+          align-items: flex-end;
           .remainingTime {
+            border: 1px solid blue;
             font-size: 1.2rem;
             color: red;
+            margin: 0 0 0 5px;
           }
         }
       }
     }
     .deviceInfoContainer {
-      border: 2px solid purple;
-      // display: flex;
+      border: 1px solid purple;
+      display: flex;
       width: 80%;
+      height: 800px;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      margin: 20px 0 20px 0;
+      .deviceInfoColumn {
+        border: 1px solid red;
+        width: 48%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        .childContainer {
+          border: 1px solid orange;
+          display: flex;
+          p {
+            margin: 0 0 0 5px;
+          }
+          .data {
+            color: red;
+            word-break: break-all;
+          }
+        }
+      }
+    }
+  }
+}
+// ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+@media (max-width: 1755px) {
+  .main {
+    border: 1px solid blue;
+    .webIntroAndGenerateButtonsContainer {
+      border: 1px solid red;
+      height: 830px;
+    }
+  }
+}
+@media (max-width: 1455px) {
+.main {
+  .webIntroAndGenerateButtonsContainer {
+    height: 860px;
+    width: 90%;
+  }
+}
+}
+// --------------------------------------- 14 INCH LAPTOPS ------------------------------------------------------
+@media (max-width: 1440px) {
+  .main {
+    border: 1px solid blue;
+    .webIntroAndGenerateButtonsContainer {
+      border: 1px solid red;
+      height: 860px;
+    }
+    .deviceInfoContainer {
+      border: 1px solid purple;
+      width: 90%;
+    }
+  }
+}
+// ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+// --------------------------------------- 13 INCH LAPTOPS --------------------------------------------------
+@media (max-width: 1366px) {
+
+}
+// ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+@media (max-width: 1260px) {
+  .main {
+    border: 1px solid blue;
+    .webIntroAndGenerateButtonsContainer {
+      border: 1px solid red;
+      width: 90%;
       height: 900px;
     }
   }
 }
-@media (max-width: 1145px) {
+
+@media (max-width: 1120px) {
   .main {
+    border: 1px solid blue;
     .webIntroAndGenerateButtonsContainer {
-      width: 90%;
-      border: 2px solid red;
-    }
-  
-    .deviceInfoContainer {
-      border: 2px solid purple;
-      // display: flex;
-      width: 90%;
+      border: 1px solid red;
+      height: 960px;
     }
   }
 }
-@media (max-width: 1015px) {
+
+@media (max-width: 990px) {
   .main {
+    border: 1px solid blue;
     .webIntroAndGenerateButtonsContainer {
-      height: 850px;
-    }
-  
-    .deviceInfoContainer {
-      height: 950px;
-    }
-  }
-}
-@media (max-width: 830px) {
-  .main {
-    .webIntroAndGenerateButtonsContainer {
-      height: 900px;
-    }
-  
-    .deviceInfoContainer {
+      border: 1px solid red;
       height: 1000px;
     }
-  }
-}
-@media (max-width: 730px) {
-  .main {
-    .webIntroAndGenerateButtonsContainer {
-      height: 1000px;
-    }
-  
     .deviceInfoContainer {
-      height: 1050px;
-    }
-  }
-}
-@media (max-width: 650px) {
-  .main {
-    .webIntroAndGenerateButtonsContainer {
-      height: 1100px;
-    }
-  
-    .deviceInfoContainer {
-      height: 1100px;
+      border: 1px solid purple;
+      display: flex;
+      flex-direction: column;
+      width: 90%;
+      height: 1200px;
+      justify-content: space-between;
+      align-items: center;
+      margin: 20px 0 20px 0;
+      .deviceInfoColumn {
+        border: 1px solid red;
+        width: 100%;
+      }
     }
   }
 }
-@media (max-width: 550px) {
+@media (max-width: 900px) {
   .main {
+    border: 1px solid blue;
     .webIntroAndGenerateButtonsContainer {
-      height: 1300px;
+      border: 1px solid red;
+      height: 1060px;
     }
-  
-    .deviceInfoContainer {
-      height: 1100px;
+    .generateButtonsContainer {
+      border: 2px solid yellow;
+      button {
+        font-size: 1rem;
+        width: 120px;
+        height: 40px;
+      }
+    }
+  }
+}
+@media (max-width: 755px) {
+  .main {
+    border: 1px solid blue;
+    .webIntroAndGenerateButtonsContainer {
+      border: 1px solid red;
+      height: 1200px;
+
+    }
+  }
+}
+@media (max-width: 660px) {
+  .main {
+    border: 1px solid blue;
+    .webIntroAndGenerateButtonsContainer {
+      border: 1px solid red;
+      height: 1400px;
+    }
+  }
+}
+@media (max-width: 585px) {
+  .main {
+    border: 1px solid blue;
+    .webIntroAndGenerateButtonsContainer {
+      border: 1px solid red;
+      height: 1360px;
+    }
+  }
+}
+@media (max-width: 540px) {
+  .main {
+    border: 1px solid blue;
+    .webIntroAndGenerateButtonsContainer {
+      border: 1px solid red;
+      height: 1420px;
+    }
+  }
+}
+@media (max-width: 524px) {
+  .main {
+    border: 1px solid blue;
+    .webIntroAndGenerateButtonsContainer {
+      border: 1px solid red;
+      height: 1480px;
     }
   }
 }
