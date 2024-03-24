@@ -3,5 +3,11 @@
         width: 200px;
         height: 50px;
         font-size: 1.2rem;
+        border-radius: 0;
+        border: 2px solid black;
+        &:active {
+            background-color: red;
+            opacity: 0.8;
+        }
     }
 }
