@@ -130,7 +130,7 @@ function DisplayData() {
     console.log("Fingerprint:", hashHex);
   };
   // ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  // -------------------------------------------------------------------------------- // NEWNEWNEWNEWNEWNEWNEWNEWNEWNEWNEWNEWNEWNEWNEW
+  // -------------------------------------------------------------------------------- //
   const setAndGetFingerprintFromCookie = async () => {
     try {
       if (fingerprint !== null) {
@@ -150,24 +150,24 @@ function DisplayData() {
     }
   };
   // ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ //
-  // -------------------------------------------------------------------------------- // NEWNEWNEWNEWNEWNEWNEWNEWNEWNEWNEWNEWNEWNEWNEW
-    useEffect(() => {
-      let timerId: NodeJS.Timeout | undefined;
-      if (timerActive) {
-        timerId = setInterval(() => {
-          setRemainingTime((prevTime = 0) => {
-            if (prevTime <= 1) {
-              clearInterval(timerId as NodeJS.Timeout);
-              setTimerActive(false);
-              return 0;
-            }
-            return prevTime - 1;
-          });
-        }, 1000);
-      }
-      return () => clearInterval(timerId as NodeJS.Timeout);
-    }, [timerActive]);
-    // ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ // 
+  // -------------------------------------------------------------------------------- //
+  useEffect(() => {
+    let timerId: NodeJS.Timeout | undefined;
+    if (timerActive) {
+      timerId = setInterval(() => {
+        setRemainingTime((prevTime = 0) => {
+          if (prevTime <= 1) {
+            clearInterval(timerId as NodeJS.Timeout);
+            setTimerActive(false);
+            return 0;
+          }
+          return prevTime - 1;
+        });
+      }, 1000);
+    }
+    return () => clearInterval(timerId as NodeJS.Timeout);
+  }, [timerActive]);
+  // ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ //
 
   return (
     <main className={styles.main}>
@@ -178,9 +178,11 @@ function DisplayData() {
           <GenerateDataButton
             setGenerateDataButtonClicked={setGenerateDataButtonClicked}
           />
-          {isLoading ? null : (
-            <GenerateFingerprintButton onClick={generateFingerprint} />
-          )}
+          {generateDataButtonClicked ? (
+            !isLoading ? (
+              <GenerateFingerprintButton onClick={generateFingerprint} />
+            ) : null
+          ) : null}
           {fingerprint ? (
             <GenerateCookieButton onClick={setAndGetFingerprintFromCookie} />
           ) : null}
@@ -205,14 +207,19 @@ function DisplayData() {
         {/* Start */}
         {/* ------------------------------------------------------- */}
         <div className={styles.deviceInfoColumn}>
-          {isLoading ? null : (
-            <div className={styles.childContainer}>
-              <p>Fingerprint:</p>
-              {fingerprint ? (
-                <p className={styles.data}>{fingerprint}</p>
-              ) : null}
-            </div>
-          )}
+          {/* DONE */}
+          <div className={styles.childContainer}>
+            {generateDataButtonClicked ? (
+              isLoading ? null : (
+                <>
+                  <p>Fingerprint:</p>
+                  {fingerprint ? (
+                    <p className={styles.data}>{fingerprint}</p>
+                  ) : null}
+                </>
+              )
+            ) : null}
+          </div>
           {/* DONE */}
           <div className={styles.childContainer}>
             <p>Screen Resolution:</p>
@@ -226,7 +233,7 @@ function DisplayData() {
               )
             ) : null}
           </div>
-            {/* DONE */}
+          {/* DONE */}
           <div className={styles.childContainer}>
             <p>Aspect Ratio:</p>
             {generateDataButtonClicked ? (
@@ -239,7 +246,7 @@ function DisplayData() {
               )
             ) : null}
           </div>
-            {/* DONE */}
+          {/* DONE */}
           <div className={styles.childContainer}>
             <p>Device Pixel Ratio:</p>
             {generateDataButtonClicked ? (
@@ -252,7 +259,7 @@ function DisplayData() {
               )
             ) : null}
           </div>
-            {/* DONE */}
+          {/* DONE */}
           <div className={styles.childContainer}>
             <p>Colour depth:</p>
             {generateDataButtonClicked ? (
@@ -265,7 +272,7 @@ function DisplayData() {
               )
             ) : null}
           </div>
-            {/* DONE */}
+          {/* DONE */}
           <div className={styles.childContainer}>
             <p>Screen Orientation:</p>
             {generateDataButtonClicked ? (
@@ -279,7 +286,7 @@ function DisplayData() {
             ) : null}
           </div>
 
-            {/* DONE */}
+          {/* DONE */}
           <div className={styles.childContainer}>
             <p>Browser Language:</p>
             {generateDataButtonClicked ? (
@@ -292,22 +299,22 @@ function DisplayData() {
               )
             ) : null}
           </div>
-        
-          {/* DONE */}
-            <div className={styles.childContainer}>
-              <p>Browser:</p>
-              {generateDataButtonClicked ? (
-                isLoading ? (
-                  <p className={styles.data}>Loading...</p>
-                ) : browser ? (
-                  <p className={styles.data}>{}browser</p>
-                ) : (
-                  <p className={styles.data}>No data available</p>
-                )
-              ) : null}
-            </div>
 
-              {/* DONE */}
+          {/* DONE */}
+          <div className={styles.childContainer}>
+            <p>Browser:</p>
+            {generateDataButtonClicked ? (
+              isLoading ? (
+                <p className={styles.data}>Loading...</p>
+              ) : browser ? (
+                <p className={styles.data}>{}browser</p>
+              ) : (
+                <p className={styles.data}>No data available</p>
+              )
+            ) : null}
+          </div>
+
+          {/* DONE */}
           <div className={styles.childContainer}>
             <p>Browser Online Status:</p>
             {generateDataButtonClicked ? (
@@ -320,7 +327,7 @@ function DisplayData() {
               )
             ) : null}
           </div>
-            {/* DONE */}
+          {/* DONE */}
           <div className={`${styles.childContainer} ${styles.secondClass}`}>
             <p>User Agent:</p>
             {generateDataButtonClicked ? (
@@ -335,49 +342,48 @@ function DisplayData() {
           </div>
 
           {/* DONE */}
-            <div className={styles.childContainer}>
-              <p>Operating System:</p>
-              {generateDataButtonClicked ? (
-                isLoading ? (
-                  <p className={styles.data}>Loading</p>
-                ) : operatingSystem ? (
-                  <p className={styles.data}>{}operatingSystem</p>
-                ) : (
-                  <p className={styles.data}>No data available</p>
-                )
-              ) : null}
-            </div>
-          
+          <div className={styles.childContainer}>
+            <p>Operating System:</p>
+            {generateDataButtonClicked ? (
+              isLoading ? (
+                <p className={styles.data}>Loading</p>
+              ) : operatingSystem ? (
+                <p className={styles.data}>{}operatingSystem</p>
+              ) : (
+                <p className={styles.data}>No data available</p>
+              )
+            ) : null}
+          </div>
 
           {/* DONE */}
-            <div className={styles.childContainer}>
-              <p>Number of Logical Processors:</p>
-              {generateDataButtonClicked ? (
-                isLoading ? (
-                  <p className={styles.data}>Loading...</p>
-                ) : numberOfLogicalProcessors ? (
-                  <p className={styles.data}>{numberOfLogicalProcessors}</p>
-                ) : (
-                  <p className={styles.data}>No data available</p>
-                )
-              ) : null}
-            </div>
-          
+          <div className={styles.childContainer}>
+            <p>Number of Logical Processors:</p>
+            {generateDataButtonClicked ? (
+              isLoading ? (
+                <p className={styles.data}>Loading...</p>
+              ) : numberOfLogicalProcessors ? (
+                <p className={styles.data}>{numberOfLogicalProcessors}</p>
+              ) : (
+                <p className={styles.data}>No data available</p>
+              )
+            ) : null}
+          </div>
+
           {/* DONE */}
-            <div className={styles.childContainer}>
-              <p>Estimated RAM:</p>
-              {generateDataButtonClicked ? (
-                isLoading ? (
-                  <p className={styles.data}>Loading...</p>
-                ) : estimatedRAM ? (
-                  <p className={styles.data}>{`${estimatedRAM} GB`}</p>
-                ) : (
-                  <p className={styles.data}>No data available</p>
-                )
-              ) : null}
-            </div>
-          
-              {/* DONE */}
+          <div className={styles.childContainer}>
+            <p>Estimated RAM:</p>
+            {generateDataButtonClicked ? (
+              isLoading ? (
+                <p className={styles.data}>Loading...</p>
+              ) : estimatedRAM ? (
+                <p className={styles.data}>{`${estimatedRAM} GB`}</p>
+              ) : (
+                <p className={styles.data}>No data available</p>
+              )
+            ) : null}
+          </div>
+
+          {/* DONE */}
           <div className={styles.childContainer}>
             <p>Battery Level:</p>
             {generateDataButtonClicked ? (
@@ -391,20 +397,19 @@ function DisplayData() {
             ) : null}
           </div>
 
-          
           {/* DONE */}
-            <div className={styles.childContainer}>
-              <p>Battery Charging:</p>
-              {generateDataButtonClicked ? (
-                isLoading ? (
-                  <p className={styles.data}>Loading...</p>
-                ) : batteryCharging ? (
-                  <p className={styles.data}>Yes</p>
-                ) : (
-                  <p className={styles.data}>No</p>
-                )
-              ) : null}
-            </div>
+          <div className={styles.childContainer}>
+            <p>Battery Charging:</p>
+            {generateDataButtonClicked ? (
+              isLoading ? (
+                <p className={styles.data}>Loading...</p>
+              ) : batteryCharging ? (
+                <p className={styles.data}>Yes</p>
+              ) : (
+                <p className={styles.data}>No</p>
+              )
+            ) : null}
+          </div>
           {/* DONE */}
           <div className={styles.childContainer}>
             <p>Vibration Supported:</p>
@@ -418,7 +423,7 @@ function DisplayData() {
               )
             ) : null}
           </div>
-            {/* DONE */}
+          {/* DONE */}
           <div className={styles.childContainer}>
             <p>Connection downlink:</p>
             {generateDataButtonClicked ? (
@@ -431,7 +436,7 @@ function DisplayData() {
               )
             ) : null}
           </div>
-            {/* DONE */}
+          {/* DONE */}
           <div className={styles.childContainer}>
             <p>Connection effectiveType:</p>
             {generateDataButtonClicked ? (
@@ -534,7 +539,9 @@ function DisplayData() {
               isLoading ? (
                 <p className={styles.data}>Loading...</p>
               ) : domContentLoadedEventStart ? (
-                <p className={styles.data}>{ `${domContentLoadedEventStart} milliseconds`}</p>
+                <p
+                  className={styles.data}
+                >{`${domContentLoadedEventStart} milliseconds`}</p>
               ) : (
                 <p className={styles.data}>No data available</p>
               )
@@ -553,20 +560,22 @@ function DisplayData() {
               )
             ) : null}
           </div>
-              {/* DONE */}
+          {/* DONE */}
           <div className={styles.childContainer}>
             <p>domainLookupStart:</p>
             {generateDataButtonClicked ? (
               isLoading ? (
                 <p className={styles.data}>Loading</p>
               ) : domainLookupStart ? (
-                <p className={styles.data}>{`${domainLookupStart} milliseconds`}</p>
+                <p
+                  className={styles.data}
+                >{`${domainLookupStart} milliseconds`}</p>
               ) : (
                 <p className={styles.data}>No data available</p>
               )
             ) : null}
           </div>
-            {/* DONE */}
+          {/* DONE */}
           <div className={styles.childContainer}>
             <p>fetchStart:</p>
             {generateDataButtonClicked ? (
@@ -579,7 +588,7 @@ function DisplayData() {
               )
             ) : null}
           </div>
-            {/* DONE */}
+          {/* DONE */}
           <div className={styles.childContainer}>
             <p>requestStart:</p>
             {generateDataButtonClicked ? (
@@ -592,7 +601,7 @@ function DisplayData() {
               )
             ) : null}
           </div>
-            {/* DONE */}
+          {/* DONE */}
           <div className={styles.childContainer}>
             <p>responseStart:</p>
             {generateDataButtonClicked ? (
@@ -605,7 +614,7 @@ function DisplayData() {
               )
             ) : null}
           </div>
-            {/* DONE */}
+          {/* DONE */}
           <div className={styles.childContainer}>
             <p>responseEnd:</p>
             {generateDataButtonClicked ? (
@@ -618,7 +627,7 @@ function DisplayData() {
               )
             ) : null}
           </div>
-            {/* DONE */}
+          {/* DONE */}
           <div className={styles.childContainer}>
             <p>transferSize:</p>
             {generateDataButtonClicked ? (
