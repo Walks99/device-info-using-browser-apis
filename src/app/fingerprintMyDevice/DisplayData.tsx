@@ -43,8 +43,8 @@ function DisplayData() {
   const [latitude, setLatitude] = useState<number | null>(null);
   const [longitude, setLongitude] = useState<number | null>(null);
   const [location, setLocation] = useState<string | null>(null);
-  const [permissionInteracted, setPermissionInteracted] = useState(false);
-  const [locationsDisabled, setLocationsDisabled] = useState(false);
+  // const [permissionInteracted, setPermissionInteracted] = useState(false);
+  // const [locationsDisabled, setLocationsDisabled] = useState(false);
   const [fingerprint, setFingerprint] = useState<string | null>(null);
   const [generateDataButtonClicked, setGenerateDataButtonClicked] = useState<
     boolean | null
@@ -266,7 +266,7 @@ function DisplayData() {
               isLoading ? (
                 <p className={styles.data}>Loading...</p>
               ) : colourDepth ? (
-                <p className={styles.colorDepth}>{colourDepth}</p>
+                <p className={styles.data}>{colourDepth}</p>
               ) : (
                 <p className={styles.data}>No data available</p>
               )
@@ -307,7 +307,7 @@ function DisplayData() {
               isLoading ? (
                 <p className={styles.data}>Loading...</p>
               ) : browser ? (
-                <p className={styles.data}>{}browser</p>
+                <p className={styles.data}>{browser}</p>
               ) : (
                 <p className={styles.data}>No data available</p>
               )
@@ -348,7 +348,7 @@ function DisplayData() {
               isLoading ? (
                 <p className={styles.data}>Loading</p>
               ) : operatingSystem ? (
-                <p className={styles.data}>{}operatingSystem</p>
+                <p className={styles.data}>{operatingSystem}</p>
               ) : (
                 <p className={styles.data}>No data available</p>
               )
@@ -641,7 +641,7 @@ function DisplayData() {
             ) : null}
           </div>
 
-          {locationsDisabled ? (
+          {latitude && longitude && location === undefined ? (
             <div className={styles.childContainer}>
               <p>Location:</p>
               <p className={styles.data}>
@@ -676,6 +676,41 @@ function DisplayData() {
               </div>
             </>
           )}
+          {/* {locationsDisabled ? (
+            <div className={styles.childContainer}>
+              <p>Location:</p>
+              <p className={styles.data}>
+                Disabled - Update browser permissions in device settings
+              </p>
+            </div>
+          ) : (
+            <>
+              <div className={styles.childContainer}>
+                <p>Latitude:</p>
+                {generateDataButtonClicked ? (
+                  <p className={styles.data}>
+                    {latitude ? latitude : "Loading..."}
+                  </p>
+                ) : null}
+              </div>
+              <div className={styles.childContainer}>
+                <p>Longitude:</p>
+                {generateDataButtonClicked ? (
+                  <p className={styles.data}>
+                    {longitude ? longitude : "Loading..."}
+                  </p>
+                ) : null}
+              </div>
+              <div className={styles.childContainer}>
+                <p>Location:</p>
+                {generateDataButtonClicked ? (
+                  <p className={styles.data}>
+                    {location ? location : "Loading..."}
+                  </p>
+                ) : null}
+              </div>
+            </>
+          )} */}
         </div>
         {/* ^^^^^^^^^^^^^^^^^^^^^^^^^^^^ */}
       </div>{" "}
