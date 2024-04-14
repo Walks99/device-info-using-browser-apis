@@ -78,6 +78,7 @@ function HomePage() {
 
   useEffect(() => {
     const fetchDeviceInfo = async () => {
+    
       console.log("Fetching device info...");
       try {
         // Screen object
@@ -149,15 +150,15 @@ function HomePage() {
         }
 
         // Navigator object
-        setBrowserLanguage(navigator.language);
-        setBrowserOnlineStatus(navigator.onLine);
-        setUserAgent(navigator.userAgent);
-        setVibrationSupported("vibrate" in navigator);
-        setDownlink((navigator as any).connection.downlink);
-        setEffectiveType((navigator as any).connection.effectiveType);
-        setRtt((navigator as any).connection.rtt);
+        setBrowserLanguage(navigator.language); // ADDED
+        setBrowserOnlineStatus(navigator.onLine); // ADDED
+        setUserAgent(navigator.userAgent); // ADDED
+        setVibrationSupported("vibrate" in navigator); // ADDED
+        setDownlink((navigator as any).connection.downlink); // ADDED
+        setEffectiveType((navigator as any).connection.effectiveType); // ADDED
+        setRtt((navigator as any).connection.rtt); // ADDED
 
-        if ((navigator as any).userAgentData) {
+        if ((navigator as any).userAgentData) { // ADDED
           setOperatingSystem((navigator as any).userAgentData.platform);
           setNumberOfLogicalProcessors((navigator as any).hardwareConcurrency);
           setEstimatedRAM((navigator as any).deviceMemory);
@@ -165,7 +166,7 @@ function HomePage() {
         } else {
           console.log("userAgentData is not supported");
         }
-        if ("getBattery" in navigator) {
+        if ("getBattery" in navigator) { // ADDED
           const battery = await (navigator.getBattery as any)();
           setBatteryLevel(Math.round(battery.level * 100));
           setBatteryCharging(battery.charging);
@@ -174,16 +175,16 @@ function HomePage() {
         }
 
         // Navigation object
-        setCurrentEntryId((window as any).navigation.currentEntry.id);
-        setCurrentEntryKey((window as any).navigation.currentEntry.key);
+        setCurrentEntryId((window as any).navigation.currentEntry.id); // ADDED
+        setCurrentEntryKey((window as any).navigation.currentEntry.key); // ADDED
 
         // performace object
         const timeOrigin = performance.timeOrigin;
         const date = new Date(timeOrigin);
-        setTimeOrigin(date.toString());
+        setTimeOrigin(date.toString()); // ADDED
 
         // PerformanceNavigationTiming object
-        let performanceEntries = performance.getEntriesByType("navigation");
+        let performanceEntries = performance.getEntriesByType("navigation"); // ADDED
         if (performanceEntries.length) {
           let navigationEntry = performanceEntries[0];
           setConnectStart((navigationEntry as any).connectStart);
