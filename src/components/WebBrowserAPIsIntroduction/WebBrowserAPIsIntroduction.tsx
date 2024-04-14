@@ -10,7 +10,7 @@ interface WebBrowserAPIsIntroductionProps {
 export default function WebBrowserAPIsIntroduction({ className }: WebBrowserAPIsIntroductionProps) {
   const currentPath = window.location.pathname;
   const landingPage = currentPath === "/";
-  const subtleCryptoAPIpage = currentPath === "/subtleCryptoAPI";
+  const subtleCryptoAPIpage = currentPath === "/subtleCryptoAPI" || "/fingerprintMyDevice";
   // const hideInstructions = currentPath === "/";
   // const showSubtleCryptoTitle = currentPath === "/subtleCyptoAPI";
 
