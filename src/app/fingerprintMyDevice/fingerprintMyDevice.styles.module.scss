@@ -1,0 +1,390 @@
+// --------------------------------------------------------------------------------------------------------------
+/*
+.main {
+  border: 1px solid blue;
+  .webIntroAndGenerateButtonsContainer {
+    border: 1px solid red;
+    .generateButtonsContainer {
+      border: 2px solid yellow;
+      button {
+      }
+      .timerActiveContainer {
+        border: 1px solid green;
+        .remainingTime {
+          border: 1px solid blue;
+        }
+      }
+    }
+  }
+  .deviceInfoContainer {
+    border: 1px solid purple;
+    .deviceInfoColumn {
+      border: 1px solid red;
+      .childContainer {
+        border: 1px solid orange;
+        p {
+        }
+        .data {
+        }
+      }
+    }
+  }
+}
+*/
+// ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+// --------------------------------------------------------------------------------------------------------------
+@media (max-width: 1920px)  {
+  .main {
+    // border: 1px solid blue;
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    .webIntroAndGenerateButtonsContainer {
+      // border: 1px solid red;
+      width: 80%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+      align-items: center;
+      height: 800px;
+      .generateButtonsContainer {
+        // border: 2px solid yellow;
+        width: 100%;
+        height: auto;
+        display: flex;
+        justify-content: flex-start;
+        align-items: flex-end;
+        button {
+          margin: 0 20px 0 0;
+        }
+        .timerActiveContainer {
+          // border: 1px solid green;
+          display: flex;
+          align-items: flex-end;
+          p {
+            font-size: 1.2rem;
+            &:first-child {
+            }
+            &:last-child {
+              margin: 0 0 0 5px;
+              color: red;
+            }
+          }
+        }
+      }
+    }
+    .deviceInfoContainer {
+      // border: 1px solid purple;
+      display: flex;
+      width: 80%;
+      height: 800px;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      margin: 20px 0 20px 0;
+      .deviceInfoColumn {
+        // border: 1px solid red;
+        width: 48%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        .childContainer {
+          // border: 1px solid orange;
+          display: flex;
+          p {
+            margin: 0 0 0 5px;
+          }
+          .data {
+            color: red;
+            word-break: break-all;
+          }
+        }
+      }
+    }
+  }
+}
+// ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+@media (max-width: 1755px) {
+  .main {
+    // border: 1px solid blue;
+    .webIntroAndGenerateButtonsContainer {
+      // border: 1px solid red;
+      height: 840px;
+    }
+  }
+}
+// ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+// --------------------------------------------------------------------------------------------------------------
+@media (max-width: 1455px) {
+.main {
+  .webIntroAndGenerateButtonsContainer {
+    height: 860px;
+    width: 90%;
+  }
+}
+}
+// ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+// --------------------------------------------------------------------------------------------------------------
+@media (max-width: 1440px) {
+  .main {
+    // border: 1px solid blue;
+    .webIntroAndGenerateButtonsContainer {
+      // border: 1px solid red;
+      height: 860px;
+    }
+    .deviceInfoContainer {
+      // border: 1px solid purple;
+      width: 90%;
+    }
+  }
+}
+// ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+// ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+@media (max-width: 1260px) {
+  .main {
+    // border: 1px solid blue;
+    .webIntroAndGenerateButtonsContainer {
+      // border: 1px solid red;
+      width: 90%;
+      height: 900px;
+    }
+  }
+}
+// --------------------------------------------------------------------------------------------------------------
+@media (max-width: 1120px) {
+  .main {
+    // border: 1px solid blue;
+    .webIntroAndGenerateButtonsContainer {
+      // border: 1px solid red;
+      height: 960px;
+      .generateButtonsContainer {
+        button {
+          width: 140px;
+          height: 50px;
+          font-size: 1.1em;
+        }
+        .timerActiveContainer {
+          // border: 1px solid green;
+          display: flex;
+          align-items: flex-end;
+          p {
+            font-size: 1rem;
+            &:first-child {
+            }
+            &:last-child {
+              margin: 0 0 0 5px;
+              color: red;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+// ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+// --------------------------------------------------------------------------------------------------------------
+@media (max-width: 990px) {
+  .main {
+    // border: 1px solid blue;
+    .webIntroAndGenerateButtonsContainer {
+      // border: 1px solid red;
+      height: 1000px;
+    }
+    .deviceInfoContainer {
+      // border: 1px solid purple;
+      display: flex;
+      flex-direction: column;
+      width: 90%;
+      height: 1200px;
+      justify-content: space-between;
+      align-items: center;
+      margin: 20px 0 20px 0;
+      .deviceInfoColumn {
+        // border: 1px solid red;
+        width: 100%;
+      }
+    }
+  }
+}
+// ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+// --------------------------------------------------------------------------------------------------------------
+@media (max-width: 900px) {
+  .main {
+    // border: 1px solid blue;
+    .webIntroAndGenerateButtonsContainer {
+      // border: 1px solid red;
+      height: 1060px;
+    }
+    .generateButtonsContainer {
+      // border: 2px solid yellow;
+      button {
+        font-size: 1rem;
+        width: 120px;
+        height: 40px;
+      }
+    }
+  }
+}
+// ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+// --------------------------------------------------------------------------------------------------------------
+@media (max-width: 755px) {
+  .main {
+    // border: 1px solid blue;
+    .webIntroAndGenerateButtonsContainer {
+      // border: 1px solid red;
+      height: 1200px;
+      .generateButtonsContainer {
+        // border: 2px solid yellow;
+        button {
+          font-size: 0.9rem;
+          width: 100px;
+          height: 40px;
+        }
+      }
+    }
+  }
+}
+// ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+// --------------------------------------------------------------------------------------------------------------
+@media (max-width: 660px) {
+  .main {
+    // border: 1px solid blue;
+    .webIntroAndGenerateButtonsContainer {
+      // border: 1px solid red;
+      height: 1300px;
+      .generateButtonsContainer {
+        // border: 2px solid yellow;
+        button {
+          font-size: 0.8rem;
+          width: 80px;
+          height: 40px;
+          margin: 0 10px 0 0;
+        }
+        .timerActiveContainer {
+          // border: 1px solid green;
+          display: flex;
+          flex-direction: column;
+          align-items: flex-start;
+          justify-content: flex-end;
+          p {
+            font-size: 0.9rem;
+            &:first-child {
+            }
+            &:last-child {
+              margin: 0;
+              color: red;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+// ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+// --------------------------------------------------------------------------------------------------------------
+@media (max-width: 585px) {
+  .main {
+    // border: 1px solid blue;
+    .webIntroAndGenerateButtonsContainer {
+      // border: 1px solid red;
+      height: 1360px;
+    }
+  }
+}
+// ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+// --------------------------------------------------------------------------------------------------------------
+@media (max-width: 540px) {
+  .main {
+    // border: 1px solid blue;
+    .webIntroAndGenerateButtonsContainer {
+      // border: 1px solid red;
+      height: 1420px;
+    }
+  }
+}
+// ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+// --------------------------------------------------------------------------------------------------------------
+@media (max-width: 524px) {
+  .main {
+    // border: 1px solid blue;
+    .webIntroAndGenerateButtonsContainer {
+      // border: 1px solid red;
+      height: 1480px;
+    }
+  }
+}
+// ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+// --------------------------------------------------------------------------------------------------------------
+@media (max-width: 500px) {
+  .main {
+    // border: 1px solid blue;
+    .webIntroAndGenerateButtonsContainer {
+      // border: 1px solid red;
+      height: 1520px;
+      .generateButtonsContainer {
+        button {
+          width: 70px;
+          
+        }
+      }
+    }
+    .deviceInfoContainer {
+      // border: 1px solid purple;
+      .deviceInfoColumn {
+        // border: 1px solid yellow;
+        .childContainer {
+          p {
+            font-size: 0.8rem;
+          }
+        }
+      }
+    }
+  }
+}
+// ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+// --------------------------------------------------------------------------------------------------------------
+@media (max-width: 450px) {
+  .main {
+    // border: 1px solid blue;
+    .webIntroAndGenerateButtonsContainer {
+      // border: 1px solid red;
+      height: 1560px;
+      .generateButtonsContainer {
+        button {
+          margin: 0 8px 0 0;
+        }
+        .timerActiveContainer {
+          p {
+            font-size: 0.8rem;
+          }
+        }
+      }
+    }
+  }
+}
+// ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+// --------------------------------------------------------------------------------------------------------------
+@media (max-width: 400px) {
+  .main {
+    // border: 1px solid blue;
+    .webIntroAndGenerateButtonsContainer {
+      // border: 1px solid red;
+      .generateButtonsContainer {
+        button {
+          margin: 0 8px 0 0;
+        }
+        .timerActiveContainer {
+          p {
+            font-size: 0.8rem;
+          }
+        }
+      }
+    }
+  }
+}
+// ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+

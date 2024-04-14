@@ -17,7 +17,7 @@ export interface DeviceInfo {
     online: boolean;
     vibrate: boolean;
     downlink: number;
-    effectiveType: number;
+    effectiveType: string;
     rtt: number;
     connectStart: number;
     decodedBodySize: number;
@@ -59,7 +59,7 @@ interface BatteryInfo {
     online: boolean;
     connection: {
       downlink: number;
-      effectiveType: number;
+      effectiveType: string;
       rtt: number;
     }
     getBattery: GetBatteryFunction;

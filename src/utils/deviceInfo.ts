@@ -38,7 +38,7 @@ export const fetchDeviceInfo = async (): Promise<DeviceInfo> => {
     online: false,
     vibrate: false,
     downlink: 0,
-    effectiveType: 0,
+    effectiveType: "",
     rtt: 0,
     connectStart: 0,
     decodedBodySize: 0,

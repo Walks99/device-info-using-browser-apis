@@ -1,19 +1,19 @@
 "use client";
-import React, {useEffect} from 'react';
-import {fetchDeviceInfo } from '@/utils/deviceInfo';
+import React from 'react';
+import dynamic from "next/dynamic";
+import DisplayData from './DisplayData';
 
-function DeviceInfoData() {
-    useEffect(() => {
-        const collect = async () => {
-            const response = await fetchDeviceInfo();
-            console.log(response);
-        }
-        collect();
-    }, [])
+// Dynamically import the HomeComponent with Server Side Rendering disabled
+const Data = dynamic(() => Promise.resolve(DisplayData), {
+  ssr: false, // This ensures the component is only loaded on the client side
+});
+
+export default function DeviceInfoData() {
+
     
   return (
-    <div>DeviceInfoData</div>
+    <div>
+      <Data />
+    </div>
   )
 }
-
-export default DeviceInfoData
