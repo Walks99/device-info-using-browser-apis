@@ -10,7 +10,12 @@ export default function landingPage() {
         <ul>
           <li>
             <a href="/subtleCryptoAPI">
-              Fingerprinting with the Subtle Crypto API
+              /subtleCryptoAPI
+            </a>
+          </li>
+          <li>
+            <a href="/fingerprintMyDevice">
+              /fingerprintMyDevice
             </a>
           </li>
         </ul>
