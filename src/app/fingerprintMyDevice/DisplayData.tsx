@@ -346,7 +346,7 @@ function DisplayData() {
             <p>Operating System:</p>
             {generateDataButtonClicked ? (
               isLoading ? (
-                <p className={styles.data}>Loading</p>
+                <p className={styles.data}>Loading...</p>
               ) : operatingSystem ? (
                 <p className={styles.data}>{operatingSystem}</p>
               ) : (
@@ -458,7 +458,7 @@ function DisplayData() {
             <p>Connection rtt:</p>
             {generateDataButtonClicked ? (
               isLoading ? (
-                <p className={styles.data}>Loading</p>
+                <p className={styles.data}>Loading...</p>
               ) : rtt ? (
                 <p className={styles.data}>{`${rtt} milliseconds`}</p>
               ) : (
@@ -471,7 +471,7 @@ function DisplayData() {
             <p>currentEntry id:</p>
             {generateDataButtonClicked ? (
               isLoading ? (
-                <p className={styles.data}>Loading..</p>
+                <p className={styles.data}>Loading...</p>
               ) : currentEntryId ? (
                 <p className={styles.data}>{currentEntryId}</p>
               ) : (
@@ -565,7 +565,7 @@ function DisplayData() {
             <p>domainLookupStart:</p>
             {generateDataButtonClicked ? (
               isLoading ? (
-                <p className={styles.data}>Loading</p>
+                <p className={styles.data}>Loading...</p>
               ) : domainLookupStart ? (
                 <p
                   className={styles.data}
