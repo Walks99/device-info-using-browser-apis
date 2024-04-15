@@ -45,7 +45,6 @@ function DisplayData() {
   const [latitude, setLatitude] = useState<number | null>(null);
   const [longitude, setLongitude] = useState<number | null>(null);
   const [location, setLocation] = useState<string | null>(null);
-  // const [permissionInteracted, setPermissionInteracted] = useState(false);
   const [locationsDisabled, setLocationsDisabled] = useState(false);
   const [fingerprint, setFingerprint] = useState<string | null>(null);
   const [generateDataButtonClicked, setGenerateDataButtonClicked] = useState<
