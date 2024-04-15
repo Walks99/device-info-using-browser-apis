@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import styles from "./fingerprintMyDevice.styles.module.scss";
-import { fetchDeviceInfo } from "@/utils/deviceInfo";
+import { fetchDeviceInfo, fetchGeoLocationData } from "@/utils/deviceInfo";
 import WebBrowserAPIsIntroduction from "@/components/WebBrowserAPIsIntroduction/WebBrowserAPIsIntroduction";
 import GenerateDataButton from "../../components/GenerateDataButton/GenerateDataButton";
 import GenerateFingerprintButton from "../../components/GenerateFingerprintButton/GenerateFingerprintButton";
@@ -15,6 +15,8 @@ import {
 function DisplayData() {
   // ------------------------------------------------------------------------------
   const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [isLoadingLocationData, setIsLoadingLocationData] =
+    useState<boolean>(true);
   const [timerActive, setTimerActive] = useState<boolean>(false);
   const [remainingTime, setRemainingTime] = useState<number>();
   const [screenOrientation, setScreenOrientation] = useState<string | null>(
@@ -44,7 +46,7 @@ function DisplayData() {
   const [longitude, setLongitude] = useState<number | null>(null);
   const [location, setLocation] = useState<string | null>(null);
   // const [permissionInteracted, setPermissionInteracted] = useState(false);
-  // const [locationsDisabled, setLocationsDisabled] = useState(false);
+  const [locationsDisabled, setLocationsDisabled] = useState(false);
   const [fingerprint, setFingerprint] = useState<string | null>(null);
   const [generateDataButtonClicked, setGenerateDataButtonClicked] = useState<
     boolean | null
@@ -109,12 +111,22 @@ function DisplayData() {
           setCurrentEntryKey(response.currentEntryKey);
           setTimeOrigin(response.timeOrigin);
           setBrowserLanguage(response.language);
-          setLatitude(response.latitude);
-          setLongitude(response.longitude);
-          setLocation(response.location);
           setIsLoading(false);
+
+          if (navigator.geolocation) {
+            const geoLocationResult = await fetchGeoLocationData(
+              setLocationsDisabled
+            );
+            setLatitude(geoLocationResult.latitude);
+            setLongitude(geoLocationResult.longitude);
+            setLocation(geoLocationResult.location);
+            setIsLoadingLocationData(false);
+          } else {
+            setIsLoadingLocationData(false);
+            console.log("Geolocation is not supported by your browser");
+          }
         } catch (error) {
-          console.log(`Error generating data: ${error}`)
+          console.log(`Error generating data: ${error}`);
         }
       }
     };
@@ -531,7 +543,7 @@ function DisplayData() {
             <p>decodeBodySize:</p>
             {generateDataButtonClicked ? (
               isLoading ? (
-                <p className={styles.data}>Loading ...</p>
+                <p className={styles.data}>Loading...</p>
               ) : decodedBodySize ? (
                 <p className={styles.data}>{`${decodedBodySize} bytes`}</p>
               ) : (
@@ -648,46 +660,7 @@ function DisplayData() {
             ) : null}
           </div>
 
-          <div className={styles.childContainer}>
-            <p>Latitude:</p>
-            {generateDataButtonClicked ? (
-              isLoading ? (
-                <p className={styles.data}>Loading...</p>
-              ) : latitude ? (
-                <p className={styles.data}>{latitude}</p>
-              ) : (
-                <p className={styles.data}>No data available</p>
-              )
-            ) : null}
-          </div>
-
-          <div className={styles.childContainer}>
-            <p>Longitude:</p>
-            {generateDataButtonClicked ? (
-              isLoading ? (
-                <p className={styles.data}>Loading...</p>
-              ) : longitude ? (
-                <p className={styles.data}>{longitude}</p>
-              ) : (
-                <p className={styles.data}>No data available</p>
-              )
-            ) : null}
-          </div>
-
-          <div className={styles.childContainer}>
-            <p>Location:</p>
-            {generateDataButtonClicked ? (
-              isLoading ? (
-                <p className={styles.data}>Loading...</p>
-              ) : location ? (
-                <p className={styles.data}>{location}</p>
-              ) : (
-                <p className={styles.data}>No data available</p>
-              )
-            ) : null}
-          </div>
-
-          {/* {locationsDisabled ? (
+          {locationsDisabled ? (
             <div className={styles.childContainer}>
               <p>Location:</p>
               <p className={styles.data}>
@@ -696,32 +669,47 @@ function DisplayData() {
             </div>
           ) : (
             <>
+              {/* DONE */}
               <div className={styles.childContainer}>
                 <p>Latitude:</p>
                 {generateDataButtonClicked ? (
-                  <p className={styles.data}>
-                    {latitude ? latitude : "Loading..."}
-                  </p>
+                  isLoadingLocationData ? (
+                    <p className={styles.data}>Loading...</p>
+                  ) : latitude ? (
+                    <p className={styles.data}>{latitude}</p>
+                  ) : (
+                    <p className={styles.data}>No data available</p>
+                  )
                 ) : null}
               </div>
+              {/* DONE */}
               <div className={styles.childContainer}>
                 <p>Longitude:</p>
                 {generateDataButtonClicked ? (
-                  <p className={styles.data}>
-                    {longitude ? longitude : "Loading..."}
-                  </p>
+                  isLoadingLocationData ? (
+                    <p className={styles.data}>Loading...</p>
+                  ) : longitude ? (
+                    <p className={styles.data}>{longitude}</p>
+                  ) : (
+                    <p className={styles.data}>No data available</p>
+                  )
                 ) : null}
               </div>
+              {/* DONE */}
               <div className={styles.childContainer}>
                 <p>Location:</p>
                 {generateDataButtonClicked ? (
-                  <p className={styles.data}>
-                    {location ? location : "Loading..."}
-                  </p>
+                  isLoadingLocationData ? (
+                    <p className={styles.data}>Loading...</p>
+                  ) : location ? (
+                    <p className={styles.data}>{location}</p>
+                  ) : (
+                    <p className={styles.data}>No data available</p>
+                  )
                 ) : null}
               </div>
             </>
-          )} */}
+          )}
         </div>
         {/* ^^^^^^^^^^^^^^^^^^^^^^^^^^^^ */}
       </div>{" "}

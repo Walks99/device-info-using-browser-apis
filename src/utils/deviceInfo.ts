@@ -54,9 +54,6 @@ export const fetchDeviceInfo = async (): Promise<DeviceInfo> => {
     currentEntryKey: "",
     timeOrigin: "",
     language: "",
-    latitude: 0,
-    longitude: 0,
-    location: null,
     error: null,
   };
 
@@ -132,17 +129,6 @@ export const fetchDeviceInfo = async (): Promise<DeviceInfo> => {
       result.transferSize = navigationEntry.transferSize;
     }
 
-    // Geolocation
-    if (navigator.geolocation) {
-      // Request permission to access the user's location
-      const geoLocationResult = await fetchGeoLocationData();
-      result.location = geoLocationResult.location;
-      result.latitude = geoLocationResult.latitude;
-      result.longitude = geoLocationResult.longitude;
-    } else {
-      console.log("Geolocation is not supported by your browser");
-    }
-
     return result;
   } catch (error) {
     console.error("Error fetching device info:", error);
@@ -213,7 +199,9 @@ const calculatePortraitRatio = (): string => {
 // ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 // ----------------------------------------------------------------------------------------------------
 // Fetch the users geolocation data
-const fetchGeoLocationData = async (): Promise<GeoLocationResult> => {
+export const fetchGeoLocationData = async (
+  setLocationsDisabled: React.Dispatch<React.SetStateAction<boolean>>
+): Promise<GeoLocationResult> => {
   return new Promise<GeoLocationResult>((resolve, reject) => {
     navigator.geolocation.getCurrentPosition(
       async (position: GeoPosition) => {
@@ -260,7 +248,8 @@ const fetchGeoLocationData = async (): Promise<GeoLocationResult> => {
         }
       },
       (error) => {
-        console.error("Location permissions denied by user: " + error); // 🤡🤡🤡 Could i return a locationDisabled === true from here back to the DisplayData.tsx file? 🤡🤡🤡
+        console.error("Location permissions denied by user: " + error);
+        setLocationsDisabled(true);
         reject(new Error("Location permissions denied by user"));
       }
     );
