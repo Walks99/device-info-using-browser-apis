@@ -260,7 +260,7 @@ const fetchGeoLocationData = async (): Promise<GeoLocationResult> => {
         }
       },
       (error) => {
-        console.error("Location permissions denied by user: " + error);
+        console.error("Location permissions denied by user: " + error); // 🤡🤡🤡 Could i return a locationDisabled === true from here back to the DisplayData.tsx file? 🤡🤡🤡
         reject(new Error("Location permissions denied by user"));
       }
     );
