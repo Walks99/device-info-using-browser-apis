@@ -74,47 +74,54 @@ function DisplayData() {
 
   useEffect(() => {
     const collect = async () => {
-      const response = await fetchDeviceInfo();
-      console.log(response);
-      setScreenResolution(response.screenResolution);
-      setDevicePixelRatio(response.devicePixelRatio);
-      setScreenOrientation(response.screenOrientation);
-      setColourDepth(response.colorDepth);
-      setAspectRatio(response.aspectRatio);
-      setUserAgent(response.userAgent);
-      setOperatingSystem(response.operatingSystem);
-      setNumberOfLogicalProcessors(response.numberOfLogicalProcessors);
-      setEstimatedRAM(response.estimatedRAM);
-      setBatteryLevel(response.battery);
-      setBatteryCharging(response.charging);
-      setBrowser(response.browser);
-      setBrowserOnlineStatus(response.online);
-      setVibrationSupported(response.vibrate);
-      setDownlink(response.downlink);
-      setEffectiveType(response.effectiveType);
-      setRtt(response.rtt);
-      setConnectStart(response.connectStart);
-      setDecodedBodySize(response.decodedBodySize);
-      setDomContentLoadedEventStart(response.domContentLoadedEventStart);
-      setDomComplete(response.domComplete);
-      setDomainLookupStart(response.domainLookupStart);
-      setFetchStart(response.fetchStart);
-      setRequestStart(response.requestStart);
-      setResponseStart(response.responseStart);
-      setResponseEnd(response.responseEnd);
-      setTransferSize(response.transferSize);
-      setCurrentEntryId(response.currentEntryID);
-      setCurrentEntryKey(response.currentEntryKey);
-      setTimeOrigin(response.timeOrigin);
-      setBrowserLanguage(response.language);
-      setLatitude(response.latitude);
-      setLongitude(response.longitude);
-      setLocation(response.location);
-      setIsLoading(false);
+      if (generateDataButtonClicked) {
+        try {
+          const response = await fetchDeviceInfo();
+          console.log(response);
+          setScreenResolution(response.screenResolution);
+          setDevicePixelRatio(response.devicePixelRatio);
+          setScreenOrientation(response.screenOrientation);
+          setColourDepth(response.colorDepth);
+          setAspectRatio(response.aspectRatio);
+          setUserAgent(response.userAgent);
+          setOperatingSystem(response.operatingSystem);
+          setNumberOfLogicalProcessors(response.numberOfLogicalProcessors);
+          setEstimatedRAM(response.estimatedRAM);
+          setBatteryLevel(response.battery);
+          setBatteryCharging(response.charging);
+          setBrowser(response.browser);
+          setBrowserOnlineStatus(response.online);
+          setVibrationSupported(response.vibrate);
+          setDownlink(response.downlink);
+          setEffectiveType(response.effectiveType);
+          setRtt(response.rtt);
+          setConnectStart(response.connectStart);
+          setDecodedBodySize(response.decodedBodySize);
+          setDomContentLoadedEventStart(response.domContentLoadedEventStart);
+          setDomComplete(response.domComplete);
+          setDomainLookupStart(response.domainLookupStart);
+          setFetchStart(response.fetchStart);
+          setRequestStart(response.requestStart);
+          setResponseStart(response.responseStart);
+          setResponseEnd(response.responseEnd);
+          setTransferSize(response.transferSize);
+          setCurrentEntryId(response.currentEntryID);
+          setCurrentEntryKey(response.currentEntryKey);
+          setTimeOrigin(response.timeOrigin);
+          setBrowserLanguage(response.language);
+          setLatitude(response.latitude);
+          setLongitude(response.longitude);
+          setLocation(response.location);
+          setIsLoading(false);
+        } catch (error) {
+          console.log(`Error generating data: ${error}`)
+        }
+      }
     };
     collect();
-  }, []);
+  }, [generateDataButtonClicked]);
 
+  // -------------------------------------------------------------------------------- //
   const generateFingerprint = async () => {
     // Calculate the fingerprint
     const fingerprintData = `${screenOrientation}${devicePixelRatio}${browserOnlineStatus}${userAgent}${batteryLevel}${batteryCharging}${vibrationSupported}${screenResolution}${aspectRatio}${colourDepth}${operatingSystem}${numberOfLogicalProcessors}${estimatedRAM}${browser}${latitude}${longitude}${location}${downlink}${effectiveType}${rtt}${currentEntryId}${screenOrientation}${currentEntryKey}${timeOrigin}${connectStart}${decodedBodySize}${domContentLoadedEventStart}${domComplete}${domainLookupStart}${fetchStart}${requestStart}${responseStart}${responseEnd}${transferSize}`;
@@ -641,41 +648,45 @@ function DisplayData() {
             ) : null}
           </div>
 
-          {latitude && longitude && location === undefined ? (
-            <div className={styles.childContainer}>
-              <p>Location:</p>
-              <p className={styles.data}>
-                Disabled - Update browser permissions in device settings
-              </p>
-            </div>
-          ) : (
-            <>
-              <div className={styles.childContainer}>
-                <p>Latitude:</p>
-                {generateDataButtonClicked ? (
-                  <p className={styles.data}>
-                    {latitude ? latitude : "Loading..."}
-                  </p>
-                ) : null}
-              </div>
-              <div className={styles.childContainer}>
-                <p>Longitude:</p>
-                {generateDataButtonClicked ? (
-                  <p className={styles.data}>
-                    {longitude ? longitude : "Loading..."}
-                  </p>
-                ) : null}
-              </div>
-              <div className={styles.childContainer}>
-                <p>Location:</p>
-                {generateDataButtonClicked ? (
-                  <p className={styles.data}>
-                    {location ? location : "Loading..."}
-                  </p>
-                ) : null}
-              </div>
-            </>
-          )}
+          <div className={styles.childContainer}>
+            <p>Latitude:</p>
+            {generateDataButtonClicked ? (
+              isLoading ? (
+                <p className={styles.data}>Loading...</p>
+              ) : latitude ? (
+                <p className={styles.data}>{latitude}</p>
+              ) : (
+                <p className={styles.data}>No data available</p>
+              )
+            ) : null}
+          </div>
+
+          <div className={styles.childContainer}>
+            <p>Longitude:</p>
+            {generateDataButtonClicked ? (
+              isLoading ? (
+                <p className={styles.data}>Loading...</p>
+              ) : longitude ? (
+                <p className={styles.data}>{longitude}</p>
+              ) : (
+                <p className={styles.data}>No data available</p>
+              )
+            ) : null}
+          </div>
+
+          <div className={styles.childContainer}>
+            <p>Location:</p>
+            {generateDataButtonClicked ? (
+              isLoading ? (
+                <p className={styles.data}>Loading...</p>
+              ) : location ? (
+                <p className={styles.data}>{location}</p>
+              ) : (
+                <p className={styles.data}>No data available</p>
+              )
+            ) : null}
+          </div>
+
           {/* {locationsDisabled ? (
             <div className={styles.childContainer}>
               <p>Location:</p>
