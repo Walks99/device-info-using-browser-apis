@@ -79,7 +79,7 @@ export const fetchDeviceInfo = async (): Promise<DeviceInfo> => {
     // browser data
     result.browser = (
       navigator as ExtendedNavigator
-    ).userAgentData.brands[2].brand;
+    ).userAgentData.brands[1].brand;
     result.language = (navigator as ExtendedNavigator).language;
     result.online = (navigator as ExtendedNavigator).onLine;
     result.currentEntryID = (window as any).navigation.currentEntry.id;
